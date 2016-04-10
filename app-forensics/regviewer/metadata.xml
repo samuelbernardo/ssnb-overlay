@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+<herd>forensics</herd>
+<maintainer>
+  <email>dragonheart@gentoo.org</email>
+    <name>Daniel Black</name>
+</maintainer>
+<longdescription>RegViewer is GTK 2.2 based GUI Windows registry file navigator. It is platform independent allowing 
+for examination of Windows registry files from any platform. Particularly useful when conducting forensics of Windows 
+files from *nix systems.</longdescription>
+</pkgmetadata>

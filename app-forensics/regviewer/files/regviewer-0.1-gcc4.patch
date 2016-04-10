@@ -1,0 +1,11 @@
+--- regviewer-0.1/src/ntreg.c.orig	2006-10-29 20:42:10.000000000 +1100
++++ regviewer-0.1/src/ntreg.c	2006-10-29 20:42:23.000000000 +1100
+@@ -1996,7 +1996,7 @@
+   ALLOC(kr,1,sizeof(int)+sizeof(int));
+   
+   kr->len = sizeof(int);
+-  (int)kr->data = dword;
++  kr->data = (int) dword;
+ 
+   r = put_buf2val(hdesc, kr, vofs, path, REG_DWORD);
+ 

@@ -1,0 +1,10 @@
+# ChangeLog for app-forensics/regviewer
+# Copyright 1999-2005 Gentoo Foundation; Distributed under the GPL v2
+# $Header: /var/cvsroot/gentoo-x86/app-forensics/regviewer/Attic/ChangeLog,v 1.2 2005/01/01 14:23:43 eradicator Exp $
+
+*regviewer-0.1 (12 Dec 2004)
+
+  12 Dec 2004; Daniel Black <dragonheart@gentoo.org> +metadata.xml,
+  +regviewer-0.1.ebuild:
+  Initial import as per bug #73286
+

@@ -1,0 +1,2 @@
+#!/bin/sh
+exec java-config --select-vm=icedtea-7 --jre-home

@@ -1,0 +1,154 @@
+  29 Dec 2014; Alon Bar-Lev <alonbl@gentoo.org> ovirt-engine-3.3.4.ebuild,
+  ovirt-engine-3.4.0.ebuild, ovirt-engine-3.4.1.ebuild,
+  ovirt-engine-3.4.9999.ebuild, ovirt-engine-9999.ebuild:
+  Modify postgresql package name
+
+  18 Aug 2014; Alon Bar-Lev <alonbl@gentoo.org> ovirt-engine-9999.ebuild:
+  add patternfly dependency
+
+  28 Jun 2014; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-9999.ebuild:
+  sync
+
+*ovirt-engine-3.4.1 (08 May 2014)
+
+  08 May 2014; Alon Bar-Lev <alonbl@redhat.com> +ovirt-engine-3.4.1.ebuild:
+  Version bump
+
+  04 May 2014; Alon Bar-Lev <alonbl@redhat.com> metadata.xml,
+  ovirt-engine-9999.ebuild:
+  Add javadoc USE
+
+  04 May 2014; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-3.4.9999.ebuild,
+  ovirt-engine-9999.ebuild:
+  bump openstack sdk and sync master
+
+  08 Apr 2014; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-3.3.4.ebuild,
+  ovirt-engine-3.4.0.ebuild, ovirt-engine-3.4.9999.ebuild,
+  ovirt-engine-9999.ebuild:
+  Remove vdsm user as we do not support nfs for now, not required, and kvm does
+  not exist by default
+
+  03 Apr 2014; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-9999.ebuild:
+  Add dev-python/numpy dependency
+
+*ovirt-engine-3.4.0 (27 Mar 2014)
+
+  27 Mar 2014; Alon Bar-Lev <alonbl@redhat.com> +ovirt-engine-3.4.0.ebuild,
+  -ovirt-engine-3.3.1.ebuild, -ovirt-engine-3.3.2.ebuild,
+  -ovirt-engine-3.3.3.ebuild, ovirt-engine-3.3.4.ebuild,
+  ovirt-engine-3.4.9999.ebuild, ovirt-engine-9999.ebuild:
+  Version bump
+
+*ovirt-engine-3.4.9999 (05 Mar 2014)
+
+  05 Mar 2014; Alon Bar-Lev <alonbl@redhat.com> +ovirt-engine-3.4.9999.ebuild,
+  ovirt-engine-9999.ebuild:
+  Add 3.4 branch
+
+*ovirt-engine-3.3.4 (05 Mar 2014)
+
+  05 Mar 2014; Alon Bar-Lev <alonbl@redhat.com> +ovirt-engine-3.3.4.ebuild:
+  Version bump
+
+*ovirt-engine-3.3.3 (04 Feb 2014)
+
+  04 Feb 2014; Alon Bar-Lev <alonbl@redhat.com> +ovirt-engine-3.3.3.ebuild:
+  version bump
+
+  28 Jan 2014; Alon Bar-Lev <alonbl@redhat.com> files/ovirt-engine.init.d,
+  ovirt-engine-3.3.2.ebuild, ovirt-engine-9999.ebuild:
+  Misc updates
+
+*ovirt-engine-3.3.2 (13 Jan 2014)
+
+  13 Jan 2014; Alon Bar-Lev <alonbl@gentoo.org> +ovirt-engine-3.3.2.ebuild,
+  ovirt-engine-9999.ebuild:
+  Version bump
+
+*ovirt-engine-3.3.1 (26 Nov 2013)
+
+  26 Nov 2013; Alon Bar-Lev <alonbl@gentoo.org> +ovirt-engine-3.3.1.ebuild,
+  files/ovirt-engine-notifier.init.d, files/ovirt-engine.init.d,
+  ovirt-engine-9999.ebuild:
+  ovirt-engine-3.3.1
+
+  25 Oct 2013; Alon Bar-Lev <alonbl@redhat.com> +files/java-home.local,
+  metadata.xml, ovirt-engine-9999.ebuild:
+  sync with upstream
+
+  27 Aug 2013; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-9999.ebuild:
+  Update otopi, ovirt-host-deploy dependencies
+
+  18 Aug 2013; Alon Bar-Lev <alonbl@gentoo.org> ovirt-engine-9999.ebuild:
+  sync with upstream
+
+  18 Aug 2013; Alon Bar-Lev <alonbl@gentoo.org> ovirt-engine-9999.ebuild:
+  sync with upstream
+
+  23 Jul 2013; Alon Bar-Lev <alonbl@redhat.com>
+  +files/ovirt-engine-notifier.init.d, files/ovirt-engine.init.d,
+  files/ovirt-websocket-proxy.init.d, ovirt-engine-9999.ebuild:
+  sync upstream
+
+  17 Jul 2013; Alon Bar-Lev <alonbl@gentoo.org> ovirt-engine-9999.ebuild:
+  sync with upstream
+
+  31 May 2013; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-9999.ebuild:
+  remove workaround of master
+
+  31 May 2013; Alon Bar-Lev <alonbl@redhat.com>
+  +files/ovirt-websocket-proxy.init.d, files/ovirt-engine.init.d, metadata.xml,
+  ovirt-engine-9999.ebuild:
+  sync upstream
+
+  14 May 2013; Alon Bar-Lev <alonbl@gentoo.org> ovirt-engine-9999.ebuild:
+  add bind-tools dependency
+
+  09 May 2013; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-9999.ebuild:
+  do not compile all locales when minimal
+
+  25 Apr 2013; Alon Bar-Lev <alonbl@redhat.com> files/ovirt-engine.init.d:
+  follow upstream service name
+
+  22 Apr 2013; Alon Bar-Lev <alonbl@redhat.com> files/ovirt-engine.init.d:
+  update service location
+
+  21 Apr 2013; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-9999.ebuild:
+  Add engine-cleanup
+
+  19 Apr 2013; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-9999.ebuild:
+  Add dev-libs/libxml2 dependency
+
+  18 Apr 2013; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-9999.ebuild:
+  update dependencies, no embedded remains
+
+  18 Apr 2013; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-9999.ebuild:
+  Dependency cleanup
+
+  11 Apr 2013; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-9999.ebuild:
+  Explicit depend on otopi as it is used for setup
+
+  11 Apr 2013; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-9999.ebuild:
+  No need postgres-server any more
+
+  11 Apr 2013; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-9999.ebuild:
+  Add EPYTHON to export best, something has changed?
+
+  07 Apr 2013; Alon Bar-Lev <alonbl@redhat.com> files/gentoo-setup.conf:
+  remove default non-root as it is in product
+
+  07 Apr 2013; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-9999.ebuild:
+  remove jaf as we removed it from engine
+
+  06 Apr 2013; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-9999.ebuild:
+  add some more java dependencies, add config note
+
+  04 Apr 2013; Alon Bar-Lev <alonbl@redhat.com> files/ovirt-engine.init.d:
+  sync init.d script
+
+  04 Apr 2013; Alon Bar-Lev <alonbl@redhat.com> ovirt-engine-9999.ebuild:
+  Use >=dev-python/python-exec-0.3 as it supports symlinks
+
+  03 Apr 2013; Alon Bar-Lev <alonbl@redhat.com> +metadata.xml,
+  files/ovirt-engine.init.d, ovirt-engine-9999.ebuild:
+  fixups
