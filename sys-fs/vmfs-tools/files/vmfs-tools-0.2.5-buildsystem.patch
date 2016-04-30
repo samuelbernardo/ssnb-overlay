@@ -1,0 +1,43 @@
+--- vmfs-tools-0.2.5/GNUmakefile
++++ vmfs-tools-0.2.5/GNUmakefile
+@@ -55,7 +55,7 @@
+ endef
+ $(foreach subdir,$(strip $(call order_by_requires,$(SUBDIRS))),$(eval $(call subdir_rules,$(subdir))))
+ 
+-CC := gcc
++CC ?= gcc
+ OPTIMFLAGS := $(if $(filter -O%,$(ENV_CFLAGS)),,-O2)
+ CFLAGS := $(ENV_CFLAGS) $(filter-out $(ENV_CFLAGS),-Wall $(OPTIMFLAGS) -g -D_FILE_OFFSET_BITS=64 $(EXTRA_CFLAGS))
+ CFLAGS += $(if $(HAS_STRNDUP),,-DNO_STRNDUP=1)
+@@ -71,7 +71,7 @@
+ 
+ EXTRA_DIST := LICENSE README TODO AUTHORS test.img configure
+ 
+-all: $(BUILD_PROGRAMS) $(wildcard .gitignore) test.img
++all: $(BUILD_PROGRAMS) $(wildcard .gitignore) test.img doc
+ 
+ ALL_MAKEFILES = $(filter-out config.cache,$(MAKEFILE_LIST)) configure.mk
+ 
+@@ -84,8 +84,8 @@
+ 	echo "#endif" >> $@
+ 
+ $(BUILD_LIBS):
+-	ar -r $@ $^
+-	ranlib $@
++	$(AR) -r $@ $^
++	$(RANLIB) $@
+ 
+ $(OBJS): %.o: %.c $(HEADERS)
+ 
+--- vmfs-tools-0.2.5/configure.mk
++++ vmfs-tools-0.2.5/configure.mk
+@@ -10,7 +10,9 @@
+ 
+ # configure rules really start here
+ $(call PKG_CONFIG_CHK,uuid,-I/usr/include/uuid,-luuid)
++ifneq (,$(WANT_FUSE))
+ $(call PKG_CONFIG_CHK,fuse)
++endif
+ $(call PATH_LOOKUP,asciidoc)
+ $(call PATH_LOOKUP,xsltproc)
+ 
