@@ -1,0 +1,25 @@
+From d5bfd018a79e35d289b2682f4a6a504bb9cd76fd Mon Sep 17 00:00:00 2001
+From: zamabe <zamabe@inderagamono.net>
+Date: Fri, 18 Sep 2015 01:51:05 -0000
+Subject: [PATCH] fix -rc .desktop Icon key
+
+---
+ usr/share/applications/enpass_rc.desktop | 2 +-
+ 1 file changed, 1 insertion(+), 1 deletion(-)
+
+diff --git a/usr/share/applications/enpass_rc.desktop b/usr/share/applications/enpass_rc.desktop
+index bbf1fff..6f347a7 100755
+--- a/usr/share/applications/enpass_rc.desktop
++++ b/usr/share/applications/enpass_rc.desktop
+@@ -2,7 +2,7 @@
+ Type=Application
+-Name=Enpass_RC
++Name=Enpass RC
+ GenericName=EnpassPasswordManager
+-Icon=enpass_rc.png
++Icon=enpass
+ Terminal=false
+ Exec=/opt/Enpass_RC/bin/runenpass.sh %U
+ MimeType=x-scheme-handler/enpass;x-scheme-handler/enpassextension;
+-- 
+2.5.3
