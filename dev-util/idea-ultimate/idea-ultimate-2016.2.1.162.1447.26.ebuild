@@ -6,8 +6,8 @@ EAPI=5
 inherit eutils versionator
 
 SLOT="0"
-PV_STRING="$(get_version_component_range 3-5)"
-MY_PV="$(get_version_component_range 1-2)"
+PV_STRING="$(get_version_component_range 4-6)"
+MY_PV="$(get_version_component_range 1-3)"
 MY_PN="idea"
 
 # distinguish settings for official stable releases and EAP-version releases
@@ -18,7 +18,7 @@ then
 	SRC_URI="https://download.jetbrains.com/idea/${MY_PN}IU-${PV_STRING}.tar.gz"
 else
 	# upstream stable
-	KEYWORDS=""
+	KEYWORDS="~amd64 ~x86"
 	SRC_URI="https://download.jetbrains.com/idea/${MY_PN}IU-${MY_PV}.tar.gz"
 fi
 
