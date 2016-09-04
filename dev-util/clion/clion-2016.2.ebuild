@@ -43,6 +43,9 @@ src_install() {
     fperms 755 "${dir}/bin/cmake/bin/cmake"
     fperms 755 "${dir}/bin/cmake/bin/cpack"
     fperms 755 "${dir}/bin/cmake/bin/ctest"
+    fperms 755 "${dir}/bin/lldb/LLDBFrontend"
+    fperms 755 "${dir}/bin/lldb/bin/lldb-server"
+    fperms 755 "${dir}/bin/lldb/lib/python2.7/site-packages/lldb/lldb-argdumper"
 
     newicon "bin/${PN}.svg" "${exe}.svg"
     make_wrapper "${exe}" "/opt/${P}/bin/${PN}.sh"
