@@ -11,7 +11,7 @@ if [[ $PV = *9999* ]]; then
 		https://github.com/bolthole/zrep.git
 		git@github.com:bolthole/zrep.git"
 	SRC_URI=""
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS=""
 #else
 #	SRC_URI="http://.../${P}.tar.bz2"
 #	KEYWORDS="~amd64 ~arm ~ppc ~ppc64 ~x86"
@@ -21,7 +21,7 @@ else
 		https://github.com/bolthole/zrep.git
 		git@github.com:bolthole/zrep.git"
 	SRC_URI=""
-	KEYWORDS="~amd64 ~x86"
+	KEYWORDS=""
 fi
 
 inherit autotools eutils user ${scm_eclass}
