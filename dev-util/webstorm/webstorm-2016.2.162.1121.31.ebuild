@@ -12,11 +12,7 @@ HOMEPAGE="http://www.jetbrains.com/webstorm/"
 DESCRIPTION="Most Intelligent WebStorm IDE for develop on js html css, 11 EAP version"
 SRC_URI="https://download.jetbrains.com/webstorm/${MY_PN}-${MY_PV}.tar.gz"
 
-if [[ x${PVERSION} != 'x' ]]; then
-	KEYWORDS="x86 amd64"
-else
-	KEYWORDS="~x86 ~amd64"
-fi
+KEYWORDS=""
 
 PROGNAME="WebStorm"
 RESTRICT="strip mirror"
