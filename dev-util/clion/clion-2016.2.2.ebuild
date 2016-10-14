@@ -18,7 +18,7 @@ SRC_URI="http://download.jetbrains.com/cpp/${MY_PN}-${PV}.tar.gz -> ${PN}-${PV}.
 
 LICENSE="CLion-IDEA"
 IUSE=""
-KEYWORDS=""
+KEYWORDS="~x86 ~amd64"
 
 S="${WORKDIR}/${PN}-${PV}"
 
