@@ -1,0 +1,10 @@
+
+# opennebula user
+USER="oneadmin"
+GROUP="oneadmin"
+
+SUNSTONESERVER_STARTOPTIONS="start"
+SUNSTONESERVER_STOPOPTIONS="stop"
+
+SUNSTONE_PID="/var/run/one/sunstone.pid"
+

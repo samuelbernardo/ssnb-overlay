@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>opennebula</herd>
+	<longdescription>
+		Virtual management infrastructure as a service (IaaS) toolkit
+		for cloud computing.
+
+		Official documentation at
+		http://docs.opennebula.org/stable
+	</longdescription>
+	<use>
+		<flag name='extras'>Enables additional packages found on
+			arch aur opennebula version.
+		</flag>
+	</use>
+</pkgmetadata>

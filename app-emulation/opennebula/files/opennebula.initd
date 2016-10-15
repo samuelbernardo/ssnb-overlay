@@ -1,0 +1,40 @@
+#!/sbin/runscript
+# Copyright 1999-2010 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/app-emulation/opennebula/files/opennebula.initd,v 1.1 2010/08/11 16:07:57 dev-zero Exp $
+
+depend() {
+    after mysql
+    use libvirtd
+}
+
+start() {
+    ebegin "Starting OpenNebula daemon"
+    start-stop-daemon \
+        --start \
+        --exec /usr/bin/one \
+        --user ${USER}:${GROUP} \
+	--pidfile ${ONE_PID} \
+        -- ${ONE_STARTOPTIONS}
+    eend $?
+
+}
+
+stop() {
+    ebegin "Stopping OpenNebula daemon"
+    start-stop-daemon \
+        --stop \
+        --exec /usr/bin/one \
+	--user ${USER}:${GROUP} \
+	--pidfile ${ONE_PID} \
+	-- ${ONE_STOPOPTIONS}
+    eend $?
+
+    ebegin "Stopping Scheduler Deamon"
+    start-stop-daemon \
+        --stop \
+        --exec /usr/bin/mm_sched \
+	--user ${USER}:${GROUP} \
+	--pidfile ${SCHED_PID} \
+    eend $?
+}

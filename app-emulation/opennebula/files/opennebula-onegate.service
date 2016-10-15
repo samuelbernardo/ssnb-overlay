@@ -1,0 +1,15 @@
+[Unit]
+Description=OpenNebula onegate Server
+After=network.target local-fs.target remote-fs.target opennebula.service
+Requires=opennebula.service
+
+[Service]
+User=oneadmin
+Group=oneadmin
+Type=forking
+PermissionsStartOnly=true
+ExecStart=/usr/bin/onegate-server start
+ExecStop=/usr/bin/onegate-server stop
+
+[Install]
+WantedBy=multi-user.target

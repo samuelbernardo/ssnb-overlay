@@ -1,0 +1,10 @@
+
+# opennebula user
+USER="oneadmin"
+GROUP="oneadmin"
+
+ONEFLOWSERVER_STARTOPTIONS="start"
+ONEFLOWSERVER_STOPOPTIONS="stop"
+
+ONEFLOW_PID="/var/run/one/oneflow.pid"
+

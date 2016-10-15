@@ -1,0 +1,34 @@
+#!/sbin/runscript
+# Copyright 1999-2010 Gentoo Foundation
+# Distributed under the terms of the GNU General Public License v2
+# $Header: /var/cvsroot/gentoo-x86/app-emulation/opennebula/files/opennebula.initd,v 1.1 2010/08/11 16:07:57 dev-zero Exp $
+
+depend() {
+    after mysql
+    use libvirtd
+}
+
+start() {
+
+    ebegin "Starting Oneflow Server"
+    start-stop-daemon \
+        --start \
+        --exec /usr/bin/oneflow-server \
+        --user ${USER}:${GROUP} \
+	--pidfile ${ONEFLOW_PID} \
+        -- ${ONEFLOWSERVER_STARTOPTIONS}
+    eend $?
+}
+
+stop() {
+
+    ebegin "Stopping Oneflow Server"
+    start-stop-daemon \
+        --stop \
+        --exec /usr/bin/oneflow-server \
+	--user ${USER}:${GROUP} \
+	--pidfile ${ONEFLOW_PID} \
+	-- ${ONEFLOWSERVER_STOPOPTIONS} \
+    eend $?
+
+}

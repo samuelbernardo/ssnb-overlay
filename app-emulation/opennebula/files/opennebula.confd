@@ -1,0 +1,12 @@
+
+# opennebula user
+USER="oneadmin"
+GROUP="oneadmin"
+
+# options for oned
+ONE_STARTOPTIONS="start"
+ONE_STOPOPTIONS="stop"
+
+ONE_PID="/var/run/one/oned.pid"
+SCHED_PID="/var/run/one/sched.pid"
+

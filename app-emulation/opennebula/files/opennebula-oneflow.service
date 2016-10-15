@@ -1,0 +1,15 @@
+[Unit]
+Description=OpenNebula econe Server
+After=network.target local-fs.target remote-fs.target opennebula.service
+Requires=opennebula.service
+
+[Service]
+User=oneadmin
+Group=oneadmin
+Type=forking
+PermissionsStartOnly=true
+ExecStart=/usr/bin/oneflow-server start
+ExecStop=/usr/bin/oneflow-server stop
+
+[Install]
+WantedBy=multi-user.target
