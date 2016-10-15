@@ -1,0 +1,6 @@
+# ChangeLog for dev-ruby/sequel
+# Copyright 1999-2016 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  15 Oct 2016; Samuel Bernardo <samuelbernardo.mail@gmail.com> sequel-4.39.0.ebuild:
+  [dev-ruby/sequel] Add sequel 4.39.0.
