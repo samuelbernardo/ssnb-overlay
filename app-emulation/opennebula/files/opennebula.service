@@ -7,10 +7,10 @@ User=oneadmin
 Group=oneadmin
 Type=forking
 PermissionsStartOnly=true
-ExecStartPre=/usr/bin/mkdir -p /var/run/one
-ExecStartPre=/usr/bin/mkdir -p /var/lock/one
-ExecStartPre=/usr/bin/chown -R oneadmin:oneadmin /var/run/one
-ExecStartPre=/usr/bin/chown -R oneadmin:oneadmin /var/lock/one
+#ExecStartPre=/bin/mkdir -p /var/run/one
+#ExecStartPre=/bin/mkdir -p /var/lock/one
+#ExecStartPre=/bin/chown -R oneadmin:oneadmin /var/run/one
+#ExecStartPre=/bin/chown -R oneadmin:oneadmin /var/lock/one
 ExecStart=/usr/bin/one start
 ExecStop=/usr/bin/one stop
 
