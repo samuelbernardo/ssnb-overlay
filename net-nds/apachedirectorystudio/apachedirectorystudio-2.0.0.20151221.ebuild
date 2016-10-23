@@ -29,11 +29,7 @@ DEPEND="!net-nds/Apache-DS" # obsolete ebuild name
 RDEPEND=">=virtual/jre-1.5.0
 	x11-libs/gtk+:2"
 
-if use x86 ; then
-	MY_ARCH=x86
-elif use amd64 ; then
-	MY_ARCH=x86_64
-fi
+MY_ARCH="x86?  ( x86 ) amd64? ( amd64 )"
 INSTALL_DIR="/opt"
 S="${WORKDIR}/${MY_PN}-linux-${MY_ARCH}-${MY_PV}"
 
