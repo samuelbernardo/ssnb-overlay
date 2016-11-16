@@ -11,7 +11,7 @@ HOMEPAGE="http://nexus.sonatype.org/"
 LICENSE="GPL-3"
 MY_PN="nexus-oss-bin"
 MY_PV=$(replace_version_separator 3 '-')"-04"
-echo "Debug: custom package version: ${MY_PV}"
+#echo "Debug: custom package version: ${MY_PV}"
 MY_P="${MY_PN}-${MY_PV}"
 
 SRC_URI="http://download.sonatype.com/nexus/3/nexus-${PV}-04-unix.tar.gz"
@@ -20,7 +20,7 @@ KEYWORDS="~x86 ~amd64"
 SLOT="3"
 IUSE=""
 S="${WORKDIR}"
-echo "Debug: working directory: ${WORKDIR}"
+#echo "Debug: working directory: ${WORKDIR}"
 RDEPEND=">=virtual/jdk-1.8"
 INSTALL_DIR="/opt/nexus-oss"
 
@@ -38,11 +38,12 @@ cd "${S}"
 }
 
 src_install() {
-echo "Debug: INSTALL_DIR: ${INSTALL_DIR}"
-echo "Debug: doins nexus-${MY_PV}"
-echo "Debug: ${WORKDIR}/nexus-${MY_PV}/bin/nexus"
+#echo "Debug: INSTALL_DIR: ${INSTALL_DIR}"
+#echo "Debug: doins nexus-${MY_PV}"
+#echo "Debug: ${WORKDIR}/nexus-${MY_PV}/bin/nexus"
 insinto ${INSTALL_DIR}
 
+dodir ${INSTALL_DIR}/run
 doins -r nexus-${MY_PV}/*
 newinitd "${WORKDIR}/nexus-${MY_PV}/bin/nexus" nexus
 systemd_dounit "${FILESDIR}"/nexus-oss.service
