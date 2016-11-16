@@ -1,0 +1,14 @@
+[Unit]
+Description=Sonatype Nexus 3.x
+After=network.target
+
+[Service]
+ExecStart=/opt/nexus-oss/bin/nexus start
+ExecStop=/opt/nexus-oss/bin/nexus stop
+ExecReload=/opt/nexus-oss/bin/nexus restart
+PIDFile=/opt/nexus-oss/run/nexus.pid
+Type=forking
+User=nexus
+
+[Install]
+WantedBy=multi-user.target
