@@ -28,6 +28,8 @@ MY_PN=${PN/-community/}
 
 QA_PREBUILT="*"
 
+S="${WORKDIR}/${PN}-${MY_PV}"
+
 src_install() {
 	insinto /opt/${PN}
 	doins -r *
