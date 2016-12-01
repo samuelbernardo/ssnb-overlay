@@ -4,11 +4,13 @@
 
 EAPI=6
 
-inherit eutils readme.gentoo-r1
+inherit eutils readme.gentoo-r1 versionator
+
+MY_PV="$(get_version_component_range 1-2)"
 
 DESCRIPTION="Intelligent Python IDE with unique code assistance and analysis"
 HOMEPAGE="http://www.jetbrains.com/pycharm/"
-SRC_URI="http://download.jetbrains.com/python/${P}.tar.gz"
+SRC_URI="http://download.jetbrains.com/python/${PN}-${MY_PV}.tar.gz"
 
 LICENSE="Apache-2.0 BSD CDDL MIT-with-advertising"
 SLOT="0"
