@@ -6,10 +6,10 @@ EAPI=5
 
 inherit eutils versionator
 
-SR=R
+SR=1a
 RNAME="neon"
 
-SRC_BASE="http://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/${RNAME}/${SR}/eclipse-java-${RNAME}-${SR}-linux-gtk"
+SRC_BASE="https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/${RNAME}/${SR}/eclipse-java-${RNAME}-1a-linux-gtk"
 
 DESCRIPTION="Eclipse SDK"
 HOMEPAGE="http://www.eclipse.org"
@@ -19,11 +19,11 @@ SRC_URI="
 
 LICENSE="EPL-1.0"
 SLOT="4.6"
-KEYWORDS=""
+KEYWORDS="~x86 ~amd64"
 IUSE=""
 
 RDEPEND="
-	>=virtual/jdk-1.6
+	>=virtual/jdk-1.8
 	x11-libs/gtk+:2"
 
 S=${WORKDIR}/eclipse
