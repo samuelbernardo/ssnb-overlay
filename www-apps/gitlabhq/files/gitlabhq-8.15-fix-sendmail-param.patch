@@ -1,0 +1,17 @@
+--- gitlabhq-8.7.5/config/environments/production.rb.orig	2016-05-20 17:01:56.043486847 +0200
++++ gitlabhq-8.7.5/config/environments/production.rb	2016-05-20 17:02:35.8.1596032 +0200
+@@ -70,10 +70,10 @@
+ 
+   config.action_mailer.delivery_method = :sendmail
+   # Defaults to:
+-  # # config.action_mailer.sendmail_settings = {
+-  # #   location: '/usr/sbin/sendmail',
+-  # #   arguments: '-i -t'
+-  # # }
++  config.action_mailer.sendmail_settings = {
++    location: '/usr/sbin/sendmail',
++    arguments: '-i'
++  }
+   config.action_mailer.perform_deliveries = true
+   config.action_mailer.raise_delivery_errors = true
+ 
