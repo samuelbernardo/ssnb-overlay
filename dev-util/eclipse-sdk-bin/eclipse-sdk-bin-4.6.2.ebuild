@@ -6,7 +6,7 @@ EAPI=5
 
 inherit eutils versionator
 
-SR=1a
+SR=2
 RNAME="neon"
 
 SRC_BASE="https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/${RNAME}/${SR}/eclipse-java-${RNAME}-${SR}-linux-gtk"
