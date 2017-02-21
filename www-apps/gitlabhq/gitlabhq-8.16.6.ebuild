@@ -10,13 +10,13 @@ EAPI="5"
 #   it should be done, but GitLab has too many dependencies that it will be too
 #   difficult to maintain them via ebuilds.
 
-USE_RUBY="ruby21 ruby22 ruby23"
-PYTHON_DEPEND="2:2.5"
+USE_RUBY="ruby21 ruby22"
+PYTHON_COMPAT=( python2_7 )
 
 EGIT_REPO_URI="https://gitlab.com/gitlab-org/gitlab-ce.git"
 EGIT_COMMIT="v${PV}"
 
-inherit eutils git-2 python ruby-ng versionator user linux-info
+inherit eutils git-2 python-r1 ruby-ng versionator user linux-info
 
 DESCRIPTION="GitLab is a free project and repository management application"
 HOMEPAGE="https://about.gitlab.com/gitlab-ci/"
