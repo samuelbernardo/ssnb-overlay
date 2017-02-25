@@ -6,7 +6,7 @@ EAPI=6
 
 inherit eutils readme.gentoo-r1 versionator
 
-MY_PV="$(get_version_component_range 1-2)"
+MY_PV="$(get_version_component_range 1-3)"
 
 DESCRIPTION="Intelligent Python IDE with unique code assistance and analysis"
 HOMEPAGE="http://www.jetbrains.com/pycharm/"
