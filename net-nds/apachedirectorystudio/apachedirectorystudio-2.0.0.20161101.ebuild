@@ -37,7 +37,7 @@ src_install() {
 
 	insinto "${INSTALL_DIR}"
 	
-	newicon "${MY_PN}/features/org.apache.directory.studio.schemaeditor.feature_2.0.0.v20151221-M10/studio.png" "${MY_PN}.png"
+	newicon "${MY_PN}/features/org.apache.directory.studio.schemaeditor.feature_${MY_PV}-M${MY_PKGM}/studio.png" "${MY_PN}.png"
 	#newicon "${MY_PN}/icon.xpm" "${MY_PN}.xpm"
 	
 	make_desktop_entry "${MY_PN}" "Apache Directory Studio" "${MY_PN}" "System"
