@@ -15,6 +15,7 @@ LICENSE=""
 SLOT="0"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
+PROPERTIES="live"
 
 DEPEND=">=app-shells/zsh-4.3.17"
 RDEPEND="${DEPEND}"
