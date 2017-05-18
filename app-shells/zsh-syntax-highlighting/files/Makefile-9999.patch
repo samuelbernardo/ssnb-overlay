@@ -1,0 +1,15 @@
+diff --git Makefile Makefile
+index f454324..2ecfc6f 100644
+--- Makefile
++++ Makefile
+@@ -2,8 +2,8 @@ NAME=zsh-syntax-highlighting
+ 
+ INSTALL?=install -c
+ PREFIX?=/usr/local
+-SHARE_DIR?=$(DESTDIR)$(PREFIX)/share/$(NAME)
+-DOC_DIR?=$(DESTDIR)$(PREFIX)/share/doc/$(NAME)
++SHARE_DIR?=$(DESTDIR)$(PREFIX)/$(NAME)
++DOC_DIR?=$(DESTDIR)$(PREFIX)/doc/$(NAME)
+ ZSH?=zsh # zsh binary to run tests with
+ 
+ all:

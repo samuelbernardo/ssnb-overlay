@@ -4,7 +4,7 @@
 
 EAPI=6
 
-inherit git-r3
+inherit git-r3 eutils
 
 DESCRIPTION="Syntax highlighting (similar to the fish shell) for ZSH"
 HOMEPAGE="https://github.com/zsh-users/zsh-syntax-highlighting"
@@ -20,10 +20,17 @@ PROPERTIES="live"
 DEPEND=">=app-shells/zsh-4.3.17"
 RDEPEND="${DEPEND}"
 
+src_prepare() {
+	if [ -f "${FILESDIR}/Makefile-${PV}.patch" ]; then
+		epatch "${FILESDIR}/Makefile-${PV}.patch"
+	fi
+	default
+}
+
 src_install() {
 	insinto "/usr/share/zsh/site-contrib/${PN}"
 	doins "${S}/${PN}.plugin.zsh"
 
-	emake install DESTDIR="${D}" PREFIX="/usr"
+	emake install DESTDIR="${D}" PREFIX="/usr/share/zsh/site-contrib/"
 }
 
