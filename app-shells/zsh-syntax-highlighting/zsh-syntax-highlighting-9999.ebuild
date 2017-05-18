@@ -21,7 +21,7 @@ DEPEND=">=app-shells/zsh-4.3.17"
 RDEPEND="${DEPEND}"
 
 src_install() {
-	insinto "/usr/share/${PN}"
+	insinto "/usr/share/zsh/site-contrib/${PN}"
 	doins "${S}/${PN}.plugin.zsh"
 
 	emake install DESTDIR="${D}" PREFIX="/usr"
