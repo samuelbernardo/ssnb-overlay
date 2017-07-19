@@ -32,7 +32,8 @@ src_install() {
     sed -e "s|^message()|source /etc/conf.d/clion\n\nmessage()|" \
         -i bin/${PN}.sh || die "Unable to patch startup script"
 
-    [[ -d "jre" ]] && rm -rf jre || die "no embedded jre found"
+    [[ -d "jre" ]] && rm -rf jre || \
+    [[ -d "jre64" ]] && rm -rf jre64 || die "no embedded jre found"
 
     doins -r *
 
