@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<herd>supermin</herd>
+	<longdescription>
+		Supermin is a tool for building supermin appliances.
+		These are tiny appliances [similar to virtual machines],
+		usually around 100KB in size, which get fully instantiated
+		on-the-fly in a fraction of a second when you need to boot
+		one of them.
+
+		Official documentation at
+		http://people.redhat.com/~rjones/supermin/
+	</longdescription>
+	<use>
+		<flag name='test'>Enable tests with network connection.
+			If you don't have a network connection let it
+			disabled.
+		</flag>
+	</use>
+</pkgmetadata>
