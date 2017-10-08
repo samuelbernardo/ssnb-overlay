@@ -1,0 +1,25 @@
+#####################################################
+#
+# GitLab version    : 5.x - 7.x
+# Contributors      : davispuh, mtorromeo, axilleas, boeserwolf91, Stefan Tatschner (rumpelsepp), firelizzard
+# Originally from   : https://gitlab.com/gitlab-org/gitlab-recipes/tree/master/init/systemd
+#
+####################################################
+
+[Unit]
+Description=GitLab Unicorn Server
+Requires=redis.service gitlab-tmpdir.service
+Wants=postgresql-10.0.service
+After=redis.service postgresql-10.0.service
+
+[Service]
+User=git
+WorkingDirectory=/opt/gitlabhq-10.0
+Environment=RAILS_ENV=production
+SyslogIdentifier=gitlab-unicorn
+PIDFile=/opt/gitlabhq-10.0/tmp/pids/unicorn.pid
+
+ExecStart=/usr/bin/bundle exec "unicorn_rails -D -c /opt/gitlabhq-10.0/config/unicorn.rb -E production"
+
+[Install]
+WantedBy=multi-user.target
