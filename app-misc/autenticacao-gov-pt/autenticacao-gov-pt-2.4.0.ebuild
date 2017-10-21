@@ -3,19 +3,19 @@
 
 EAPI=6
 
-DESCRIPTION="Tool for authenticating with https://www.autenticacao.gov.pt/"
+DESCRIPTION="Tools for authenticating with https://www.autenticacao.gov.pt/"
 HOMEPAGE="https://www.autenticacao.gov.pt/"
 
-inherit subversion
+inherit subversion unpacker eutils
 
-#SRC_URI=""
+#SRC_URI="https://autenticacao.gov.pt/fa/ajuda/software/autenticacao.gov.pt.deb"
 ESVN_REPO_URI="https://svn.gov.pt/projects/ccidadao/repository/middleware-offline/tags/version${PV}/source/trunk/_src/eidmw"
 ESVN_PATCHES="${FILESDIR}/*.patch"
 
 LICENSE="EUPL"
 SLOT="2"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="+java"
 
 DEPEND="sys-apps/pcsc-lite
 	dev-java/icedtea
@@ -25,14 +25,23 @@ DEPEND="sys-apps/pcsc-lite
 	dev-qt/qtchooser
 	dev-libs/xml-security-c
 	dev-libs/xerces-c
-	app-text/poppler"
+	app-text/poppler
+	java? ( >=virtual/jdk-1.8:1.8 >=dev-java/oracle-jdk-bin-1.8:1.8 )"
 RDEPEND="${DEPEND}"
 
-PATCHES=( "${FILESDIR}/qmake.patch" )
+PATCHES=(
+	"${FILESDIR}/qmake.patch"
+	"${FILESDIR}/Makefile.gnu.patch"
+	)
 
 src_unpack() {
 	default
 	subversion_src_unpack
+	#if use java; then unpack_deb ${A}; fi
+	if use java; then
+		unpack_deb ${FILESDIR}/autenticacao.gov.pt-${PV}.deb
+		unpack ${FILESDIR}/extras-${PV}.tar.gz
+	fi
 }
 
 src_prepare() {
@@ -68,9 +77,14 @@ src_compile() {
 src_install() {
 	# make install
 	if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]] ; then
-		emake DESTDIR="${D}" install || die "Error: emake install failed"
+		emake INSTALL_ROOT="${D}" DESTDIR="${D}" install || die "Error: emake install failed"
 	else
 		die "Error: install phase failed because is missing Makefile!"
+	fi
+
+	# deb install
+	if use java; then
+		cp -R "${WORKDIR}/usr" "${D}" || die "Error: copy files in install phase failed!"
 	fi
 }
 
