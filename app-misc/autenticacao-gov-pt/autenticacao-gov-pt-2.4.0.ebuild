@@ -18,7 +18,6 @@ KEYWORDS="~amd64 ~x86"
 IUSE="+java"
 
 DEPEND="sys-apps/pcsc-lite
-	dev-java/icedtea
 	sys-apps/pcsc-tools
 	app-crypt/ccid
 	>=dev-qt/qtcore-5
@@ -26,7 +25,7 @@ DEPEND="sys-apps/pcsc-lite
 	dev-libs/xml-security-c
 	dev-libs/xerces-c
 	app-text/poppler
-	java? ( >=virtual/jdk-1.8:1.8 >=dev-java/oracle-jdk-bin-1.8:1.8 )"
+	java? ( >=virtual/jdk-1.8:1.8 || ( >=dev-java/oracle-jdk-bin-1.8:1.8 dev-java/icedtea dev-java/icedtea-bin ) )"
 RDEPEND="${DEPEND}"
 
 PATCHES=(
