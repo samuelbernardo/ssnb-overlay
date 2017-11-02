@@ -34,7 +34,9 @@ enewuser nexus -1 /bin/bash "${INSTALL_DIR}" "nexus"
 src_unpack() {
 unpack ${A}
 cd "${S}"
-# epatch "${FILESDIR}/${P}.patch"
+if -f "${FILESDIR}/${P}.patch"; then
+	epatch "${FILESDIR}/${P}.patch"
+fi
 }
 
 src_install() {
@@ -44,8 +46,12 @@ src_install() {
 insinto ${INSTALL_DIR}
 
 dodir ${INSTALL_DIR}/run
+dodir "/etc/init.d/"
 doins -r nexus-${MY_PV}/*
-newinitd "${WORKDIR}/nexus-${MY_PV}/bin/nexus" nexus
+doins -r nexus-${MY_PV}/.install4j
+#BUG: nexus init script needs a symlink because it uses program path to find their configuration files
+#newinitd "${WORKDIR}/nexus-${MY_PV}/bin/nexus" nexus
+dosym ${INSTALL_DIR}/bin/nexus /etc/init.d/nexus
 systemd_dounit "${FILESDIR}"/nexus-oss.service
 
 fowners -R nexus:nexus ${INSTALL_DIR}
