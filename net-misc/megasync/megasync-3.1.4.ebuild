@@ -68,8 +68,8 @@ if [[ ${PV} != *9999* ]];then
 	src_prepare(){
 		cp -r ../sdk-${SDK_COMMIT}/* src/MEGASync/mega
 		EPATCH_OPTS="-p0" epatch "${FILESDIR}/MEGAsync-3.1.4.0_Linux.patch"
-		cd src/MEGASync/mega
 		eapply_user
+		cd src/MEGASync/mega
 		eautoreconf
 	}
 fi

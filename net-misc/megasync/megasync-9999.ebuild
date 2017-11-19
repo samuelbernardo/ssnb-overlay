@@ -64,8 +64,8 @@ RDEPEND="${DEPEND}
 if [[ ${PV} != *9999* ]];then
 	src_prepare(){
 		cp -r ../sdk-${SDK_COMMIT}/* src/MEGASync/mega
-		cd src/MEGASync/mega
 		eapply_user
+		cd src/MEGASync/mega
 		eautoreconf
 	}
 fi
