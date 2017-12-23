@@ -23,7 +23,7 @@ IUSE=""
 S="${WORKDIR}"
 #echo "Debug: working directory: ${WORKDIR}"
 RDEPEND=">=virtual/jdk-1.8"
-INSTALL_DIR="/opt/nexus-oss-${MY_MV}"
+INSTALL_DIR="/opt/nexus-oss"
 
 pkg_setup() {
 #enewgroup <name> [gid]
@@ -46,11 +46,11 @@ epatch_user
 
 src_install() {
 #echo "Debug: install sonatype work dir"
-dodir ${INSTALL_DIR/nexus-oss-${MY_MV}/sonatype-work}
-insinto ${INSTALL_DIR/nexus-oss-${MY_MV}/sonatype-work}
+dodir ${INSTALL_DIR/nexus-oss/sonatype-work}
+insinto ${INSTALL_DIR/nexus-oss/sonatype-work}
 doins -r sonatype-work/*
 
-fowners -R nexus:nexus ${INSTALL_DIR/nexus-oss-${MY_MV}/sonatype-work}
+fowners -R nexus:nexus ${INSTALL_DIR/nexus-oss/sonatype-work}
 
 #echo "Debug: INSTALL_DIR: ${INSTALL_DIR}"
 #echo "Debug: doins nexus-${MY_PV}"
