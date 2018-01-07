@@ -1,0 +1,27 @@
+--- src/MEGAShellExtDolphin/megasync-plugin.h	2017-07-24 03:22:14.894701134 +0100
++++ src/MEGAShellExtDolphin/megasync-plugin.h	2017-07-24 03:29:22.518056652 +0100
+@@ -5,7 +5,7 @@
+ #ifndef WITH_KF5
+ #include <kabstractfileitemactionplugin.h>
+ #else
+-#include <KIOWidgets/kabstractfileitemactionplugin.h>
++#include <KF5/KIOWidgets/kabstractfileitemactionplugin.h>
+ #endif
+ #include <QLocalSocket>
+ 
+--- src/MEGAShellExtDolphin/megasync-plugin.cpp	2017-07-24 03:22:28.616295121 +0100
++++ src/MEGAShellExtDolphin/megasync-plugin.cpp	2017-07-24 03:31:02.382106210 +0100
+@@ -13,10 +13,10 @@
+ #else
+ #include <KPluginFactory>
+ #include <KPluginLoader>
+-#include <KIOWidgets/kabstractfileitemactionplugin.h>
++#include <KF5/KIOWidgets/kabstractfileitemactionplugin.h>
+ #include <QtNetwork/QLocalSocket>
+-#include <KIOCore/kfileitem.h>
+-#include <KIOCore/KFileItemListProperties>
++#include <KF5/KIOCore/kfileitem.h>
++#include <KF5/KIOCore/KFileItemListProperties>
+ #include <QtWidgets/QAction>
+ #include <QtCore/QDir>
+ #include <QtCore/QTimer>

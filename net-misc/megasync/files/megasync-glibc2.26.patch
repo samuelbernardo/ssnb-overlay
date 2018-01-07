@@ -1,0 +1,123 @@
+diff -Naur a/src/MEGASync/google_breakpad/client/linux/handler/exception_handler.cc b/src/MEGASync/google_breakpad/client/linux/handler/exception_handler.cc
+--- a/src/MEGASync/google_breakpad/client/linux/handler/exception_handler.cc	2017-11-19 14:46:02.366790151 +0000
++++ b/src/MEGASync/google_breakpad/client/linux/handler/exception_handler.cc	2017-11-19 14:52:43.760546710 +0000
+@@ -397,12 +397,12 @@
+   }
+   CrashContext context;
+   memcpy(&context.siginfo, info, sizeof(siginfo_t));
+-  memcpy(&context.context, uc, sizeof(struct ucontext));
++  memcpy(&context.context, uc, sizeof(ucontext_t));
+ #if !defined(__ARM_EABI__) && !defined(__mips__)
+   // FP state is not part of user ABI on ARM Linux.
+-  // In case of MIPS Linux FP state is already part of struct ucontext
++  // In case of MIPS Linux FP state is already part of ucontext_t
+   // and 'float_state' is not a member of CrashContext.
+-  struct ucontext *uc_ptr = (struct ucontext*)uc;
++  ucontext_t *uc_ptr = (ucontext_t*)uc;
+   if (uc_ptr->uc_mcontext.fpregs) {
+     memcpy(&context.float_state,
+            uc_ptr->uc_mcontext.fpregs,
+@@ -421,12 +421,13 @@
+ // This is a public interface to HandleSignal that allows the client to
+ // generate a crash dump. This function may run in a compromised context.
+ bool ExceptionHandler::SimulateSignalDelivery(int sig) {
+-  siginfo_t siginfo = {0, 0, 0, {0}};
++  siginfo_t siginfo;
++  memset(&siginfo, 0, sizeof(siginfo_t));
+   // Mimic a trusted signal to allow tracing the process (see
+   // ExceptionHandler::HandleSignal().
+   siginfo.si_code = SI_USER;
+   siginfo.si_pid = getpid();
+-  struct ucontext context;
++  ucontext_t context;
+   getcontext(&context);
+   return HandleSignal(sig, &siginfo, &context);
+ }
+diff -Naur a/src/MEGASync/google_breakpad/client/linux/handler/exception_handler.h b/src/MEGASync/google_breakpad/client/linux/handler/exception_handler.h
+--- a/src/MEGASync/google_breakpad/client/linux/handler/exception_handler.h	2017-11-19 14:46:02.366790151 +0000
++++ b/src/MEGASync/google_breakpad/client/linux/handler/exception_handler.h	2017-11-19 14:51:28.364846717 +0000
+@@ -189,10 +189,10 @@
+   struct CrashContext {
+     siginfo_t siginfo;
+     pid_t tid;  // the crashing thread.
+-    struct ucontext context;
++    ucontext_t context;
+ #if !defined(__ARM_EABI__) && !defined(__mips__)
+     // #ifdef this out because FP state is not part of user ABI for Linux ARM.
+-    // In case of MIPS Linux FP state is already part of struct ucontext
++    // In case of MIPS Linux FP state is already part of ucontext_t
+     // so 'float_state' is not required.
+     struct _libc_fpstate float_state;
+ #endif
+diff -Naur a/src/MEGASync/google_breakpad/client/linux/minidump_writer/minidump_writer.cc b/src/MEGASync/google_breakpad/client/linux/minidump_writer/minidump_writer.cc
+--- a/src/MEGASync/google_breakpad/client/linux/minidump_writer/minidump_writer.cc	2017-11-19 14:46:02.369790060 +0000
++++ b/src/MEGASync/google_breakpad/client/linux/minidump_writer/minidump_writer.cc	2017-11-19 14:51:28.353847052 +0000
+@@ -1725,7 +1725,7 @@
+   const int fd_;  // File descriptor where the minidum should be written.
+   const char* path_;  // Path to the file where the minidum should be written.
+ 
+-  const struct ucontext* const ucontext_;  // also from the signal handler
++  const ucontext_t* const ucontext_;  // also from the signal handler
+   const struct _libc_fpstate* const float_state_;  // ditto
+   LinuxDumper* dumper_;
+   MinidumpFileWriter minidump_writer_;
+diff -Naur a/src/MEGASync/google_breakpad/common/android/include/sys/ucontext.h b/src/MEGASync/google_breakpad/common/android/include/sys/ucontext.h
+--- a/src/MEGASync/google_breakpad/common/android/include/sys/ucontext.h	2017-11-19 14:46:02.394789297 +0000
++++ b/src/MEGASync/google_breakpad/common/android/include/sys/ucontext.h	2017-11-19 14:51:28.333847662 +0000
+@@ -53,9 +53,9 @@
+ // The ARM kernel uses a 64-bit signal mask.
+ typedef uint32_t  kernel_sigmask_t[2];
+ 
+-typedef struct ucontext {
++typedef ucontext_t {
+   uint32_t uc_flags;
+-  struct ucontext* uc_link;
++  ucontext_t* uc_link;
+   stack_t uc_stack;
+   mcontext_t uc_mcontext;
+   kernel_sigmask_t uc_sigmask;
+@@ -117,9 +117,9 @@
+ // The i386 kernel uses a 64-bit signal mask.
+ typedef uint32_t kernel_sigmask_t[2];
+ 
+-typedef struct ucontext {
++typedef ucontext_t {
+   uint32_t uc_flags;
+-  struct ucontext* uc_link;
++  ucontext_t* uc_link;
+   stack_t uc_stack;
+   mcontext_t uc_mcontext;
+   kernel_sigmask_t uc_sigmask;
+@@ -152,9 +152,9 @@
+ // The MIPS kernel uses a 128-bit signal mask.
+ typedef uint32_t kernel_sigmask_t[4];
+ 
+-typedef struct ucontext {
++typedef ucontext_t {
+   uint32_t uc_flags;
+-  struct ucontext* uc_link;
++  ucontext_t* uc_link;
+   stack_t uc_stack;
+   mcontext_t uc_mcontext;
+   kernel_sigmask_t uc_sigmask;
+diff -Naur a/src/MEGASync/google_breakpad/client/linux/minidump_writer/minidump_writer.cc b/src/MEGASync/google_breakpad/client/linux/minidump_writer/minidump_writer.cc
+--- a/src/MEGASync/google_breakpad/client/linux/minidump_writer/minidump_writer.cc	2017-11-19 15:03:10.536413558 +0000
++++ b/src/MEGASync/google_breakpad/client/linux/minidump_writer/minidump_writer.cc	2017-11-19 15:16:27.828131605 +0000
+@@ -177,7 +177,7 @@
+ // Juggle an x86 ucontext into minidump format
+ //   out: the minidump structure
+ //   info: the collection of register structures.
+-void CPUFillFromUContext(MDRawContextX86 *out, const ucontext *uc,
++void CPUFillFromUContext(MDRawContextX86 *out, const ucontext_t *uc,
+                          const struct _libc_fpstate* fp) {
+   const greg_t* regs = uc->uc_mcontext.gregs;
+ 
+@@ -277,7 +277,7 @@
+   my_memcpy(&out->flt_save.xmm_registers, &info.fpregs.xmm_space, 16 * 16);
+ }
+ 
+-void CPUFillFromUContext(MDRawContextAMD64 *out, const ucontext *uc,
++void CPUFillFromUContext(MDRawContextAMD64 *out, const ucontext_t *uc,
+                          const struct _libc_fpstate* fpregs) {
+   const greg_t* regs = uc->uc_mcontext.gregs;
+ 
