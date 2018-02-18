@@ -25,7 +25,7 @@ dev-java/jna:0
 
 RDEPEND="${COMMONDEP}
 dev-embedded/arduino-libs
-=dev-embedded/avrdude-6.0.1
+>=dev-embedded/avrdude-6
 sys-devel/crossdev
 >=virtual/jre-1.8"
 
