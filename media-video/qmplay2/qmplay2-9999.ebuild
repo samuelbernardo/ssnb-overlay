@@ -68,6 +68,23 @@ DEPEND="${RDEPEND}
 CMAKE_MIN_VERSION="2.8.11"
 DOCS=( AUTHORS ChangeLog README.md )
 
+PATCHES=(
+	"${FILESDIR}/qmplay2-dbus.patch"
+)
+
+src_prepare() {
+	if [[ ${PV} == 9999 ]]; then
+		default
+	else
+		if declare -p PATCHES | grep -q "^declare -a "; then
+			[[ -n ${PATCHES[@]} ]] && eapply "${PATCHES[@]}" || die "Error: failed to apply ebuild patches ${PATCHES}!"
+		else
+			[[ -n ${PATCHES} ]] && eapply ${PATCHES} || die "Error: failed to apply ebuild patches ${PATCHES}!"
+		fi
+		eapply_user
+	fi
+}
+
 src_configure() {
 	local mycmakeargs=(
 		-DLANGUAGES="$(l10n_get_locales)"

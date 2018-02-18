@@ -1,0 +1,10 @@
+--- a/src/qmplay2/CMakeLists.txt
++++ b/src/qmplay2/CMakeLists.txt
+@@ -102,6 +102,7 @@ if(USE_GIT_VERSION AND QMPLAY2_GIT_HEAD)
+ endif()
+ 
+ if(USE_FREEDESKTOP_NOTIFICATIONS)
++    find_package(Qt5 REQUIRED COMPONENTS DBus)
+     list(APPEND QMPLAY2_HDR headers/NotifiesFreedesktop.hpp)
+     list(APPEND QMPLAY2_SRC NotifiesFreedesktop.cpp)
+     qt5_add_dbus_interface(QMPLAY2_SRC org.freedesktop.Notifications.xml notifications_interface)
