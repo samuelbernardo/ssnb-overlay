@@ -6,8 +6,8 @@ EAPI=5
 
 inherit eutils versionator
 
-SR=1a
-RNAME="neon"
+SR="3"
+RNAME="oxygen"
 
 SRC_BASE="https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/${RNAME}/${SR}/eclipse-java-${RNAME}-${SR}-linux-gtk"
 
@@ -18,7 +18,7 @@ SRC_URI="
 	x86? ( ${SRC_BASE}.tar.gz&r=1 -> eclipse-java-${RNAME}-${SR}-linux-gtk-${PV}.tar.gz )"
 
 LICENSE="EPL-1.0"
-SLOT="4.6"
+SLOT="4.7"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
