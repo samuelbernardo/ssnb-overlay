@@ -8,10 +8,10 @@ USE_RUBY="ruby19 ruby20 ruby21 ruby22 ruby23 ruby24 ruby25"
 
 inherit ruby-fakegem
 
-DESCRIPTION="This is the MySQL API module for Ruby"
-HOMEPAGE="https://rubygems.org/gems/rubygems-update/versions/2.6.8"
+DESCRIPTION="This client only supports Zendesk's v2 API."
+HOMEPAGE="https://github.com/zendesk/zendesk_api_client_rb"
 
-LICENSE="Ruby"
+LICENSE="Apache"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
 

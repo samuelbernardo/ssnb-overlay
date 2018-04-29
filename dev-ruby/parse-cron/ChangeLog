@@ -1,0 +1,6 @@
+# ChangeLog for dev-ruby/sequel
+# Copyright 1999-2016 Gentoo Foundation; Distributed under the GPL v2
+# $Header: $
+
+  15 Oct 2016; Samuel Bernardo <samuelbernardo.mail@gmail.com> parse-cron-0.1.4.ebuild:
+  [dev-ruby/parse-cron] Add parse-cron 0.1.4.

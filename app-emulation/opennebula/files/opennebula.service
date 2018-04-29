@@ -1,18 +1,32 @@
 [Unit]
 Description=OpenNebula management
-After=network.target local-fs.target remote-fs.target mysqld.service 
+After=syslog.target network.target local-fs.target remote-fs.target
+Requires=mysqld.service
+#Before=opennebula-scheduler.service
+#BindTo=opennebula-scheduler.service
+#Wants=opennebula-sunstone.service opennebula-econe.service opennebula-onegate.service opennebula-oneflow.service opennebula-scheduler.service
+Wants=opennebula-sunstone.service opennebula-econe.service opennebula-onegate.service opennebula-oneflow.service
 
 [Service]
 User=oneadmin
 Group=oneadmin
 Type=forking
 PermissionsStartOnly=true
+
 #ExecStartPre=/bin/mkdir -p /var/run/one
 #ExecStartPre=/bin/mkdir -p /var/lock/one
 #ExecStartPre=/bin/chown -R oneadmin:oneadmin /var/run/one
 #ExecStartPre=/bin/chown -R oneadmin:oneadmin /var/lock/one
 ExecStart=/usr/bin/one start
 ExecStop=/usr/bin/one stop
+# Log file location must exist
+#ExecStartPre=/bin/mkdir -p /var/log/one
+#ExecStartPre=/bin/chown oneadmin:oneadmin /var/log/one
+#ExecStartPre=-/usr/bin/logrotate -s /tmp/logrotate.state -f /etc/logrotate.d/opennebula
+#ExecStopPost=/usr/bin/rm -f /var/lock/one/one
+ExecStopPost=/usr/share/one/follower_cleanup
+#PIDFile=/var/run/one/oned.pid
+#Restart=always
 
 [Install]
 WantedBy=multi-user.target

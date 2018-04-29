@@ -4,12 +4,12 @@
 
 EAPI=6
 
-USE_RUBY="ruby19 ruby20 ruby21 ruby22 ruby23 ruby24 ruby25"
+USE_RUBY="ruby21 ruby22 ruby23 ruby24 ruby25"
 
 inherit ruby-fakegem
 
-DESCRIPTION="This is the MySQL API module for Ruby"
-HOMEPAGE="https://rubygems.org/gems/rubygems-update/versions/2.6.8"
+DESCRIPTION="A Ruby library for accessing memcached"
+HOMEPAGE="https://rubygems.org/gems/memcache-client/versions/1.8.5"
 
 LICENSE="Ruby"
 SLOT="0"
