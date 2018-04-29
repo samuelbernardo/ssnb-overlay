@@ -1,6 +1,6 @@
 [Unit]
 Description=OpenNebula management
-After=syslog.target network.target local-fs.target remote-fs.target
+After=syslog.target network.target local-fs.target remote-fs.target mysqld.service
 Requires=mysqld.service
 #Before=opennebula-scheduler.service
 #BindTo=opennebula-scheduler.service
