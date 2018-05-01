@@ -8,7 +8,7 @@
 	</maintainer>
 	<use>
 		<flag name="libvirt">
-			Builds the terraform provider for libvirt
+			Builds the terraform provider for opennebula
 		</flag>
 	</use>
 </pkgmetadata>

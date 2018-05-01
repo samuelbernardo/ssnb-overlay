@@ -3,10 +3,9 @@
 
 EAPI=6
 
-GOLANG_PKG_IMPORTPATH="github.com/dmacvicar"
-GOLANG_PKG_ARCHIVEPREFIX="v"
+GOLANG_PKG_IMPORTPATH="github.com/runtastic"
+#GOLANG_PKG_ARCHIVEPREFIX="v"
 GOLANG_PKG_HAVE_TEST=1
-GOLANG_PKG_USE_CGO="yes"
 
 inherit golang-single versionator
 
@@ -15,7 +14,7 @@ inherit golang-single versionator
 DESCRIPTION="Terraform builds, changes, and combines infrastructure safely and efficiently"
 HOMEPAGE="http://www.terraform.io"
 
-LICENSE="Apache 2.0"
+LICENSE="MIT"
 SLOT="0"
 KEYWORDS="amd64 x86"
 IUSE=""
