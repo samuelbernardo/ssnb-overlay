@@ -36,6 +36,7 @@ DEPEND="
 		dev-qt/qtcore:4
 		dev-qt/qtgui:4
 		dev-qt/qtdbus:4
+		dev-libs/sni-qt
 		)
 	qt5? ( 
 		dev-qt/qtcore:5
@@ -47,7 +48,6 @@ DEPEND="
 		dev-qt/qtdbus:5
 		)"
 RDEPEND="${DEPEND}
-		dev-libs/sni-qt
 		x11-themes/hicolor-icon-theme
 		dev-libs/openssl
 		dev-libs/libgcrypt
