@@ -16,6 +16,7 @@ if [[ ${PV} == 9999 ]]; then
 	EGIT_REPO_URI="https://github.com/zaps166/${MY_PN}.git"
 	KEYWORDS=""
 else
+	inherit versionator
 	MY_PV=$(replace_version_separator 3 '-')
 
 	SRC_URI="https://github.com/zaps166/${MY_PN}/releases/download/${MY_PV}/${MY_PN}-src-${MY_PV}.tar.xz"
