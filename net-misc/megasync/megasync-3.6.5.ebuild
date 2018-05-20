@@ -64,14 +64,18 @@ RDEPEND="${DEPEND}
 		readline? ( sys-libs/readline:0 )
 		"
 
-#PATCHES=( "${FILESDIR}/megasync-glibc2.26.patch" )
+PATCHES=( "${FILESDIR}/${P}-ffmeg.patch" )
 
 if [[ ${PV} != *9999* ]];then
 	src_prepare(){
+		#default
 		# Not needed, since using git submodules
 		#cp -r ../sdk-${SDK_COMMIT}/* src/MEGASync/mega
 		if [ -e "${FILESDIR}/MEGAsync-${PV}.0_Linux.patch" ]; then
 			EPATCH_OPTS="-p0" epatch "${FILESDIR}/MEGAsync-${PV}.0_Linux.patch"
+		fi
+		if [ ! -z ${PATCHES} ]; then
+			epatch ${PATCHES}
 		fi
 		eapply_user
 		cd src/MEGASync/mega
