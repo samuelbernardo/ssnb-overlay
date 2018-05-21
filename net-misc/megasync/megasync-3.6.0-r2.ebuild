@@ -20,7 +20,7 @@ else
 	EGIT_SUBMODULES=( '*' )
 	#SRC_URI="https://github.com/meganz/MEGAsync/archive/v${PV}.0_Linux.tar.gz -> ${P}.tar.gz
 	#https://github.com/meganz/sdk/archive/${SDK_COMMIT}.tar.gz -> ${PN}-sdk-20170215.tar.gz"
-	KEYWORDS="~x86 ~amd64"
+	KEYWORDS="x86 amd64"
 	#RESTRICT="mirror"
 	#S="${WORKDIR}/MEGAsync-${PV}.0_Linux"
 fi
@@ -32,6 +32,7 @@ IUSE="+cryptopp +sqlite +zlib +curl freeimage readline examples threads qt5 java
 DEPEND="
 	dev-lang/swig
 	app-doc/doxygen
+	media-libs/libmediainfo
 	!qt5? ( 
 		dev-qt/qtcore:4
 		dev-qt/qtgui:4
