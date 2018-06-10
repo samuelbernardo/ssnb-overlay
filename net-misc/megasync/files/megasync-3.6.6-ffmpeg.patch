@@ -1,0 +1,12 @@
+diff -Naur a/src/MEGASync/MEGASync.pro b/src/MEGASync/MEGASync.pro
+--- a/src/MEGASync/MEGASync.pro	2018-05-19 18:48:04.753947715 +0100
++++ b/src/MEGASync/MEGASync.pro	2018-05-19 19:48:13.055865813 +0100
+@@ -57,7 +57,7 @@
+ CONFIG += USE_MEDIAINFO
+ 
+ unix:!macx {
+-        exists(/usr/include/ffmpeg-mega)|exists(mega/bindings/qt/3rdparty/include/ffmpeg)|packagesExist(ffmpeg) {
++        exists(/usr/include/ffmpeg-mega)|exists(mega/bindings/qt/3rdparty/include/ffmpeg)|packagesExist(ffmpeg)|packagesExist(libavcodec) {
+             CONFIG += USE_FFMPEG
+         }
+ }

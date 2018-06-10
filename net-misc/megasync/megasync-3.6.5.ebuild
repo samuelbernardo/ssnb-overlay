@@ -64,7 +64,7 @@ RDEPEND="${DEPEND}
 		readline? ( sys-libs/readline:0 )
 		"
 
-PATCHES=( "${FILESDIR}/${P}-ffmeg.patch" )
+PATCHES=( "${FILESDIR}/${P}-ffmpeg.patch" )
 
 if [[ ${PV} != *9999* ]];then
 	src_prepare(){
