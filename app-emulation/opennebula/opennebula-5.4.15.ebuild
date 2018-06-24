@@ -104,6 +104,13 @@ src_compile() {
 	# http://lists.ceph.com/pipermail/users-opennebula.org/2011-June/033132.html
 	#filter-ldflags -lpthread
 
+	# install necessary npm project dependencies
+	if use sunstone; then
+		cd ${S}/src/sunstone/public/
+		/usr/bin/npm install -f
+		cd ${S}
+	fi
+
 	local myconf
 	# This builds the vanilla OpenNebula package. Tweak this line as desired.
 	myconf+="parsers=yes "
