@@ -5,7 +5,7 @@
 EAPI=6
 USE_RUBY="ruby22 ruby23 ruby24 ruby25"
 
-inherit user eutils multilib ruby-ng systemd git-r3 flag-o-matic
+inherit user eutils multilib ruby-ng systemd git-r3 flag-o-matic npm-tools
 
 MY_P="opennebula-${PV/_/-}"
 
@@ -106,9 +106,7 @@ src_compile() {
 
 	# install necessary npm project dependencies
 	if use sunstone; then
-		cd ${S}/src/sunstone/public/
-		/usr/bin/npm install -f
-		cd ${S}
+		npm_install ${S}/src/sunstone/public/
 	fi
 
 	local myconf
