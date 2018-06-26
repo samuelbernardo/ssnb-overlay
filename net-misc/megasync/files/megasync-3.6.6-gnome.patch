@@ -1,0 +1,12 @@
+diff -Naur a/src/MEGASync/MegaApplication.cpp b/src/MEGASync/MegaApplication.cpp
+--- a/src/MEGASync/MegaApplication.cpp	2018-06-26 23:07:10.698536478 +0100
++++ b/src/MEGASync/MegaApplication.cpp	2018-06-26 23:12:13.287919683 +0100
+@@ -165,7 +165,7 @@
+ #endif
+ 
+ #if QT_VERSION < 0x050A00
+-    QApplication::setDesktopSettingsAware(false);
++    //QApplication::setDesktopSettingsAware(false);
+ #endif
+ #endif
+     MegaApplication app(argc, argv);
