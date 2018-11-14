@@ -9,15 +9,16 @@ inherit eutils user versionator systemd
 DESCRIPTION="Maven Repository Manager"
 HOMEPAGE="http://nexus.sonatype.org/"
 LICENSE="GPL-3"
-MY_PN="nexus-oss-bin"
-MY_PV=$(replace_version_separator 3 '-')"-02"
+MY_PN="nexus"
+MY_PV="${PV}-04-unix"
 #echo "Debug: custom package version: ${MY_PV}"
 MY_P="${MY_PN}-${MY_PV}"
+MY_MV="3"
 
-SRC_URI="http://download.sonatype.com/nexus/3/nexus-${PV}-02-unix.tar.gz"
+SRC_URI="http://download.sonatype.com/${MY_PN}/${MY_MV}/${MY_P}.tar.gz"
 RESTRICT="mirror"
 KEYWORDS="~x86 ~amd64"
-SLOT="3"
+SLOT="${MY_MV}"
 IUSE=""
 S="${WORKDIR}"
 #echo "Debug: working directory: ${WORKDIR}"
@@ -33,19 +34,36 @@ enewuser nexus -1 /bin/bash "${INSTALL_DIR}" "nexus"
 
 src_unpack() {
 unpack ${A}
+}
+
+src_prepare() {
 cd "${S}"
-# epatch "${FILESDIR}/${P}.patch"
+if -f "${FILESDIR}/${P}.patch"; then
+	epatch "${FILESDIR}/${P}.patch"
+fi
+epatch_user
 }
 
 src_install() {
+#echo "Debug: install sonatype work dir"
+dodir ${INSTALL_DIR/nexus-oss/sonatype-work}
+insinto ${INSTALL_DIR/nexus-oss/sonatype-work}
+doins -r sonatype-work/*
+
+fowners -R nexus:nexus ${INSTALL_DIR/nexus-oss/sonatype-work}
+
 #echo "Debug: INSTALL_DIR: ${INSTALL_DIR}"
 #echo "Debug: doins nexus-${MY_PV}"
 #echo "Debug: ${WORKDIR}/nexus-${MY_PV}/bin/nexus"
 insinto ${INSTALL_DIR}
 
 dodir ${INSTALL_DIR}/run
-doins -r nexus-${MY_PV}/*
-newinitd "${WORKDIR}/nexus-${MY_PV}/bin/nexus" nexus
+dodir "/etc/init.d/"
+doins -r ${MY_P/-unix/}/*
+doins -r ${MY_P/-unix/}/.??*
+#BUG: nexus init script needs a symlink because it uses program path to find their configuration files
+#newinitd "${WORKDIR}/nexus-${MY_PV}/bin/nexus" nexus
+dosym ${INSTALL_DIR}/bin/nexus /etc/init.d/nexus
 systemd_dounit "${FILESDIR}"/nexus-oss.service
 
 fowners -R nexus:nexus ${INSTALL_DIR}
