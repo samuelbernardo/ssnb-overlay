@@ -32,7 +32,7 @@ RDEPEND=">=virtual/jre-1.8.0
 #MY_ARCH="x86?  ( x86 ) amd64? ( amd64 )"
 MY_ARCH="$ARCH"
 INSTALL_DIR="/opt"
-S="${WORKDIR}/${MY_PN}-linux-${MY_ARCH}-${MY_PV}"
+S="${WORKDIR}/${MY_PN}"
 
 src_install() {
 
