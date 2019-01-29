@@ -31,21 +31,21 @@ RDEPEND=">=virtual/jre-1.8.0
 
 #MY_ARCH="x86?  ( x86 ) amd64? ( amd64 )"
 MY_ARCH="$ARCH"
-INSTALL_DIR="/opt"
+INSTALL_DIR="/opt/${MY_PN}"
 S="${WORKDIR}/${MY_PN}"
 
 src_install() {
 
 	insinto "${INSTALL_DIR}"
 	
-	newicon "${MY_PN}/features/org.apache.directory.studio.schemaeditor.feature_${MY_PV}-M${MY_PKGM}/studio.png" "${MY_PN}.png"
+	newicon "features/org.apache.directory.studio.schemaeditor.feature_${MY_PV}-M${MY_PKGM}/studio.png" "${MY_PN}.png"
 	#newicon "${MY_PN}/icon.xpm" "${MY_PN}.xpm"
 	
 	make_desktop_entry "${MY_PN}" "Apache Directory Studio" "${MY_PN}" "System"
 	
 	doins -r *
 	
-	fperms +x "${INSTALL_DIR}/${MY_PN}/${MY_PN}"
+	fperms +x "${INSTALL_DIR}/${MY_PN}"
 	
-	dosym "${INSTALL_DIR}/${MY_PN}/${MY_PN}" "/usr/bin/${MY_PN}"
+	dosym "${INSTALL_DIR}/${MY_PN}" "/usr/bin/${MY_PN}"
 }
