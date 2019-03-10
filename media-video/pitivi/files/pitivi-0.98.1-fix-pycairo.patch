@@ -1,0 +1,12 @@
+Fix compilation with pycairo 1.17.x
+
+--- a/pitivi/coptimizations/renderer.c    2017-04-29 11:33:23.000000000 +0200
++++ b/pitivi/coptimizations/renderer.c   2019-03-09 14:34:05.868654440 +0100
+@@ -4,7 +4,6 @@
+ #include <py3cairo.h>
+ #include <gst/gst.h>
+
+-static Pycairo_CAPI_t *Pycairo_CAPI;
+ static GObjectClass * gobject_class;
+
+ /*
