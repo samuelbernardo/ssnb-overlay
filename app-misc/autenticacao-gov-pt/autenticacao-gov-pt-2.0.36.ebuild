@@ -23,6 +23,8 @@ RDEPEND="${DEPEND}
 	!app-misc/autenticacao-gov-pt:2
 	!app-misc/autenticacao-gov-pt:3"
 
+S="${WORKDIR}/"
+
 src_unpack() {
 	default
 	unpack_deb ${A}
