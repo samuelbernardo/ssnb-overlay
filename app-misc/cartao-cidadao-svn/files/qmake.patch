@@ -1,0 +1,17 @@
+--- a/configure	2017-09-21 20:34:16.391377881 +0100
++++ b/configure	2017-09-21 21:24:12.444003296 +0100
+@@ -302,11 +302,11 @@
+ my $QtVerZ = 0;
+ my $qmakeVerI = 10000 * $QtVerX + 100 * $QtVerY + $QtVerZ;
+ 
+-my $qmakeVer = `qmake -v`;
+-my $qmakeCmd = "qmake";
++my $qmakeVer = `qmake -qt=5 -v`;
++my $qmakeCmd = "qmake -qt=5";
+ eval {
+ 	print "trying qmake...";
+-	$qmakeVer = `qmake -v`;
++	$qmakeVer = `qmake -qt=5 -v`;
+ };
+ 
+ # get the version nr from the version string

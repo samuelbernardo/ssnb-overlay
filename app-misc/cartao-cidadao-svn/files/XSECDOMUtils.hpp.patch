@@ -1,0 +1,12 @@
+diff -Naur a/applayer/XadesSignature.cpp b/applayer/XadesSignature.cpp
+--- a/applayer/XadesSignature.cpp	2019-01-13 20:06:05.519457738 +0000
++++ b/applayer/XadesSignature.cpp	2019-01-13 20:40:45.482262806 +0000
+@@ -63,7 +63,7 @@
+ #include <xsec/enc/XSECCryptoUtils.hpp>
+ #include <xsec/enc/XSECCryptoException.hpp>
+ #include <xsec/utils/XSECBinTXFMInputStream.hpp>
+-#include <xsec/utils/XSECDOMUtils.hpp>
++//#include <xsec/utils/XSECDOMUtils.hpp>
+ #include <xsec/transformers/TXFMBase.hpp>
+ #include <xsec/transformers/TXFMChain.hpp>
+ 

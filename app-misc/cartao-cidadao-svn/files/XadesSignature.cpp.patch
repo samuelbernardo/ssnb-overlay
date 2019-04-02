@@ -1,0 +1,38 @@
+diff -Naur a/applayer/XadesSignature.cpp b/applayer/XadesSignature.cpp
+--- a/applayer/XadesSignature.cpp	2019-02-18 23:48:47.483833073 +0000
++++ b/applayer/XadesSignature.cpp	2019-02-19 00:43:51.207845230 +0000
+@@ -62,6 +62,7 @@
+ 
+ #include <xsec/enc/XSECCryptoUtils.hpp>
+ #include <xsec/enc/XSECCryptoException.hpp>
++#include <xsec/enc/XSECCryptoHash.hpp>
+ #include <xsec/utils/XSECBinTXFMInputStream.hpp>
+ #include <xsec/utils/XSECDOMUtils.hpp>
+ #include <xsec/transformers/TXFMBase.hpp>
+@@ -567,7 +568,7 @@
+ 
+     string c14n;
+     unsigned char buffer[1024];
+-    xsecsize_t bytes = 0;
++    XMLSize_t bytes = 0;
+     while((bytes = canonicalizer.outputBuffer(buffer, 1024)) > 0)
+     {
+         c14n.append( (char*)&buffer[0], size_t(bytes));
+@@ -622,7 +623,7 @@
+ 
+     string c14n;
+     unsigned char buffer[1024];
+-    xsecsize_t bytes = 0;
++    XMLSize_t bytes = 0;
+     while((bytes = canonicalizer.outputBuffer(buffer, 1024)) > 0)
+     {
+         c14n.append( (char*)&buffer[0], size_t(bytes));
+@@ -881,7 +882,7 @@
+ 
+     string c14n;
+     unsigned char buffer[1024];
+-    xsecsize_t bytes = 0;
++    XMLSize_t bytes = 0;
+     while((bytes = canonicalizer.outputBuffer(buffer, 1024)) > 0)
+     {
+         c14n.append((char*)&buffer[0], size_t(bytes));
