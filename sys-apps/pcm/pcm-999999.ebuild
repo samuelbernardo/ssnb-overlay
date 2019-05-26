@@ -19,7 +19,6 @@ else
 	EGIT_COMMIT="${MYPV}"
 	EGIT_SUBMODULES=( '*' )
 	KEYWORDS="~x86 ~amd64"
-	S="${WORKDIR}/${PN}"
 fi
 
 LICENSE="Intel"
@@ -48,7 +47,7 @@ src_compile(){
 
 src_install(){
 	insinto usr/share/licenses/${PN}
-	doins LICENCE
+	doins LICENSE
 
 	newbin pcm.x pcm
 	newbin pcm-numa.x pcm-numa
