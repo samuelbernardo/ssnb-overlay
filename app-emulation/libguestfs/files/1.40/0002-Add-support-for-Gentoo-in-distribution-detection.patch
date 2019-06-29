@@ -1,0 +1,13 @@
+diff -Naur a/m4/guestfs-appliance.m4 b/m4/guestfs-appliance.m4
+--- a/m4/guestfs-appliance.m4	2018-09-21 16:05:40.719638121 +0100
++++ b/m4/guestfs-appliance.m4	2018-11-21 23:46:42.371118647 +0000
+@@ -108,6 +108,9 @@
+                     [OPENSUSE | SLED | SLES],[DISTRO=SUSE],
+                     [ARCH],[DISTRO=ARCHLINUX])
+             AC_MSG_RESULT([$DISTRO (from /etc/os-release)])
++	elif test -f /etc/gentoo-release; then
++		DISTRO=GENTOO
++		AC_MSG_RESULT([$DISTRO (from /etc/gentoo-release)])
+         else
+             AC_MSG_ERROR([/etc/os-release not available, please specify the distro using --with-distro=DISTRO])
+         fi
