@@ -123,10 +123,6 @@ src_configure(){
 	cd ../..
 	local myeqmakeargs=(
 		MEGA.pro
-		CONFIG$(usex nautilus + -)=with_ext
-		CONFIG$(usex thunar + -)=with_thu
-		CONFIG-=with_updater
-		CONFIG-=with_tools
 		CONFIG+="release"
 	)
 	if use qt5; then
