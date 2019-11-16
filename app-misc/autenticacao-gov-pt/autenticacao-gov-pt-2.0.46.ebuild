@@ -8,7 +8,7 @@ HOMEPAGE="https://www.autenticacao.gov.pt/"
 
 inherit unpacker eutils
 
-SRC_URI="https://autenticacao.gov.pt/fa/ajuda/software/plugin-autenticacao-gov.deb"
+SRC_URI="https://autenticacao.gov.pt/fa/ajuda/software/plugin-autenticacao-gov.deb -> ${P}.deb"
 
 LICENSE="EUPL"
 SLOT="0"
