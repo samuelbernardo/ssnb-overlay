@@ -1,0 +1,20 @@
+diff -Naur a/dialogs/dialogsQTsrv/dlgWndPinpadInfo.cpp b/dialogs/dialogsQTsrv/dlgWndPinpadInfo.cpp
+--- a/dialogs/dialogsQTsrv/dlgWndPinpadInfo.cpp	2018-11-11 13:51:45.408429081 +0000
++++ b/dialogs/dialogsQTsrv/dlgWndPinpadInfo.cpp	2018-11-11 13:54:03.660290076 +0000
+@@ -21,6 +21,7 @@
+ #include "dlgWndPinpadInfo.h"
+ #include "../langUtil.h"
+ #include <QDesktopWidget>
++#include <QIcon>
+ 
+ dlgWndPinpadInfo::dlgWndPinpadInfo( unsigned long ulHandle,
+ 		DlgPinOperation operation, const QString & Reader,
+@@ -39,7 +40,7 @@
+ 
+ 	QString Title="";
+ 
+-	this->setWindowIcon( QIcon(":/Resources/ICO_CARD_EID_PLAIN_16x16.png") );
++	this->setWindowIcon( QIcon("./Resources/ICO_CARD_EID_PLAIN_16x16.png") );
+ 
+     if (operation == DLG_PIN_OP_CHANGE)
+         Title+= QString::fromWCharArray(GETSTRING_DLG(ChangeYourPin));

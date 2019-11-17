@@ -1,0 +1,30 @@
+diff -Naur a/applayer/XadesSignature.cpp b/applayer/XadesSignature.cpp
+--- a/applayer/XadesSignature.cpp	2019-09-13 08:07:22.239291284 +0100
++++ b/applayer/XadesSignature.cpp	2019-09-13 08:14:39.319813193 +0100
+@@ -577,7 +577,7 @@
+ 
+     string c14n;
+     unsigned char buffer[1024];
+-    xsecsize_t bytes = 0;
++    XMLSize_t bytes = 0;
+     while((bytes = canonicalizer.outputBuffer(buffer, 1024)) > 0)
+     {
+         c14n.append( (char*)&buffer[0], size_t(bytes));
+@@ -632,7 +632,7 @@
+ 
+     string c14n;
+     unsigned char buffer[1024];
+-    xsecsize_t bytes = 0;
++    XMLSize_t bytes = 0;
+     while((bytes = canonicalizer.outputBuffer(buffer, 1024)) > 0)
+     {
+         c14n.append( (char*)&buffer[0], size_t(bytes));
+@@ -897,7 +897,7 @@
+ 
+     string c14n;
+     unsigned char buffer[1024];
+-    xsecsize_t bytes = 0;
++    XMLSize_t bytes = 0;
+     while((bytes = canonicalizer.outputBuffer(buffer, 1024)) > 0)
+     {
+         c14n.append((char*)&buffer[0], size_t(bytes));
