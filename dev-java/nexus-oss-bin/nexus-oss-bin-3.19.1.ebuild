@@ -41,7 +41,7 @@ cd "${S}"
 if -f "${FILESDIR}/${P}.patch"; then
 	epatch "${FILESDIR}/${P}.patch"
 fi
-epatch_user
+eapply_user
 }
 
 src_install() {
