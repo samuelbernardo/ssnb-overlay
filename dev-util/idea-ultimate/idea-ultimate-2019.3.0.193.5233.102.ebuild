@@ -48,6 +48,7 @@ src_prepare() {
 			rm -r jre64 || die
 		fi
 	fi
+	eapply_user
 }
 
 src_install() {
