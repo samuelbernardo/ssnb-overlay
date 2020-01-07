@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer>
+		<email>samuelbernardo.mail@gmail.com</email>
+		<name>Samuel Bernardo</name>
+	</maintainer>
+	<longdescription>Python 3 Bindings for the NVIDIA Management Library</longdescription>
+</pkgmetadata>
