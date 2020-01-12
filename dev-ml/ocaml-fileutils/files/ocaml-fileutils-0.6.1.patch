@@ -1,0 +1,32 @@
+diff -Naur a/fileutils.opam b/fileutils.opam
+--- a/fileutils.opam	2019-09-14 01:08:31.000000000 +0100
++++ b/fileutils.opam	2020-01-12 19:24:24.418870965 +0000
+@@ -16,7 +16,6 @@
+   "ocaml"
+   "base-unix"
+   "base-bytes"
+-  "stdlib-shims"
+   "dune" {build & >= "1.11.0"}
+   "ounit" {with-test & >= "2.0.0"}
+ ]
+diff -Naur a/src/dune b/src/dune
+--- a/src/dune	2019-09-14 01:08:31.000000000 +0100
++++ b/src/dune	2020-01-12 19:25:02.219748368 +0000
+@@ -8,7 +8,7 @@
+     fileUtilCHMOD fileUtilTEST fileUtilPWD fileUtilREADLINK fileUtilWHICH
+     fileUtilMKDIR fileUtilTOUCH fileUtilFIND fileUtilRM fileUtilCP fileUtilMV
+     fileUtilCMP fileUtilDU fileUtilLS)
+-  (libraries unix bytes stdlib-shims))
++  (libraries unix bytes))
+ 
+ (library
+   (name fileutils_str)
+diff -Naur a/test/dune b/test/dune
+--- a/test/dune	2019-09-14 01:08:31.000000000 +0100
++++ b/test/dune	2020-01-12 19:25:12.520442463 +0000
+@@ -6,4 +6,4 @@
+ (test
+   (name test)
+   (modules test)
+-  (libraries fileutils fileutils_str oUnit stdlib-shims))
++  (libraries fileutils fileutils_str oUnit))

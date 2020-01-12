@@ -1,0 +1,19 @@
+diff -Naur a/Makefile b/Makefile
+--- a/Makefile	2019-08-08 08:10:33.000000000 +0100
++++ b/Makefile	2020-01-12 18:18:24.460374975 +0000
+@@ -3,6 +3,9 @@
+ all:
+ 	dune build @install
+ 
++build:
++	dune build
++
+ install:
+ 	dune install $(INSTALL_ARGS)
+ 
+@@ -21,4 +24,4 @@
+ all-supported-ocaml-versions:
+ 	dune build --workspace dune-workspace.dev
+ 
+-.PHONY: all-supported-ocaml-versions all install uninstall reinstall test clean
++.PHONY: all-supported-ocaml-versions all build install uninstall reinstall test clean
