@@ -120,6 +120,8 @@ src_install() {
 
 		fperms 0755 "${dest}/lib/sbt" || die
 		dosym "${dest}/lib/sbt" /usr/bin/sbt || die
+
+		java-pkg_regjar ${D}/${dest}/lib/*.jar
 	else
 		# Place sbt-launch.jar at the end of the CLASSPATH
 		java-pkg_dojar $(find "${WORKDIR}"/.ivy2/local -name \*.jar -print | grep -v sbt-launch.jar) \
