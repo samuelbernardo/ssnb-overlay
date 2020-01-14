@@ -125,7 +125,7 @@ src_configure(){
 		MEGA.pro
 		CONFIG+="release"
 	)
-	if [ gcc-major-version -eq "9" ]; then
+	if [ $(gcc-major-version) -eq "9" ]; then
 		myeqmakeargs+=(QMAKE_CXXFLAGS+="-fpermissive")
 	fi
 	if use qt5; then
