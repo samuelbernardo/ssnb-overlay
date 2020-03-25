@@ -1,0 +1,9 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer type="person">
+		<email>samuelbernardo.mail@gmail.com</email>
+		<name>Samuel Bernardo</name>
+	</maintainer>
+	<longdescription>A Go's dependency management tool</longdescription>
+</pkgmetadata>
