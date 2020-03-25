@@ -109,6 +109,9 @@ src_install() {
 
 	cd "${T}"
 
+	# set correct owner
+	fowners -R ${ONEUSER}:${ONEGROUP} etc/ var/ usr/
+
 	# installing things for real
 	keepdir /var/{lib,run}/${PN} || die "keepdir failed"
 
@@ -161,10 +164,10 @@ src_install() {
 
 pkg_postinst() {
 
-	chown -R oneadmin:oneadmin ${ROOT}var/{lock,lib,log,run,tmp}/one
-	chown -R oneadmin:oneadmin ${ROOT}usr/share/one
-	chown -R oneadmin:oneadmin ${ROOT}etc/one
-	chown -R oneadmin:oneadmin ${ROOT}usr/$(get_libdir)/one
+	#chown -R oneadmin:oneadmin ${ROOT}var/{lock,lib,log,run,tmp}/one
+	#chown -R oneadmin:oneadmin ${ROOT}usr/share/one
+	#chown -R oneadmin:oneadmin ${ROOT}etc/one
+	#chown -R oneadmin:oneadmin ${ROOT}usr/$(get_libdir)/one
 
 	local onedir="${EROOT}var/lib/one"
 	if [ ! -d "${onedir}/.ssh" ] ; then
