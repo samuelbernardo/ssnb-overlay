@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2019 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -9,16 +9,10 @@ inherit eutils multilib qmake-utils autotools git-r3
 DESCRIPTION="A Qt-based program for syncing your MEGA account in your PC. This is the official app."
 HOMEPAGE="http://mega.co.nz"
 RTAG="_Linux"
-if [[ ${PV} == *9999* ]];then
-	EGIT_REPO_URI="https://github.com/meganz/MEGAsync"
-	KEYWORDS=""
-	EGIT_SUBMODULES=( '*' )
-else
-	EGIT_REPO_URI="https://github.com/meganz/MEGAsync"
-	EGIT_COMMIT="v${PV}.0${RTAG}"
-	EGIT_SUBMODULES=( '*' )
-	KEYWORDS="~x86 ~amd64"
-fi
+
+EGIT_REPO_URI="https://github.com/meganz/MEGAsync"
+KEYWORDS=""
+EGIT_SUBMODULES=( '*' )
 
 LICENSE="MEGA"
 SLOT="0"
@@ -70,24 +64,22 @@ RDEPEND="${DEPEND}
 
 PATCHES=( )
 
-if [[ ${PV} != *9999* ]];then
-	src_prepare(){
-		if [ -e "${FILESDIR}/MEGAsync-${PV}.0_Linux.patch" ]; then
-			EPATCH_OPTS="-p0" epatch "${FILESDIR}/MEGAsync-${PV}.0_Linux.patch"
+src_prepare(){
+	if [ -e "${FILESDIR}/MEGAsync-${PV}.0_Linux.patch" ]; then
+		EPATCH_OPTS="-p0" epatch "${FILESDIR}/MEGAsync-${PV}.0_Linux.patch"
+	fi
+	if [ ! -z ${PATCHES} ]; then
+		epatch ${PATCHES}
+	fi
+	if use gnome; then
+		if [ -e "${FILESDIR}${P}-gnome.patch" ]; then
+			epatch "${FILESDIR}/${P}-gnome.patch"
 		fi
-		if [ ! -z ${PATCHES} ]; then
-			epatch ${PATCHES}
-		fi
-		if use gnome; then
-			if [ -e "${FILESDIR}${P}-gnome.patch" ]; then
-				epatch "${FILESDIR}/${P}-gnome.patch"
-			fi
-		fi
-		eapply_user
-		cd src/MEGASync/mega
-		eautoreconf
-	}
-fi
+	fi
+	eapply_user
+	cd src/MEGASync/mega
+	eautoreconf
+}
 
 src_configure(){
 	cd "${S}"/src/MEGASync/mega
