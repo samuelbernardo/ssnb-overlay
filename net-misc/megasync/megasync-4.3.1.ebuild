@@ -2,9 +2,9 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=6
+EAPI=7
 
-inherit eutils multilib qmake-utils autotools versionator git-r3 toolchain-funcs
+inherit eutils multilib qmake-utils autotools git-r3
 
 DESCRIPTION="A Qt-based program for syncing your MEGA account in your PC. This is the official app."
 HOMEPAGE="http://mega.co.nz"
@@ -14,16 +14,10 @@ if [[ ${PV} == *9999* ]];then
 	KEYWORDS=""
 	EGIT_SUBMODULES=( '*' )
 else
-	#SDK_COMMIT="e8e66e9f030febfb35c9e4dd503d69091e28fc04"
-	#MY_PV="$(replace_all_version_separators _)"
 	EGIT_REPO_URI="https://github.com/meganz/MEGAsync"
 	EGIT_COMMIT="v${PV}.0${RTAG}"
 	EGIT_SUBMODULES=( '*' )
-	#SRC_URI="https://github.com/meganz/MEGAsync/archive/v${PV}.0_Linux.tar.gz -> ${P}.tar.gz
-	#https://github.com/meganz/sdk/archive/${SDK_COMMIT}.tar.gz -> ${PN}-sdk-20170215.tar.gz"
 	KEYWORDS="~x86 ~amd64"
-	#RESTRICT="mirror"
-	#S="${WORKDIR}/MEGAsync-${PV}.0_Linux"
 fi
 
 LICENSE="MEGA"
@@ -78,9 +72,6 @@ PATCHES=( )
 
 if [[ ${PV} != *9999* ]];then
 	src_prepare(){
-		#default
-		# Not needed, since using git submodules
-		#cp -r ../sdk-${SDK_COMMIT}/* src/MEGASync/mega
 		if [ -e "${FILESDIR}/MEGAsync-${PV}.0_Linux.patch" ]; then
 			EPATCH_OPTS="-p0" epatch "${FILESDIR}/MEGAsync-${PV}.0_Linux.patch"
 		fi
@@ -125,9 +116,6 @@ src_configure(){
 		MEGA.pro
 		CONFIG+="release"
 	)
-	if [ $(gcc-major-version) -eq "9" ]; then
-		myeqmakeargs+=(QMAKE_CXXFLAGS+="-fpermissive")
-	fi
 	if use qt5; then
 		eqmake5 ${myeqmakeargs[@]}
 		use dolphin && cmake-utils_src_configure
