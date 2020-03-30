@@ -2,12 +2,12 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=6
+EAPI=7
 
-inherit eutils versionator
+inherit eutils desktop
 
 SR="R"
-RNAME="2019-12"
+RNAME="2020-03"
 
 SRC_BASE="https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/${RNAME}/${SR}/eclipse-java-${RNAME}-${SR}-linux-gtk"
 
@@ -16,7 +16,7 @@ HOMEPAGE="http://www.eclipse.org"
 SRC_URI="amd64? ( ${SRC_BASE}-x86_64.tar.gz&r=1 -> eclipse-java-${RNAME}-${SR}-linux-gtk-x86_64-${PV}.tar.gz )"
 
 LICENSE="EPL-1.0"
-SLOT="4.14"
+SLOT="4.15"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
@@ -35,7 +35,8 @@ src_install() {
 	exeinto ${dest}
 	doexe eclipse
 
-	dohtml -r readme/*
+	docinto html
+	dodoc -r readme/*
 
 	cp "${FILESDIR}"/eclipserc-bin-${SLOT} "${T}" || die
 	cp "${FILESDIR}"/eclipse-bin-${SLOT} "${T}" || die
