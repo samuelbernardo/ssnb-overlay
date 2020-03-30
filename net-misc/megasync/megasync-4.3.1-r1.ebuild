@@ -4,7 +4,7 @@
 
 EAPI=7
 
-inherit eutils multilib qmake-utils autotools git-r3
+inherit eutils multilib qmake-utils autotools git-r3 desktop cmake-multilib
 
 DESCRIPTION="A Qt-based program for syncing your MEGA account in your PC. This is the official app."
 HOMEPAGE="http://mega.co.nz"
