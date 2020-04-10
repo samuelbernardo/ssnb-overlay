@@ -21,9 +21,10 @@ COMMON_DEPEND="
 	>=app-cdr/dvd+rw-tools-7.1
 	media-libs/libexif:=
 	>=media-libs/wxsvg-1.5.19:=
-	>=media-video/dvdauthor-0.7.1
+	>=media-video/dvdauthor-0.7.0
 	>=media-video/xine-ui-0.99.7
 	virtual/cdrtools
+	>=app-cdr/cdrtools-2.01
 	libav? ( >=media-video/libav-9:0=[encode] )
 	!libav? ( >=media-video/ffmpeg-2.6:0=[encode] )
 	virtual/jpeg:0
@@ -38,7 +39,7 @@ RDEPEND="${COMMON_DEPEND}
 DEPEND="${COMMON_DEPEND}
 	app-arch/zip
 	app-text/xmlto
-	sys-devel/gettext
+	>=sys-devel/gettext-0.17
 	virtual/yacc
 	virtual/pkgconfig
 "
