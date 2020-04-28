@@ -1,15 +1,15 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=6
 inherit eutils versionator
 
 SLOT="$(get_major_version)"
 RDEPEND=">=virtual/jdk-1.7"
 
 MY_PN="RubyMine"
-MY_PV="$(get_version_component_range 1-3)"
+MY_PV="$(get_version_component_range 1-2)"
 RESTRICT="strip"
 QA_TEXTRELS="opt/${P}/bin/libbreakgen.so"
 
