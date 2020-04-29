@@ -5,4 +5,10 @@
 		<email>samuelbernardo.mail@gmail.com</email>
 		<name>Samuel Bernardo</name>
 	</maintainer>
+	<longdescription lang="en">
+	RubyMine is a cross-platform IDE that supports Ruby, Ruby on Rails and web development.
+	</longdescription>
+	<use>
+		<flag name="jbr11">Install and use the Java 11 based version of JetBrains Runtime.</flag>
+	</use>
 </pkgmetadata>
