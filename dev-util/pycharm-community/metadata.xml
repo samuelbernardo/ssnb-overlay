@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE pkgmetadata SYSTEM "http://www.gentoo.org/dtd/metadata.dtd">
+<pkgmetadata>
+	<maintainer>
+		<email>samuelbernardo.mail@gmail.com</email>
+		<name>Samuel Bernardo</name>
+	</maintainer>
+	<longdescription lang="en">
+	Intelligent Python IDE with unique code assistance and analysis.
+	</longdescription>
+	<use>
+		<flag name="jbr11">Install and use the Java 11 based version of JetBrains Runtime.</flag>
+	</use>
+</pkgmetadata>
