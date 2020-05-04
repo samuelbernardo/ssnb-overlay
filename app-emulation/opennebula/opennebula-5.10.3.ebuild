@@ -104,7 +104,10 @@ src_unpack() {
 
 src_prepare() {
 	# install missing source file
-	#cp "${FILESDIR}"/${P}/parsers/* "${S}"/src/parsers/
+	#cp "${FILESDIR}"/${P}/parsers/* "${S}"/src/parsers/ || die "copy parsers files failed"
+
+	# set correct lib path
+	for f in $(grep -rlI "/usr/lib/one" .); do sed -i -e "s/\/usr\/lib\/one/\/usr\/$(get_libdir)\/one/g" $f; done || die "correct lib dir failed"
 
 	# grunt-sass and node-sass versions
 	sed -i -e 's|1.2.1|2.1.0|' -e 's|3.10.1|4.13.0|' src/sunstone/public/package.json || die "sed failed"
@@ -193,10 +196,10 @@ src_install() {
 	into /usr
 	dobin usr/bin/*
 
-	cp -a usr/lib/one/* "${ED}"/usr/$(get_libdir)/one/
+	cp -a usr/$(get_libdir)/one/* "${ED}"/usr/$(get_libdir)/one/
 	cp -a usr/share/one/* "${ED}"/usr/share/one/
 	cp -a var/lib/one/* "${ED}"/var/lib/one/
-	rm -rf usr/bin usr/lib/one usr/share/one var/lib/one
+	rm -rf usr/bin usr/$(get_libdir)/one usr/share/one var/lib/one
 
 	# add documentation
 	dodoc usr/share/docs/one/*
