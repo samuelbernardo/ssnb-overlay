@@ -42,6 +42,12 @@ RDEPEND=">=dev-libs/xmlrpc-c-1.18.02[abyss,cxx,threads]
 		dev-ruby/treetop
 		dev-ruby/xml-simple
 		dev-ruby/zendesk_api
+		dev-ruby/ffi-rzmq
+		dev-ruby/ffi-rzmq-core
+		dev-ruby/rqrcode
+		dev-ruby/rqrcode_core
+		dev-ruby/chunky_png
+		dev-ruby/rotp
 		dev-libs/log4cpp )
 	mysql? ( virtual/mysql )
 	dev-db/sqlite
