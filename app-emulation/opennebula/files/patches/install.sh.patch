@@ -1,0 +1,25 @@
+Index: install.sh
+===================================================================
+--- install.sh	2019-12-10 16:00:55.000000000 +0100
++++ install.sh	2019-12-15 08:55:09.000000000 +0100
+@@ -107,8 +107,8 @@
+     ONEHEM_LOCATION="$LIB_LOCATION/onehem"
+     SYSTEM_DS_LOCATION="$VAR_LOCATION/datastores/0"
+     DEFAULT_DS_LOCATION="$VAR_LOCATION/datastores/1"
+-    RUN_LOCATION="/var/run/one"
+-    LOCK_LOCATION="/var/lock/one"
++    RUN_LOCATION="/run/one"
++    LOCK_LOCATION="/run/lock/one"
+     INCLUDE_LOCATION="/usr/include"
+     SHARE_LOCATION="/usr/share/one"
+     MAN_LOCATION="/usr/share/man/man1"
+@@ -2450,7 +2450,8 @@
+         ln -s $VAR_LOCATION/sunstone/main.js $DESTDIR$SUNSTONE_LOCATION/public/dist/main.js
+     fi
+     for d in $CHOWN_DIRS; do
+-        chown -R $ONEADMIN_USER:$ONEADMIN_GROUP $DESTDIR$d
++        :
++        #chown -R $ONEADMIN_USER:$ONEADMIN_GROUP $DESTDIR$d
+     done
+ else
+     for d in `echo $DELETE_DIRS | awk '{for (i=NF;i>=1;i--) printf $i" "}'`; do

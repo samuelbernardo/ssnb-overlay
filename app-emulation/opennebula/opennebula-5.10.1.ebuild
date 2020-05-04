@@ -3,24 +3,30 @@
 # $Header: $
 
 EAPI=7
-USE_RUBY="ruby24 ruby25 ruby26"
+USE_RUBY="ruby24 ruby25 ruby26 ruby27"
+PYTHON_COMPAT=( python2_7 python3_6 )
 
-inherit user eutils multilib ruby-ng systemd
+inherit user eutils multilib ruby-ng systemd rpm python-r1
 
 MY_P="one-release-${PV}"
+P_RPM="${P}-1"
 
 DESCRIPTION="OpenNebula Virtual Infrastructure Engine"
 HOMEPAGE="http://www.opennebula.org/"
-SRC_URI="http://downloads.opennebula.org/packages/${PN}-${PV}/${PN}-${PV}.tar.gz"
 
+IUSE="qemu +mysql xen sqlite +extras systemd docker +sunstone vnc +python"
+REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 LICENSE="Apache-2.0"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="qemu +mysql xen sqlite +extras systemd docker vnc"
+SRC_URI="http://downloads.opennebula.org/packages/${P}/${P}.tar.gz -> ${P}.tar.gz"
+#SRC_URI="http://downloads.opennebula.org/packages/${P}/${P}.tar.gz -> ${P}.tar.gz
+#         http://downloads.opennebula.io/packages/${P}/centos8/${P_RPM}.tar.gz -> ${P}-centos8.tar.gz"
 
 RDEPEND=">=dev-libs/xmlrpc-c-1.18.02[abyss,cxx,threads]
 	dev-lang/ruby
-	dev-lang/python
+	python? ( ${PYTHON_DEPS}
+	        >=dev-python/pygobject-2.90.4:3[${PYTHON_USEDEP}] )
 	extras? ( dev-libs/openssl
 		dev-ruby/libxml
 		net-misc/curl
@@ -48,13 +54,17 @@ RDEPEND=">=dev-libs/xmlrpc-c-1.18.02[abyss,cxx,threads]
 	qemu? ( app-emulation/libvirt[libvirtd,qemu] )
 	xen? ( app-emulation/xen-tools )"
 DEPEND="${RDEPEND}
-	>=dev-util/scons-1.2.0-r1
+	>=dev-util/scons-3.0.0
 	dev-ruby/nokogiri
 	dev-ruby/bundler
 	dev-nodejs/grunt-cli
 	dev-nodejs/bower
 	net-libs/nodejs[npm]
 	net-libs/libvncserver
+	app-text/ronn
+	dev-ruby/builder
+	dev-ruby/highline
+	dev-ruby/ipaddress:1
 	docker? ( dev-go/dep )"
 
 # make sure no eclass is running tests
@@ -65,6 +75,20 @@ S="${WORKDIR}/${P}"
 ONEUSER="oneadmin"
 ONEGROUP="oneadmin"
 
+PATCHES=(
+	"${FILESDIR}/patches/fix_kvm_emulator.patch"
+	"${FILESDIR}/patches/install.sh.patch"
+)
+
+pkg_pretend() {
+	if use docker; then
+		elog "Opennebula releases needs to build docker without network sandbox restriction."
+		if [[ "${FEATURES}" == *"network-sandbox"* ]]; then
+			die "Please disable feature network-sandbox: -network-sandbox"
+		fi
+	fi
+}
+
 pkg_setup () {
 	enewgroup ${ONEGROUP}
 	enewuser ${ONEUSER} -1 /bin/bash /var/lib/one ${ONEGROUP}
@@ -72,10 +96,25 @@ pkg_setup () {
 
 src_unpack() {
 	default
+	#rm -rf ${WORKDIR}/${P_RPM}/src
+	#rpm_unpack $(find . -name "*.rpm")
 }
 
 src_prepare() {
-	sed -i -e 's|chmod|true|' install.sh || die "sed failed"
+	# install missing source file
+	cp "${FILESDIR}"/${P}/parsers/* "${S}"/src/parsers/
+
+	# grunt-sass and node-sass versions
+	#sed -i -e 's|1.2.1|2.1.0|' -e 's|3.10.1|4.13.0|' src/sunstone/public/package.json || die "sed failed"
+
+	# As we install from the github release sources we need to build sunstone as well.
+	# To do that we need the npm environment set up
+	# https://docs.opennebula.org/5.4/integration/references/sunstone_dev.html#sunstone-dev
+	#pushd src/sunstone/public/ >/dev/null
+	#npm install
+	#bower install
+	#popd >/dev/null
+
 	eapply_user
 }
 
@@ -92,73 +131,93 @@ src_compile() {
 	##                                                                       ##
 	###########################################################################
 	local myconf
-	myconfg+="parsers=yes new_xmlrpc=yes "
+	myconf+="parsers=yes new_xmlrpc=yes "
 	use extras && myconf+="new_xmlrpc=yes "
 	use mysql && myconf+="mysql=yes " || myconf+="mysql=no "
 	use docker && myconf+="docker_machine=yes "
 	use systemd && myconf+="systemd=yes "
 	use vnc && myconf+="svncterm=yes "
-	python2.7 $(which scons) \
+	python3 $(which scons) \
 		${myconf} \
 		$(sed -r 's/.*(-j\s*|--jobs=)([0-9]+).*/-j\2/' <<< ${MAKEOPTS}) \
 		|| die "building ${PN} failed"
+
+	if use !sunstone; then
+		rm -rf ${S}/src/sunstone
+	fi
 }
 
 src_install() {
-	DESTDIR=${T} ./install.sh -u ${ONEUSER} -g ${ONEGROUP} || die "install failed"
-
-	cd "${T}"
-
-	# set correct owner
-	fowners -R ${ONEUSER}:${ONEGROUP} etc/ var/ usr/
-
-	# installing things for real
+	# Prepare installation
 	keepdir /var/{lib,run}/${PN} || die "keepdir failed"
 
 	dodir /usr/$(get_libdir)/one
-	dodir /var/lock/one
 	dodir /var/log/one
 	dodir /var/lib/one
-	dodir /var/run/one
 	dodir /var/tmp/one
 	dodir /var/lib/one
 	dodir /var/lib/one/vms
 	dodir /usr/share/one
 	dodir /etc/tmpfiles.d
 
-	insinto	/
-	doins -r etc/
-	doins -r var/
+	# Installing Opennebula
+	DESTDIR="${T}" ./install.sh -u ${ONEUSER} -g ${ONEGROUP} || die "install opennebula core failed"
+	use extras && DESTDIR="${T}" ./install.sh -u ${ONEUSER} -g ${ONEGROUP} -c || die "install opennebula client tools failed"
+	use docker && DESTDIR="${T}" ./install.sh -u ${ONEUSER} -g ${ONEGROUP} -e -k || die "install docker machine failed"
 
-	insinto /usr
-	doins -r usr/bin
-	doins -r usr/include
-	doins -r usr/share
+	pushd "${T}" >/dev/null
+	# Clean files
+	rm -rf etc/{logrotate.d,sudoers.d} lib/ var/{lock,run}
 
-	insinto /usr/$(get_libdir)
-	doins -r usr/lib/*
-
-	doenvd "${FILESDIR}/99one"
-
-	newinitd "${FILESDIR}/opennebula.initd" opennebula
-	newinitd "${FILESDIR}/sunstone-server.initd" sunstone-server
-	newinitd "${FILESDIR}/oneflow-server.initd" oneflow-server
-	newconfd "${FILESDIR}/opennebula.confd" opennebula
-	newconfd "${FILESDIR}/sunstone-server.confd" sunstone-server
-	newconfd "${FILESDIR}/oneflow-server.confd" oneflow-server
-
-	use systemd && systemd_dounit "${FILESDIR}"/opennebula{,-sunstone,-econe,-oneflow,-onegate}.service
+	# setup etc
+	insinto	/etc
+	doins -r etc/one
+	rm -rf etc/one
 
 	insinto /etc/one
 	insopts -m 0640
-	doins -r etc/*
 	doins "${FILESDIR}/one_auth"
 
 	insinto /etc/tmpfiles.d
-	doins "${FILESDIR}/tmpfilesd.opennebula.conf"
+	doins "${FILESDIR}"/tmpfiles.d/*
 
 	insinto /etc/logrotate.d
-	newins "${FILESDIR}/logrotated.opennebula" "opennebula"
+	doins "${FILESDIR}"/logrotate/*
+
+	# set binaries executable
+	into /usr
+	dobin usr/bin/*
+
+	cp -a usr/lib/one/* "${ED}"/usr/$(get_libdir)/one/
+	cp -a usr/share/one/* "${ED}"/usr/share/one/
+	cp -a var/lib/one/* "${ED}"/var/lib/one/
+	rm -rf usr/bin usr/lib/one usr/share/one var/lib/one
+
+	# add documentation
+	dodoc usr/share/docs/one/*
+	rm -rf usr/share/docs
+
+	# install remaining files
+	insinto /usr/share/man/man1
+	doins -r usr/share/man/man1/
+
+	# set correct owner
+	fowners -R ${ONEUSER}:${ONEGROUP} /etc/one /usr/$(get_libdir)/one /usr/share/one /var/lib/{one,opennebula} /run/lock/one /var/log/one /run/one /var/tmp/one
+
+	# install daemon files
+	if use systemd; then
+		systemd_dounit "${FILESDIR}"/systemd/*.service
+	else
+		doenvd "${FILESDIR}/openrc/99one"
+		newinitd "${FILESDIR}/openrc/opennebula.initd" opennebula
+		newinitd "${FILESDIR}/openrc/sunstone-server.initd" sunstone-server
+		newinitd "${FILESDIR}/openrc/oneflow-server.initd" oneflow-server
+		newconfd "${FILESDIR}/openrc/opennebula.confd" opennebula
+		newconfd "${FILESDIR}/openrc/sunstone-server.confd" sunstone-server
+		newconfd "${FILESDIR}/openrc/oneflow-server.confd" oneflow-server
+	fi
+
+	popd >/dev/null
 
 }
 
