@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -182,10 +182,14 @@ src_install() {
 	doins "${FILESDIR}/one_auth"
 
 	insinto /etc/tmpfiles.d
+	insopts -m 0644
 	doins "${FILESDIR}"/tmpfiles.d/*
 
 	insinto /etc/logrotate.d
 	doins "${FILESDIR}"/logrotate/*
+
+	insinto /etc/sudoers.d
+	doins "${FILESDIR}"/sudoers/*
 
 	# set binaries executable
 	into /usr
