@@ -105,6 +105,7 @@ src_prepare() {
 	cp "${FILESDIR}"/${P}/parsers/* "${S}"/src/parsers/ || die "copy parsers files failed"
 
 	# set correct lib path
+	make -C src/docker_machine/src/docker_machine vendor
 	for f in $(grep -rlI "/usr/lib/one" .); do sed -i -e "s/\/usr\/lib\/one/\/usr\/$(get_libdir)\/one/g" $f; done || die "correct lib dir failed"
 
 	# grunt-sass and node-sass versions
