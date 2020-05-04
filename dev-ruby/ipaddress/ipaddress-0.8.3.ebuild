@@ -6,13 +6,15 @@ EAPI=7
 
 USE_RUBY="ruby24 ruby25 ruby26 ruby27"
 
+SLOT="1"
+RUBY_FAKEGEM_NAME="${PN}"
+
 inherit ruby-fakegem
 
-DESCRIPTION="Client API for Amazon Web Services"
-HOMEPAGE="http://aws.amazon.com"
+DESCRIPTION="Ruby library designed to make manipulation of IPv4 and IPv6 addresses."
+HOMEPAGE="https://github.com/bluemonk/ipaddress"
 
-LICENSE="Apache-2.0"
-SLOT="2"
+LICENSE="MIT"
 KEYWORDS="~amd64"
 IUSE=""
 

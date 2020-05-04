@@ -1,10 +1,10 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=7
 
-USE_RUBY="ruby19 ruby20 ruby21 ruby22 ruby23 ruby24 ruby25"
+USE_RUBY="ruby24 ruby25 ruby26 ruby27"
 
 inherit ruby-fakegem
 
