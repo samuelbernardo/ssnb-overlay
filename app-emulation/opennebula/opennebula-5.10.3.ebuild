@@ -87,15 +87,11 @@ PATCHES=(
 pkg_pretend() {
 	if use sunstone; then
 		elog "Opennebula hotfix releases needs to build sunstone without network sandbox restriction."
-		if [[ "${FEATURES}" == *"network-sandbox"* ]]; then
-			die "Please disable feature network-sandbox: -network-sandbox"
-		fi
+		has network-sandbox ${FEATURES} && die "Please disable feature network-sandbox: -network-sandbox"
 	fi
 	if use docker; then
 		elog "Opennebula releases needs to build docker without network sandbox restriction."
-		if [[ "${FEATURES}" == *"network-sandbox"* ]]; then
-			die "Please disable feature network-sandbox: -network-sandbox"
-		fi
+		has network-sandbox ${FEATURES} && die "Please disable feature network-sandbox: -network-sandbox"
 	fi
 }
 
