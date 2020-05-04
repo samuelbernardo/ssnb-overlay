@@ -113,8 +113,7 @@ src_prepare() {
 	# To do that we need the npm environment set up
 	# https://docs.opennebula.org/5.4/integration/references/sunstone_dev.html#sunstone-dev
 	pushd src/sunstone/public/ >/dev/null
-	npm install
-	bower install
+	./build.sh -d
 	popd >/dev/null
 
 	eapply_user
@@ -208,7 +207,7 @@ src_install() {
 	doins -r usr/share/man/man1/
 
 	# set correct owner
-	fowners -R ${ONEUSER}:${ONEGROUP} /etc/one /usr/$(get_libdir)/one /usr/share/one /var/lib/{one,opennebula} /run/lock/one /var/log/one /run/one /var/tmp/one
+	fowners -R ${ONEUSER}:${ONEGROUP} /etc/one /usr/$(get_libdir)/one /usr/share/one /var/lib/{one,opennebula} /var/log/one /var/tmp/one
 
 	# install daemon files
 	if use systemd; then
