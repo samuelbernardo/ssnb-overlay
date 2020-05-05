@@ -3,24 +3,27 @@
 
 EAPI=7
 
-DESCRIPTION="Tools for authenticating with https://www.autenticacao.gov.pt/"
-HOMEPAGE="https://svn.gov.pt/projects/ccidadao"
+DESCRIPTION="Portuguese Citizen Card Middleware"
+HOMEPAGE="https://github.com/amagovpt/autenticacao.gov"
 
 inherit git-r3 unpacker eutils
 
 EGIT_CLONE_TYPE="single"
 EGIT_REPO_URI="https://github.com/amagovpt/autenticacao.gov.git"
-EGIT_COMMIT="v$PV"
+#EGIT_COMMIT="v$PV"
+EGIT_BRANCH="openssl-migration"
 
 SRC_URI="https://www.autenticacao.gov.pt/documents/10179/11962/Autenticacao.gov_Ubuntu_20_x64.deb"
 
 LICENSE="EUPL"
 SLOT="3"
 KEYWORDS="~amd64 ~x86"
-IUSE=""
+IUSE="java"
 
 DEPEND="dev-lang/swig
-        dev-libs/xml-security-c"
+        dev-libs/xml-security-c
+	>=dev-libs/openssl-1.1.0
+	java? ( dev-java/openjdk:11 )"
 RDEPEND="${DEPEND}
         >=sys-apps/pcsc-lite-1.5.0
 	sys-apps/pcsc-tools
@@ -30,7 +33,7 @@ RDEPEND="${DEPEND}
 	dev-libs/xml-security-c
 	dev-libs/xerces-c
 	dev-vcs/subversion
-	>=dev-libs/openssl-1.0.0 <dev-libs/openssl-1.1
+	>=dev-libs/openssl-1.1.0
 	app-text/poppler[qt5]
 	dev-libs/libzip
 	net-misc/curl
@@ -52,10 +55,13 @@ src_unpack() {
 
 src_prepare() {
 	default
-	cd "${S}"
+	pushd "${S}" >/dev/null
 	rm -rf ./docs README.md license.txt
 	mv pteid-mw-pt/_src/eidmw/* .
 	rm -rf pteid-mw-pt
+	use !java && rm -rf eidlibJava_Wrapper
+	popd >/dev/null
+	use !java && eapply "${FILESDIR}/pteid-mw.pro.patch"
 }
 
 src_configure() {
@@ -88,6 +94,7 @@ src_compile() {
 
 src_install() {
 	# make install
+	dodir /usr/local/lib
 	if [[ -f Makefile ]] || [[ -f GNUmakefile ]] || [[ -f makefile ]] ; then
 		emake INSTALL_ROOT="${ED}" DESTDIR="${ED}" install || die "Error: emake install failed"
 	else
@@ -107,13 +114,15 @@ src_install() {
 	doins "${WORKDIR}"/usr/share/applications/pteid-mw-gui.desktop
 	insinto /usr/share/doc/pteid-mw
 	doins "${WORKDIR}"/usr/share/doc/pteid-mw/copyright
-	doins "${WORKDIR}"/usr/share/doc/pteid-mw/changelog.Debian.gz
+	doins "${WORKDIR}"/usr/share/doc/pteid-mw/changelog.gz
 	insinto /usr/share/icons/hicolor/64x64/mimetypes
 	doins "${WORKDIR}"/usr/share/icons/hicolor/64x64/mimetypes/gnome-mime-application-x-signedcc.png
 	doins "${WORKDIR}"/usr/share/icons/hicolor/64x64/mimetypes/application-x-signedcc.png
 	insinto /usr/share/icons/hicolor/scalable/apps
 	doins "${WORKDIR}"/usr/share/icons/hicolor/scalable/apps/pteid-scalable.svg
-	insinto /usr/local/lib/pteid_jni
-	doins "${WORKDIR}"/usr/local/lib/pteid_jni/pteidlibj.jar
+	if use !java; then
+		insinto /usr/local/lib/pteid_jni
+		doins "${WORKDIR}"/usr/local/lib/pteid_jni/pteidlibj.jar
+	fi
 }
 

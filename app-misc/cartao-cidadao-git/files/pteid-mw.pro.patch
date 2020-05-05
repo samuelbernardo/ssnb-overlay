@@ -1,0 +1,20 @@
+diff -Naur a/pteid-mw.pro b/pteid-mw.pro
+--- a/pteid-mw.pro	2020-05-05 01:16:01.171810913 +0100
++++ b/pteid-mw.pro	2020-05-05 01:21:39.314340682 +0100
+@@ -19,8 +19,7 @@
+ 
+ SUBDIRS +=	pkcs11/pkcs11.pro \
+ 	        applayer \
+-	        eidlib \
+-		eidlibJava_Wrapper
++	        eidlib
+ 
+ applayer.depends = pteid-poppler		
+ 
+@@ -49,4 +48,4 @@
+ 	        web \
+ 	        fonts
+ 
+-TARGET = pteid-mw
+\ No newline at end of file
++TARGET = pteid-mw
