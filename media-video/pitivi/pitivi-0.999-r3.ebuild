@@ -86,7 +86,7 @@ PATCHES=(
 
 src_prepare() {
 	default
-	sed -e "s|dependency('python3'|dependency('python3-embed'|" -i meson.build
+	sed -e "s|dependency('python3'|dependency('python-3.6'|" -i meson.build
 }
 
 src_configure() {
