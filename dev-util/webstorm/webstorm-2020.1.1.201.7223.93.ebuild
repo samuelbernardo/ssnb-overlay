@@ -1,20 +1,23 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit gnome2-utils readme.gentoo-r1 xdg
+inherit eutils gnome2-utils readme.gentoo-r1 xdg
+
+MY_PV="$(ver_cut 1-3)"
+SRC_VER="$(ver_cut 4-6)"
 
 PROGNAME="WebStorm"
 DESCRIPTION="Intelligent Python IDE with unique code assistance and analysis"
 HOMEPAGE="http://www.jetbrains.com/webstorm/"
-SRC_URI="http://download.jetbrains.com/webstorm/${PROGNAME}-${PV}.tar.gz"
+SRC_URI="http://download.jetbrains.com/${PN}/${PROGNAME}-${MY_PV}.tar.gz"
 
 PROGNAME="WebStorm"
 LICENSE="IDEA"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
-SRC_VER="201.7223.93"
+IUSE="-jbr11"
 
 RDEPEND=">=virtual/jre-1.8"
 
@@ -31,7 +34,7 @@ S="${WORKDIR}/${PROGNAME}-${SRC_VER}"
 src_prepare() {
 	default
 
-	rm -rf jre || die
+	use !jbr11 && rm -rf jre || die
 }
 
 src_install() {
