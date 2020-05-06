@@ -34,7 +34,7 @@ S="${WORKDIR}/${PROGNAME}-${SRC_VER}"
 src_prepare() {
 	default
 
-	use !jbr11 && rm -rf jre || die
+	use !jbr11 && rm -rf jre jbr || die
 }
 
 src_install() {
