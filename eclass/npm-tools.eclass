@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 # @ECLASS: npm-tools.eclass
@@ -28,7 +28,7 @@ _NPM_TOOLS_ECLASS=1
 # Run npm install in the provided project directory.
 # If no directory is provided it will run on current path.
 case ${EAPI:-0} in
-5|6)
+5|6|7)
 	npm_install() {
 		local dir="$1"
 		if [[ -z "${dir}" ]] ; then

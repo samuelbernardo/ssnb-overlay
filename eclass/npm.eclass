@@ -1,4 +1,4 @@
-# Copyright 1999-2018 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
@@ -12,7 +12,7 @@
 # Requires EAPI=2 or later.
 
 case ${EAPI} in
-    2|3|4|5|6) : ;;
+    2|3|4|5|6|7) : ;;
     *)     die "npm.eclass: unsupported EAPI=${EAPI:-0}" ;;
 esac
 
