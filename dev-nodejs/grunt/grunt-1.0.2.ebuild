@@ -29,3 +29,8 @@ RDEPEND="dev-nodejs/grunt-cli
 		 dev-nodejs/eventemitter2
 		 dev-nodejs/dateformat
 		 dev-nodejs/coffeescript"
+
+src_prepare() {
+    default
+    sed -i -e "s|grunt-cli/bin/grunt|../$(get_libdir)/node_modules/grunt-cli/bin/grunt|" "bin/${NPM_BIN}" || die "Failed to correct path for grunt-cli lib"
+}

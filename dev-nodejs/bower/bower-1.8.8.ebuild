@@ -16,3 +16,8 @@ IUSE="test"
 
 NPM_EXTRA_FILES="bin packages"
 NPM_BIN="${PN}"
+
+src_prepare() {
+    default
+    sed -i -e "s|../lib/bin/|../$(get_libdir)/node_modules/bower/lib/bin/|" "bin/${NPM_BIN}" || die "Failed to correct path for bower lib"
+}

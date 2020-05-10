@@ -18,7 +18,7 @@ IUSE="qemu +mysql xen sqlite +extras systemd docker +sunstone vnc +python +doc"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 LICENSE="Apache-2.0"
 SLOT="0"
-KEYWORDS=""
+#KEYWORDS="~amd64"
 SRC_URI="https://github.com/OpenNebula/one/archive/release-${PV}.tar.gz -> ${P}.tar.gz"
 
 RDEPEND=">=dev-libs/xmlrpc-c-1.18.02[abyss,cxx,threads]
@@ -58,6 +58,7 @@ RDEPEND=">=dev-libs/xmlrpc-c-1.18.02[abyss,cxx,threads]
 	qemu? ( app-emulation/libvirt[libvirtd,qemu] )
 	xen? ( app-emulation/xen-tools )"
 DEPEND="${RDEPEND}
+	dev-lang/ruby:2.5
 	>=dev-util/scons-3.0.0
 	dev-ruby/nokogiri
 	dev-ruby/bundler
@@ -119,7 +120,9 @@ src_prepare() {
 	# To do that we need the npm environment set up
 	# https://docs.opennebula.org/5.4/integration/references/sunstone_dev.html#sunstone-dev
 	pushd src/sunstone/public/ >/dev/null
-	./build.sh -d
+	./build.sh -d || die "Install required dependencies for npm and bower failed."
+	#export PATH=$PATH:$PWD/node_modules/.bin
+	#./build.sh || die "Prepare minified files failed."
 	popd >/dev/null
 
 	eapply_user

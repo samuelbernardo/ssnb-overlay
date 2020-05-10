@@ -78,14 +78,6 @@ npm_src_unpack() {
     mv "${WORKDIR}/package" ${S}
 }
 
-# @FUNCTION: npm-src_prepare
-# @DESCRIPTION:
-# This function prepare the source for NodeJS/npm packages.
-npm_src_prepare() {
-    default
-    for f in $(grep -rlI "/lib/" "${S}"); do sed -i -e "s|/lib/|/$(get_libdir)/|" "${f}"; done || die "Failed to correct usr/lib path in lib"
-}
-
 # @FUNCTION: npm-src_compile
 # @DESCRIPTION:
 # This function does nothing.
@@ -143,4 +135,4 @@ npm_src_install() {
     fi
 }
 
-EXPORT_FUNCTIONS src_unpack src_prepare src_compile src_install
+EXPORT_FUNCTIONS src_unpack src_compile src_install
