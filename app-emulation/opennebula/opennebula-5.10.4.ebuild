@@ -18,7 +18,7 @@ IUSE="qemu +mysql xen sqlite +extras systemd docker +sunstone vnc +python +doc"
 REQUIRED_USE="python? ( ${PYTHON_REQUIRED_USE} )"
 LICENSE="Apache-2.0"
 SLOT="0"
-#KEYWORDS="~amd64"
+KEYWORDS="~amd64"
 SRC_URI="https://github.com/OpenNebula/one/archive/release-${PV}.tar.gz -> ${P}.tar.gz"
 
 RDEPEND=">=dev-libs/xmlrpc-c-1.18.02[abyss,cxx,threads]
@@ -62,7 +62,7 @@ DEPEND="${RDEPEND}
 	>=dev-util/scons-3.0.0
 	dev-ruby/nokogiri
 	dev-ruby/bundler
-	dev-nodejs/grunt-cli
+	dev-nodejs/grunt
 	dev-nodejs/bower
 	net-libs/nodejs[npm]
 	net-libs/libvncserver
@@ -85,7 +85,7 @@ PATCHES=(
 	"${FILESDIR}/patches/install.sh.patch"
 )
 
-pkg_pretend() {
+test_netsandbox() {
 	if use sunstone; then
 		elog "Opennebula hotfix releases needs to build sunstone without network sandbox restriction."
 		has network-sandbox ${FEATURES} && die "Please disable feature network-sandbox: -network-sandbox"
@@ -96,7 +96,12 @@ pkg_pretend() {
 	fi
 }
 
+pkg_pretend() {
+	test_netsandbox
+}
+
 pkg_setup () {
+	test_netsandbox
 	enewgroup ${ONEGROUP}
 	enewuser ${ONEUSER} -1 /bin/bash /var/lib/one ${ONEGROUP}
 }
