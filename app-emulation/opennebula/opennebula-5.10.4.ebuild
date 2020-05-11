@@ -64,6 +64,7 @@ DEPEND="${RDEPEND}
 	dev-ruby/bundler
 	dev-nodejs/grunt
 	dev-nodejs/bower
+	dev-nodejs/ini
 	net-libs/nodejs[npm]
 	net-libs/libvncserver
 	app-text/ronn
