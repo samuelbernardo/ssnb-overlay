@@ -1,10 +1,10 @@
-# Copyright 1999-2019 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
-PYTHON_COMPAT=( python2_7 )
+EAPI=7
+PYTHON_COMPAT=( python3_6 )
 
-inherit python-single-r1 git-r3
+inherit python-r1 git-r3
 #inherit python-single-r1
 #[ "${PV}" = 9999 ] && inherit git-r3
 
@@ -21,6 +21,7 @@ fi
 LICENSE="GPL-2"
 SLOT="0"
 [ "${PV}" = 9999 ] || KEYWORDS="~amd64 ~x86"
+REQUIRED_USE="${PYTHON_REQUIRED_USE}"
 
 COMMON_DEPEND="
 	${PYTHON_DEPS}
