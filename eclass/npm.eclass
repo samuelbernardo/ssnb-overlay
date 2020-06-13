@@ -65,8 +65,18 @@ if [[ -z $NPM_PN_URI ]]; then
 	NPM_PN_URI="${PN}"
 fi
 
+# @ECLASS-VARIABLE: NPM_GROUP_URI
+# @DESCRIPTION:
+# Name of the group at the npm registry. 
+# The Default value for NPM_GROUP_URI is ${NPM_PN_URI}
+#
+# Example: NPM_GROUP_URI="${MY_PN}"
+if [[ -z $NPM_GROUP_URI ]]; then
+	NPM_GROUP_URI="${NPM_PN_URI}"
+fi
+
 HOMEPAGE="https://www.npmjs.org/package/${NPM_PN_URI}"
-SRC_URI="http://registry.npmjs.org/${NPM_PN_URI}/-/${NPM_PN_URI}-${PV}.tgz"
+SRC_URI="http://registry.npmjs.org/${NPM_GROUP_URI}/-/${NPM_PN_URI}-${PV}.tgz"
 
 # @FUNCTION: npm-src_unpack
 # @DESCRIPTION:

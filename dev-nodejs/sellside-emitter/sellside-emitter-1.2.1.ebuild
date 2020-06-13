@@ -5,7 +5,8 @@
 EAPI=6
 
 NPM_MODULE="@sellside/emitter"
-NPM_PN_URI="%40sellside%2Femitter"
+NPM_GROUP_URI="@sellside/emitter"
+NPM_PN_URI="emitter"
 
 inherit npm
 
