@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -25,7 +25,7 @@ COMMON_DEPEND="
 	>=media-video/xine-ui-0.99.7
 	virtual/cdrtools
 	>=app-cdr/cdrtools-2.01
-	libav? ( >=media-video/libav-9:0=[encode] )
+	libav? ( >=virtual/ffmpeg-9:0=[libav=] )
 	!libav? ( >=media-video/ffmpeg-2.6:0=[encode] )
 	virtual/jpeg:0
 	x11-libs/wxGTK:${WX_GTK_VER}=[gstreamer,X]
