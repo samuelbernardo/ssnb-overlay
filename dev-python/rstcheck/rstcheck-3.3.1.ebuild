@@ -14,25 +14,21 @@ SRC_URI="mirror://pypi/${PN:0:1}/${PN}/${P}.tar.gz"
 LICENSE="MIT"
 SLOT="0"
 KEYWORDS="~amd64"
-IUSE="test"
-RESTRICT="!test? ( test )"
 
 RDEPEND="
 	dev-python/docutils[${PYTHON_USEDEP}]
 "
 BDEPEND="
-	dev-python/setuptools[${PYTHON_USEDEP}]
 	>=dev-python/setuptools_scm-1.15.0[${PYTHON_USEDEP}]
 	test? (
 		${RDEPEND}
 		dev-python/path-py[${PYTHON_USEDEP}]
-		>=dev-python/pytest-3.4[${PYTHON_USEDEP}]
 	)
 "
 
 S="${WORKDIR}/${P}"
 
-distutils_enable_sphinx docs ">=dev-python/jaraco-packaging-3.2"
+distutils_enable_tests pytest
 
 python_test() {
 	# Ignore the module from ${S}, use the one from ${BUILD_DIR}
