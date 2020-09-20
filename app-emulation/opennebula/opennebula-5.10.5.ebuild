@@ -26,7 +26,7 @@ RDEPEND=">=dev-libs/xmlrpc-c-1.18.02[abyss,cxx,threads]
 	python? ( ${PYTHON_DEPS}
 	        >=dev-python/pygobject-2.90.4:3[${PYTHON_USEDEP}] )
 	extras? ( dev-libs/openssl
-		dev-ruby/libxml
+		dev-ruby/xmlparser
 		net-misc/curl
 		dev-libs/libxslt
 		dev-libs/expat
@@ -36,7 +36,6 @@ RDEPEND=">=dev-libs/xmlrpc-c-1.18.02[abyss,cxx,threads]
 		dev-ruby/mysql
 		dev-ruby/mysql2
 		dev-ruby/parse-cron
-		dev-ruby/sequel
 		dev-ruby/treetop
 		dev-ruby/xml-simple
 		dev-ruby/zendesk_api
@@ -46,6 +45,10 @@ RDEPEND=">=dev-libs/xmlrpc-c-1.18.02[abyss,cxx,threads]
 		dev-ruby/rqrcode_core
 		dev-ruby/chunky_png
 		dev-ruby/rotp
+		dev-ruby/rake
+		dev-ruby/ruby-net-ldap
+		dev-ruby/curb
+		dev-ruby/rubygems
 		dev-libs/log4cpp )
 	mysql? ( virtual/mysql )
 	dev-db/sqlite
@@ -53,6 +56,12 @@ RDEPEND=">=dev-libs/xmlrpc-c-1.18.02[abyss,cxx,threads]
 	net-fs/nfs-utils
 	dev-db/mariadb
 	net-libs/zeromq
+	dev-ruby/json
+	dev-ruby/sequel
+	dev-ruby/sinatra
+	dev-ruby/thin
+	dev-ruby/nokogiri
+	sunstone? ( dev-ruby/rack )
 	|| ( app-cdr/cdrkit app-cdr/cdrtools )
 	sqlite? ( dev-ruby/sqlite3 )
 	qemu? ( app-emulation/libvirt[libvirtd,qemu] )
@@ -60,7 +69,6 @@ RDEPEND=">=dev-libs/xmlrpc-c-1.18.02[abyss,cxx,threads]
 DEPEND="${RDEPEND}
 	dev-lang/ruby:2.5
 	>=dev-util/scons-3.0.0
-	dev-ruby/nokogiri
 	dev-ruby/bundler
 	dev-nodejs/grunt
 	dev-nodejs/bower

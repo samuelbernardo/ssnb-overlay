@@ -129,7 +129,7 @@ src_prepare() {
 	for f in $(grep -rlI "/usr/lib/one" .); do sed -i -e "s/\/usr\/lib\/one/\/usr\/$(get_libdir)\/one/g" $f; done || die "correct lib dir failed"
 
 	# grunt-sass and node-sass versions
-	sed -i -e 's|1.2.1|2.1.0|' -e 's|3.10.1|4.13.0|' src/sunstone/public/package.json || die "sed failed"
+	#sed -i -e 's|2.1.0|3.1.0|' -e 's|4.13.0|4.14.0|' src/sunstone/public/package.json || die "sed failed"
 
 	# As we install from the github release sources we need to build sunstone as well.
 	# To do that we need the npm environment set up
