@@ -1,0 +1,20 @@
+diff -Naur a/src/sunstone/public/package.json b/src/sunstone/public/package.json
+--- a/src/sunstone/public/package.json	2020-07-14 18:02:27.000000000 +0100
++++ b/src/sunstone/public/package.json	2020-09-20 15:39:20.106057317 +0100
+@@ -2,11 +2,12 @@
+   "name": "opennebula-sunstone",
+   "version": "0.0.1",
+   "devDependencies": {
+-    "grunt": "<1.1.0",
++    "grunt": "^1.3.0",
+     "grunt-cli": "^1.2.0",
+     "grunt-contrib-requirejs": "^1.0.0",
+-    "grunt-contrib-watch": "^1.0.0",
+-    "grunt-sass": "^1.2.1",
+-    "node-sass": "^3.10.1"
++    "grunt-contrib-watch": "^1.1.0",
++    "grunt-sass": "^3.1.0",
++    "node-sass": "^4.12.0",
++    "load-grunt-tasks": "^5.1.0"
+   }
+ }

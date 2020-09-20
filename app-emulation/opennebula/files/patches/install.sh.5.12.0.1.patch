@@ -1,0 +1,14 @@
+diff -Naur a/install.sh b/install.sh
+--- a/install.sh	2020-07-14 18:02:27.000000000 +0100
++++ b/install.sh	2020-09-20 14:11:35.962024833 +0100
+@@ -108,8 +108,8 @@
+     ONEHEM_LOCATION="$LIB_LOCATION/onehem"
+     SYSTEM_DS_LOCATION="$VAR_LOCATION/datastores/0"
+     DEFAULT_DS_LOCATION="$VAR_LOCATION/datastores/1"
+-    RUN_LOCATION="/var/run/one"
+-    LOCK_LOCATION="/var/lock/one"
++    RUN_LOCATION="/run/one"
++    LOCK_LOCATION="/run/lock/one"
+     INCLUDE_LOCATION="/usr/include"
+     SHARE_LOCATION="/usr/share/one"
+     MAN_LOCATION="/usr/share/man/man1"

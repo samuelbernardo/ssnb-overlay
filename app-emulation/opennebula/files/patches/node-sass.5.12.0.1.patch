@@ -1,0 +1,20 @@
+diff -Naur a/src/sunstone/public/Gruntfile.js b/src/sunstone/public/Gruntfile.js
+--- a/src/sunstone/public/Gruntfile.js	2020-07-14 18:02:27.000000000 +0100
++++ b/src/sunstone/public/Gruntfile.js	2020-09-20 13:18:19.158839478 +0100
+@@ -15,11 +15,16 @@
+ /* -------------------------------------------------------------------------- */
+ 
+ module.exports = function(grunt) {
++  const sass = require('node-sass');
++
++  require('load-grunt-tasks')(grunt);
++
+   grunt.initConfig({
+     pkg: grunt.file.readJSON("package.json"),
+ 
+     sass: {
+       options: {
++	implementation: sass,
+         includePaths: ["bower_components/foundation-sites/scss"]
+       },
+       dist: {

@@ -1,0 +1,11 @@
+diff -Naur a/src/vmm_mad/exec/vmm_exec_kvm.conf b/src/vmm_mad/exec/vmm_exec_kvm.conf
+--- a/src/vmm_mad/exec/vmm_exec_kvm.conf	2020-07-14 18:02:27.000000000 +0100
++++ b/src/vmm_mad/exec/vmm_exec_kvm.conf	2020-09-20 19:32:44.702940463 +0100
+@@ -29,6 +29,7 @@
+ # NOTE: raw attribute value is appended to that on the VM template
+ 
+ #EMULATOR = /usr/libexec/qemu-kvm
++EMULATOR = /usr/bin/qemu-system-x86_64
+ 
+ #VCPU = 1
+ 

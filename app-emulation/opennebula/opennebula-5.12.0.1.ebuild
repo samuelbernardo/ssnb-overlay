@@ -91,8 +91,10 @@ ONEUSER="oneadmin"
 ONEGROUP="oneadmin"
 
 PATCHES=(
-	"${FILESDIR}/patches/fix_kvm_emulator.patch"
-	"${FILESDIR}/patches/install.sh.patch"
+	"${FILESDIR}/patches/install.sh.${PV}.patch"
+	"${FILESDIR}/patches/node-sass.${PV}.patch"
+	"${FILESDIR}/patches/fix_kvm_emulator.${PV}.patch"
+	"${FILESDIR}/patches/package.js.${PV}.patch"
 )
 
 test_netsandbox() {
@@ -121,15 +123,16 @@ src_unpack() {
 }
 
 src_prepare() {
+	default
+	eapply_user
+	#EPATCH_SOURCE="${FILESDIR}/patches" EPATCH_SUFFIX="patch" EPATCH_FORCE="yes" epatch
+
 	# install missing source file
 	#cp "${FILESDIR}"/${P}/parsers/* "${S}"/src/parsers/ || die "copy parsers files failed"
 
 	# set correct lib path
 	use docker && make -C src/docker_machine/src/docker_machine vendor
 	for f in $(grep -rlI "/usr/lib/one" .); do sed -i -e "s/\/usr\/lib\/one/\/usr\/$(get_libdir)\/one/g" $f; done || die "correct lib dir failed"
-
-	# grunt-sass and node-sass versions
-	#sed -i -e 's|2.1.0|3.1.0|' -e 's|4.13.0|4.14.0|' src/sunstone/public/package.json || die "sed failed"
 
 	# As we install from the github release sources we need to build sunstone as well.
 	# To do that we need the npm environment set up
@@ -139,8 +142,6 @@ src_prepare() {
 	#export PATH=$PATH:$PWD/node_modules/.bin
 	#./build.sh || die "Prepare minified files failed."
 	popd >/dev/null
-
-	eapply_user
 }
 
 src_configure() {
@@ -163,7 +164,7 @@ src_compile() {
 	##                                                                       ##
 	###########################################################################
 	local myconf
-	myconf+="parsers=yes new_xmlrpc=yes "
+	myconf+="parsers=yes "
 	use extras && myconf+="new_xmlrpc=yes "
 	use mysql && myconf+="mysql=yes " || myconf+="mysql=no "
 	use sunstone && myconf+="sunstone=yes "
