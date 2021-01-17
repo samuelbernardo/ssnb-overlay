@@ -1,5 +1,6 @@
 # Copyright 1999-2020 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
+# $Header: $
 
 EAPI=7
 
@@ -7,10 +8,11 @@ inherit autotools desktop qmake-utils xdg cmake git-r3
 
 DESCRIPTION="The official Qt-based program for syncing your MEGA account in your PC"
 HOMEPAGE="http://mega.co.nz"
-
+RTAG="_Linux"
 EGIT_REPO_URI="https://github.com/meganz/MEGAsync"
-KEYWORDS=""
+EGIT_COMMIT="v${PV}${RTAG}"
 EGIT_SUBMODULES=( '*' )
+KEYWORDS="~x86 ~amd64"
 
 LICENSE="MEGA"
 SLOT="0"
@@ -53,15 +55,29 @@ DEPEND="
 	dev-qt/qtsvg:5
 "
 BDEPEND="
-	app-doc/doxygen
 	dev-lang/swig
 	dev-qt/linguist-tools
 "
 
 DOCS=( CREDITS.md README.md )
 
+PATCHES=( )
+
+CMAKE_USE_DIR="${S}/src/MEGAShellExtDolphin"
+
 src_prepare() {
-	default
+	if [ -e "${FILESDIR}/MEGAsync-${PV}.0_Linux.patch" ]; then
+		EPATCH_OPTS="-p0" epatch "${FILESDIR}/MEGAsync-${PV}.0_Linux.patch"
+	fi
+	if [ ! -z ${PATCHES} ]; then
+		epatch ${PATCHES}
+	fi
+	if use dolphin; then
+		# use the kde5 CMakeLists instead of the kde 4 version
+		mv src/MEGAShellExtDolphin/CMakeLists_kde5.txt src/MEGAShellExtDolphin/CMakeLists.txt || die
+		cmake_src_prepare
+	fi
+	eapply_user
 	cd src/MEGASync/mega
 	eautoreconf
 }
@@ -106,14 +122,17 @@ src_compile() {
 }
 
 src_install() {
+	local DOCS=( CREDITS.md README.md )
 	use dolphin && cmake_src_install
 	einstalldocs
 	dobin src/MEGASync/${PN}
 	insinto usr/share/licenses/${PN}
 	doins LICENCE.md installer/terms.txt
+	dobin src/MEGASync/${PN}
 	domenu src/MEGASync/platform/linux/data/${PN}.desktop
 	cd src/MEGASync/platform/linux/data/icons/hicolor
 	for size in 16x16 32x32 48x48 128x128 256x256;do
 		doicon -s $size $size/apps/mega.png
 	done
 }
+
