@@ -1,0 +1,48 @@
+diff -Naur a/pteid-mw-pt/_src/eidmw/applayer/J2KHelper.h b/pteid-mw-pt/_src/eidmw/applayer/J2KHelper.h
+--- a/pteid-mw-pt/_src/eidmw/applayer/J2KHelper.h	2021-05-16 16:59:11.683395980 +0100
++++ b/pteid-mw-pt/_src/eidmw/applayer/J2KHelper.h	2021-05-16 17:01:52.437847679 +0100
+@@ -3,7 +3,7 @@
+ 
+ #include <zlib.h>
+ #include <png.h>
+-#include <openjpeg.h>
++#include <openjpeg-2.4/openjpeg.h>
+ 
+ #include "PNGConverter.h"
+ 
+diff -Naur a/pteid-mw-pt/_src/eidmw/applayer/PNGConverter.cpp b/pteid-mw-pt/_src/eidmw/applayer/PNGConverter.cpp
+--- a/pteid-mw-pt/_src/eidmw/applayer/PNGConverter.cpp	2021-05-16 16:59:11.684395952 +0100
++++ b/pteid-mw-pt/_src/eidmw/applayer/PNGConverter.cpp	2021-05-16 17:01:52.442847538 +0100
+@@ -43,7 +43,7 @@
+ #include <ctype.h>
+ #include <limits.h>
+ 
+-#include <openjpeg.h>
++#include <openjpeg-2.4/openjpeg.h>
+ 
+ #include "PNGConverter.h"
+ 
+diff -Naur a/pteid-mw-pt/_src/eidmw/applayer/PNGConverter.h b/pteid-mw-pt/_src/eidmw/applayer/PNGConverter.h
+--- a/pteid-mw-pt/_src/eidmw/applayer/PNGConverter.h	2021-05-16 16:59:11.684395952 +0100
++++ b/pteid-mw-pt/_src/eidmw/applayer/PNGConverter.h	2021-05-16 17:01:52.446847426 +0100
+@@ -1,7 +1,7 @@
+ #ifndef __J2K_CONVERT_H
+ #define __J2K_CONVERT_H
+ 
+-#include <openjpeg.h>
++#include <openjpeg-2.4/openjpeg.h>
+ 
+ /* Component precision clipping */
+ void clip_component(opj_image_comp_t* component, OPJ_UINT32 precision);
+diff -Naur a/pteid-mw-pt/_src/eidmw/pteid-poppler/poppler/JPEG2000Stream.h b/pteid-mw-pt/_src/eidmw/pteid-poppler/poppler/JPEG2000Stream.h
+--- a/pteid-mw-pt/_src/eidmw/pteid-poppler/poppler/JPEG2000Stream.h	2021-05-16 16:59:11.812392305 +0100
++++ b/pteid-mw-pt/_src/eidmw/pteid-poppler/poppler/JPEG2000Stream.h	2021-05-16 17:01:52.456847146 +0100
+@@ -16,7 +16,7 @@
+ #ifndef JPEG2000STREAM_H
+ #define JPEG2000STREAM_H
+ 
+-#include <openjpeg.h>
++#include <openjpeg-2.4/openjpeg.h>
+ 
+ #include "goo/gtypes.h"
+ #include "Object.h"

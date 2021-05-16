@@ -10,8 +10,8 @@ inherit git-r3 unpacker eutils
 
 EGIT_CLONE_TYPE="single"
 EGIT_REPO_URI="https://github.com/amagovpt/autenticacao.gov.git"
-#EGIT_COMMIT="v$PV"
-EGIT_BRANCH="openssl-migration"
+EGIT_COMMIT="v$PV"
+#EGIT_BRANCH="openssl-migration"
 
 SRC_URI="https://www.autenticacao.gov.pt/documents/10179/11962/Autenticacao.gov_Ubuntu_20_x64.deb"
 
@@ -21,8 +21,11 @@ KEYWORDS="~amd64 ~x86"
 IUSE="java"
 
 DEPEND="dev-lang/swig
+        sys-devel/qconf
         dev-libs/xml-security-c
 	>=dev-libs/openssl-1.1.0
+	>=media-libs/openjpeg-2.4.0
+	<=media-libs/openjpeg-2.5.0
 	java? ( dev-java/openjdk:11 )"
 RDEPEND="${DEPEND}
         >=sys-apps/pcsc-lite-1.5.0
@@ -44,7 +47,7 @@ RDEPEND="${DEPEND}
 	!app-misc/cartao-cidadao-svn"
 
 PATCHES=(
-	#"${FILESDIR}/*.${PV}.patch"
+	${FILESDIR}/openjpeg.h.${PV}.patch
 	)
 
 src_unpack() {
