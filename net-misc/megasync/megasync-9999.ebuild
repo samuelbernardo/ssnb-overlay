@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -6,33 +6,38 @@ EAPI=7
 inherit autotools desktop qmake-utils xdg cmake git-r3
 
 DESCRIPTION="The official Qt-based program for syncing your MEGA account in your PC"
-HOMEPAGE="http://mega.co.nz"
+HOMEPAGE="
+        https://mega.io
+	https://github.com/meganz/MEGAsync
+"
 
+RTAG="_Win"
 EGIT_REPO_URI="https://github.com/meganz/MEGAsync"
-KEYWORDS=""
+if [[ ${PV} == 9999 ]]; then
+	EGIT_BRANCH="master"
+else
+	EGIT_COMMIT="v${PV}${RTAG}"
+fi
 EGIT_SUBMODULES=( '*' )
+KEYWORDS="~x86 ~amd64"
 
 LICENSE="MEGA"
 SLOT="0"
-IUSE="+cryptopp +curl +sqlite +zlib dolphin examples freeimage java libressl nautilus php python readline threads thunar"
+IUSE="+cryptopp +curl +sqlite +zlib dolphin examples freeimage java nautilus php python readline threads thunar"
 
 RDEPEND="
 	app-arch/xz-utils
 	dev-libs/libgcrypt
 	dev-libs/libsodium
 	dev-libs/libuv
+	dev-libs/openssl:0=
 	media-libs/libpng
 	net-dns/c-ares
 	x11-themes/hicolor-icon-theme
 	cryptopp? ( dev-libs/crypto++ )
-	curl? (
-		!libressl? ( net-misc/curl[ssl,curl_ssl_openssl] )
-		libressl? ( net-misc/curl[ssl,curl_ssl_libressl] )
-	)
+	curl? ( net-misc/curl[ssl,curl_ssl_openssl(-)] )
 	dolphin? ( kde-apps/dolphin )
 	freeimage? ( media-libs/freeimage )
-	!libressl? ( dev-libs/openssl:0= )
-	libressl? ( dev-libs/libressl:0= )
 	nautilus? ( >=gnome-base/nautilus-3 )
 	readline? ( sys-libs/readline:0 )
 	sqlite? ( dev-db/sqlite:3 )
@@ -51,23 +56,44 @@ DEPEND="
 	dev-qt/qtdbus:5
 	dev-qt/qtimageformats:5
 	dev-qt/qtsvg:5
+	dev-qt/qtx11extras:5
 "
 BDEPEND="
-	app-doc/doxygen
 	dev-lang/swig
 	dev-qt/linguist-tools
 "
 
 DOCS=( CREDITS.md README.md )
 
+PATCHES=( )
+
+CMAKE_USE_DIR="${S}/src/MEGAShellExtDolphin"
+
 src_prepare() {
-	default
-	cd src/MEGASync/mega
+	if [ -e "${FILESDIR}/MEGAsync-${PV}.0_Linux.patch" ]; then
+		eapply -p0 "${FILESDIR}/MEGAsync-${PV}.0_Linux.patch"
+	fi
+	if [ -e "${FILESDIR}/${P}_pdfium.patch" ]; then
+		cd "${S}/src/MEGASync/mega"
+		eapply -Np1 "${FILESDIR}/${P}_pdfium.patch"
+		cd "${S}"
+	fi
+	if has_version ">=media-video/ffmpeg-4.4" && [ -e "${FILESDIR}/${P}_ffmpeg.patch" ]; then
+		eapply "${FILESDIR}/${P}_ffmpeg.patch"
+	fi
+	if use dolphin; then
+		# use the kde5 CMakeLists instead of the kde 4 version
+		mv src/MEGAShellExtDolphin/CMakeLists_kde5.txt src/MEGAShellExtDolphin/CMakeLists.txt || die
+		cmake_src_prepare
+	else
+		default
+	fi
+	cd "${S}/src/MEGASync/mega"
 	eautoreconf
 }
 
 src_configure() {
-	cd src/MEGASync/mega
+	cd "${S}/src/MEGASync/mega"
 	econf \
 		"--disable-silent-rules" \
 		"--disable-curl-checks" \
@@ -88,7 +114,7 @@ src_configure() {
 		$(use_enable python) \
 		"--enable-chat" \
 		"--enable-gcc-hardening"
-	cd ../..
+	cd "${S}/src"
 
 	local myeqmakeargs=(
 		MEGA.pro
@@ -117,3 +143,4 @@ src_install() {
 		doicon -s $size $size/apps/mega.png
 	done
 }
+
