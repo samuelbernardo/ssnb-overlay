@@ -15,11 +15,12 @@ RTAG="_Win"
 EGIT_REPO_URI="https://github.com/meganz/MEGAsync"
 if [[ ${PV} == 9999 ]]; then
 	EGIT_BRANCH="master"
+	KEYWORDS=""
 else
 	EGIT_COMMIT="v${PV}${RTAG}"
+	KEYWORDS="~x86 ~amd64"
 fi
 EGIT_SUBMODULES=( '*' )
-KEYWORDS="~x86 ~amd64"
 
 LICENSE="MEGA"
 SLOT="0"
