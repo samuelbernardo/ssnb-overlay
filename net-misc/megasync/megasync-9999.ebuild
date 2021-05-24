@@ -15,11 +15,12 @@ RTAG="_Win"
 EGIT_REPO_URI="https://github.com/meganz/MEGAsync"
 if [[ ${PV} == 9999 ]]; then
 	EGIT_BRANCH="master"
+	KEYWORDS=""
 else
 	EGIT_COMMIT="v${PV}${RTAG}"
+	KEYWORDS="~x86 ~amd64"
 fi
 EGIT_SUBMODULES=( '*' )
-KEYWORDS="~x86 ~amd64"
 
 LICENSE="MEGA"
 SLOT="0"
@@ -70,9 +71,6 @@ PATCHES=( )
 CMAKE_USE_DIR="${S}/src/MEGAShellExtDolphin"
 
 src_prepare() {
-	if [ -e "${FILESDIR}/MEGAsync-${PV}.0_Linux.patch" ]; then
-		eapply -p0 "${FILESDIR}/MEGAsync-${PV}.0_Linux.patch"
-	fi
 	if [ -e "${FILESDIR}/${P}_pdfium.patch" ]; then
 		cd "${S}/src/MEGASync/mega"
 		eapply -Np1 "${FILESDIR}/${P}_pdfium.patch"
