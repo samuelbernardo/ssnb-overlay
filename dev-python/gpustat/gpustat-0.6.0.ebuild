@@ -5,7 +5,7 @@ EAPI=7
 
 REPO_URI="https://files.pythonhosted.org/packages/b4/69/d8c849715171aeabd61af7da080fdc60948b5a396d2422f1f4672e43d008/"
 SOURCEFILE="${P}.tar.gz"
-PYTHON_COMPAT=( python{2_7,3_5,3_6,3_7,3_8} )
+PYTHON_COMPAT=( python{2_7,3_8,3_9,3_10} )
 
 inherit gs-pypi
 
