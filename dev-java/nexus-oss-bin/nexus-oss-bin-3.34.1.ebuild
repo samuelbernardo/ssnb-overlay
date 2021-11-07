@@ -25,7 +25,7 @@ S="${WORKDIR}"
 #echo "Debug: working directory: ${WORKDIR}"
 RDEPEND=">=virtual/jdk-1.8"
 INSTALL_DIR="/opt/nexus-oss"
-SONATYPE_DIR="/opt/sonatype-work/nexus${MY_MV}"
+SONATYPE_DIR="/opt/sonatype-work"
 
 pkg_setup() {
 #enewgroup <name> [gid]
