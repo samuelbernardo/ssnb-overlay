@@ -8,13 +8,12 @@ if [[ -z ${PV%%*9999} ]]; then
 	EGIT_REPO_URI="https://github.com/Thomas-Tsai/${PN}.git"
 	inherit git-r3
 else
-	inherit vcs-snapshot
 	[[ -n ${PV%%*_p*} ]] && MY_PV="${PV}"
 	SRC_URI="
 		https://github.com/Thomas-Tsai/${PN}/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz
 	"
 	RESTRICT="primaryuri"
-	KEYWORDS="~amd64 ~x86"
+	#KEYWORDS="~amd64 ~x86"
 fi
 
 DESCRIPTION="Partition cloning tool"
