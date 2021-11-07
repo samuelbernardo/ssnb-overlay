@@ -24,7 +24,7 @@ IUSE=""
 S="${WORKDIR}"
 #echo "Debug: working directory: ${WORKDIR}"
 RDEPEND=">=virtual/jdk-1.8"
-INSTALL_DIR="/opt/nexus-oss-${MY_MV}"
+INSTALL_DIR="/opt/nexus-oss"
 SONATYPE_DIR="/opt/sonatype-work/nexus${MY_MV}"
 
 pkg_setup() {
