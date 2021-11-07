@@ -1,19 +1,20 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2021 Gentoo Foundation
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=7
+EAPI=8
 
-inherit eutils user systemd
+inherit systemd
 
 DESCRIPTION="Maven Repository Manager"
 HOMEPAGE="http://nexus.sonatype.org/"
 LICENSE="GPL-3"
 MY_PN="nexus"
-MY_PV="${PV}-03-unix"
+MY_RC="01"
+MY_PV="${PV}-${MY_RC}-unix"
 #echo "Debug: custom package version: ${MY_PV}"
 MY_P="${MY_PN}-${MY_PV}"
-MY_MV="3"
+MY_MV=$(ver_cut 1)
 
 SRC_URI="http://download.sonatype.com/${MY_PN}/${MY_MV}/${MY_P}.tar.gz"
 RESTRICT="mirror"
@@ -23,7 +24,8 @@ IUSE=""
 S="${WORKDIR}"
 #echo "Debug: working directory: ${WORKDIR}"
 RDEPEND=">=virtual/jdk-1.8"
-INSTALL_DIR="/opt/nexus-oss"
+INSTALL_DIR="/opt/nexus-oss-${MY_MV}"
+SONATYPE_DIR="/opt/sonatype-work/nexus${MY_MV}"
 
 pkg_setup() {
 #enewgroup <name> [gid]
@@ -46,11 +48,11 @@ eapply_user
 
 src_install() {
 #echo "Debug: install sonatype work dir"
-dodir ${INSTALL_DIR/nexus-oss/sonatype-work}
-insinto ${INSTALL_DIR/nexus-oss/sonatype-work}
+dodir ${SONATYPE_DIR}
+insinto ${SONATYPE_DIR}
 doins -r sonatype-work/*
 
-fowners -R nexus:nexus ${INSTALL_DIR/nexus-oss/sonatype-work}
+fowners -R nexus:nexus ${SONATYPE_DIR}
 
 #echo "Debug: INSTALL_DIR: ${INSTALL_DIR}"
 #echo "Debug: doins nexus-${MY_PV}"
