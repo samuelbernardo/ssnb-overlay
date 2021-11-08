@@ -13,7 +13,7 @@ else
 		https://github.com/Thomas-Tsai/${PN}/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz
 	"
 	RESTRICT="primaryuri"
-	#KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 DESCRIPTION="Partition cloning tool"
