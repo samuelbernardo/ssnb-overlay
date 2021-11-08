@@ -1,14 +1,14 @@
-# Copyright 1999-2019 Gentoo Authors
+# Copyright 1999-2021 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=7
 
-inherit autotools
+inherit autotools flag-o-matic
 if [[ -z ${PV%%*9999} ]]; then
 	EGIT_REPO_URI="https://github.com/Thomas-Tsai/${PN}.git"
 	inherit git-r3
 else
-	inherit vcs-snapshot
+	#inherit vcs-snapshot
 	MY_PV="5e00059"
 	[[ -n ${PV%%*_p*} ]] && MY_PV="${PV}"
 	SRC_URI="
@@ -60,6 +60,9 @@ DEPEND="
 DOCS=( AUTHORS ChangeLog HACKING NEWS README.md TODO )
 
 src_prepare() {
+	for f in ${FILESDIR}/${PN}-*.patch; do
+		eapply $f
+	done
 	default
 	eautoreconf
 }
@@ -83,5 +86,6 @@ src_configure() {
 		$(use_enable static)
 		$(use_enable xfs)
 	)
+	append-flags -fcommon
 	econf "${myconf[@]}"
 }

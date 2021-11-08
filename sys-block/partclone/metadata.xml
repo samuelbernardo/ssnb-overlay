@@ -7,6 +7,6 @@
 		<description>ssnb Gentoo Overlay</description>
 	</maintainer>
 	<upstream>
-	        <remote-id type="github">Thomas-Tsai/partclone</remote-id>
+		<remote-id type="github">Thomas-Tsai/partclone</remote-id>
 	</upstream>
 </pkgmetadata>

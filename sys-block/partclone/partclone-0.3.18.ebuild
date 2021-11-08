@@ -58,6 +58,9 @@ DEPEND="
 DOCS=( AUTHORS ChangeLog HACKING NEWS README.md TODO )
 
 src_prepare() {
+	for f in ${FILESDIR}/${PN}-*.patch; do
+		eapply $f
+	done
 	default
 	eautoreconf
 }
