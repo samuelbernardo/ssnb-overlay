@@ -12,8 +12,7 @@ else
 	SRC_URI="
 		https://github.com/Thomas-Tsai/${PN}/archive/refs/tags/${PV}.tar.gz -> ${P}.tar.gz
 	"
-	RESTRICT="primaryuri"
-	#KEYWORDS="~amd64 ~x86"
+	KEYWORDS="~amd64 ~x86"
 fi
 
 DESCRIPTION="Partition cloning tool"
@@ -22,8 +21,8 @@ HOMEPAGE="https://partclone.org"
 LICENSE="GPL-2"
 SLOT="0"
 IUSE="
-apfs btrfs +e2fs exfat f2fs fat fuse hfs minix ncurses nilfs2 ntfs reiser4
-reiserfs static xfs
+apfs btrfs +e2fs exfat f2fs fat fuse hfs jfs minix ncurses nilfs2 ntfs reiser4
+reiserfs static ufs vmfs xfs
 "
 
 RDEPEND="
@@ -31,6 +30,7 @@ RDEPEND="
 	e2fs? ( sys-fs/e2fsprogs )
 	btrfs? ( sys-apps/util-linux )
 	fuse? ( sys-fs/fuse:0 )
+	jfs? ( sys-fs/jfsutils )
 	ncurses? ( sys-libs/ncurses:0 )
 	nilfs2? ( sys-fs/nilfs-utils )
 	ntfs? ( sys-fs/ntfs3g )
@@ -45,6 +45,7 @@ RDEPEND="
 		)
 		btrfs? ( sys-apps/util-linux[static-libs] )
 		fuse? ( sys-fs/fuse:0[static-libs] )
+		jfs? ( sys-fs/jfsutils[static] )
 		ncurses? ( sys-libs/ncurses:0[static-libs] )
 		nilfs2? ( sys-fs/nilfs-utils[static-libs] )
 		ntfs? ( sys-fs/ntfs3g[static-libs] )
@@ -58,8 +59,8 @@ DEPEND="
 DOCS=( AUTHORS ChangeLog HACKING NEWS README.md TODO )
 
 src_prepare() {
-	for f in ${FILESDIR}/${PN}-*.patch; do
-		eapply $f
+	for f in "${FILESDIR}/${PN}-"*.patch; do
+		eapply "$f"
 	done
 	default
 	eautoreconf
@@ -75,6 +76,7 @@ src_configure() {
 		$(use_enable fat)
 		$(use_enable fuse)
 		$(use_enable hfs hfsp)
+		$(use_enable jfs)
 		$(use_enable minix)
 		$(use_enable ncurses ncursesw)
 		$(use_enable nilfs2)
@@ -82,6 +84,8 @@ src_configure() {
 		$(use_enable reiserfs)
 		$(use_enable reiser4)
 		$(use_enable static)
+		$(use_enable vmfs)
+		$(use_enable ufs)
 		$(use_enable xfs)
 	)
 	append-flags -fcommon
