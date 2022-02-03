@@ -1,23 +1,19 @@
-# Copyright 1999-2008 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="6"
+EAPI="7"
 
-inherit eutils versionator
+inherit eutils
 
-MY_PV=$(replace_version_separator 3 '.v')
+MY_PV=$(ver_rs 3 '.v')
+MY_PV=$(ver_cut 1-5 ${MY_PV})
 MY_PN="ApacheDirectoryStudio"
-MY_PKGM=14
+MY_PKGM=$(ver_cut 5)
 
 
 DESCRIPTION="Apache Directory Studio is an universal LDAP directory tool."
-SRC_URI="amd64? (
-		"http://www.us.apache.org/dist/directory/studio/${MY_PV}-M${MY_PKGM}/${MY_PN}-${MY_PV}-M${MY_PKGM}-linux.gtk.x86_64.tar.gz"
-	)
-	x86? (
-		"http://www.us.apache.org/dist/directory/studio/${MY_PV}-M${MY_PKGM}/${MY_PN}-${MY_PV}-M${MY_PKGM}-linux.gtk.x86.tar.gz"
-	)"
+SRC_URI="http://www.apache.org/dist/directory/studio/${MY_PV}-M${MY_PKGM}/${MY_PN}-${MY_PV}-M${MY_PKGM}-linux.gtk.x86_64.tar.gz"
 HOMEPAGE="http://directory.apache.org/studio/"
 
 KEYWORDS="~amd64 ~x86"
