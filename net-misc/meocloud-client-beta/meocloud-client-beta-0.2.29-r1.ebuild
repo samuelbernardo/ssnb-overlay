@@ -1,4 +1,4 @@
-# Copyright 1999-2019 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
@@ -16,6 +16,8 @@ SRC_URI="
 	x86? ( https://meocloud.pt/binaries/linux/i386/meocloud-latest_i386_beta.tar.gz -> ${P}_i386.tar.gz )
 	amd64? ( https://meocloud.pt/binaries/linux/x86_64/meocloud-latest_x86_64_beta.tar.gz -> ${P}_x86_64.tar.gz )
 	"
+
+QA_FLAGS_IGNORED="*"
 
 src_unpack() {
     if [ "${A}" != "" ]; then
