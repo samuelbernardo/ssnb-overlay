@@ -17,6 +17,10 @@ SRC_URI="
 	amd64? ( https://meocloud.pt/binaries/linux/x86_64/meocloud-latest_x86_64_beta.tar.gz -> ${P}_x86_64.tar.gz )
 	"
 
+QA_PRESTRIPPED="
+		opt/meocloud/cli/.*
+		opt/meocloud/core/*"
+
 QA_FLAGS_IGNORED="*"
 
 src_unpack() {
