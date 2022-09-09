@@ -1,18 +1,17 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=8
 JAVA_PKG_IUSE="doc examples"
 
-inherit eutils java-pkg-2 java-ant-2
+inherit desktop java-pkg-2 java-ant-2
 
 MY_P="Arduino"
 PNS="arduino"
 DESCRIPTION="An open-source AVR electronics prototyping platform"
 HOMEPAGE="http://arduino.cc/ https://arduino.googlecode.com/"
-SRC_URI="https://github.com/arduino/${MY_P}/archive/${PV}.tar.gz -> arduino-${PV}.tar.gz
-	 mirror://gentoo/arduino-icons.tar.bz2"
+SRC_URI="https://github.com/arduino/${MY_P}/archive/${PV}.tar.gz -> arduino-${PV}.tar.gz"
 LICENSE="GPL-2 GPL-2+ LGPL-2 CC-BY-SA-3.0"
 SLOT="0"
 KEYWORDS="~amd64 ~x86"
@@ -25,7 +24,7 @@ dev-java/jna:0
 
 RDEPEND="${COMMONDEP}
 dev-embedded/arduino-libs
-dev-embedded/avrdude
+>=dev-embedded/avrdude-6
 sys-devel/crossdev
 >=virtual/jre-1.8"
 
@@ -67,7 +66,7 @@ src_install() {
 
 	insinto "/usr/share/${PNS}/"
 	#doins -r hardware libraries tools tools-builder dist
-	doins -r tools tools-builder dist
+	doins -r tools tools-builder
 	#fowners -R root:uucp "/usr/share/${PNS}/hardware"
 
 	insinto "/usr/share/${PNS}/lib"
