@@ -5,12 +5,11 @@
 
 EAPI=8
 
-inherit eutils unpacker
+inherit unpacker
 
 DESCRIPTION="A cross-platform, complete password management solution that securely manages passwords and all other life important credentials like bank accounts, Credit cards, IDs, passport, driving licenses etc. Everything is saved locally on user’s device and optionally he can sync through other devices using his accounts of Dropbox, Box, Google Drive, OneDrive, iCloud and ownCloud."
 HOMEPAGE="http://enpass.io/apps/linux/"
-SRC_URI="amd64? ( http://repo.sinew.in/pool/main/e/enpass/enpass_${PV}_amd64.deb )
-         x86?  ( http://repo.sinew.in/pool/main/e/enpass/enpass_${PV}_i386.deb )"
+SRC_URI="amd64? ( http://apt.enpass.io/pool/main/e/enpass/enpass_${PV}_amd64.deb )"
 
 LICENSE="SINEW"
 SLOT="0"
