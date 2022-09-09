@@ -1,24 +1,22 @@
-# Copyright 1999-2014 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI=6
+EAPI=8
 
-inherit eutils versionator
+inherit desktop
 
 SR="R"
-RNAME="2018-09"
+RNAME="2022-06"
 
-SRC_BASE="https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/${RNAME}/${SR}/eclipse-java-${RNAME}-linux-gtk"
+SRC_BASE="https://www.eclipse.org/downloads/download.php?file=/technology/epp/downloads/release/${RNAME}/${SR}/eclipse-java-${RNAME}-${SR}-linux-gtk"
 
 DESCRIPTION="Eclipse SDK"
 HOMEPAGE="http://www.eclipse.org"
-SRC_URI="
-	amd64? ( ${SRC_BASE}-x86_64.tar.gz&r=1 -> eclipse-java-${RNAME}-${SR}-linux-gtk-x86_64-${PV}.tar.gz )
-	x86? ( ${SRC_BASE}.tar.gz&r=1 -> eclipse-java-${RNAME}-${SR}-linux-gtk-${PV}.tar.gz )"
+SRC_URI="amd64? ( ${SRC_BASE}-x86_64.tar.gz&r=1 -> eclipse-java-${RNAME}-${SR}-linux-gtk-x86_64-${PV}.tar.gz )"
 
 LICENSE="EPL-1.0"
-SLOT="4.9"
+SLOT="4.15"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
@@ -37,7 +35,8 @@ src_install() {
 	exeinto ${dest}
 	doexe eclipse
 
-	dohtml -r readme/*
+	docinto html
+	dodoc -r readme/*
 
 	cp "${FILESDIR}"/eclipserc-bin-${SLOT} "${T}" || die
 	cp "${FILESDIR}"/eclipse-bin-${SLOT} "${T}" || die
