@@ -16,7 +16,7 @@ HOMEPAGE="http://www.eclipse.org"
 SRC_URI="amd64? ( ${SRC_BASE}-x86_64.tar.gz&r=1 -> eclipse-java-${RNAME}-${SR}-linux-gtk-x86_64-${PV}.tar.gz )"
 
 LICENSE="EPL-1.0"
-SLOT="4.15"
+SLOT="$(ver_cut 1-2)"
 KEYWORDS="~x86 ~amd64"
 IUSE=""
 
