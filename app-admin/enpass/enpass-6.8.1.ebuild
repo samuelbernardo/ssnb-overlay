@@ -1,9 +1,9 @@
-# Copyright 1999-2015 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 # http://repo.sinew.in/dists/stable/main/binary-{amd64,i386}/Packages
 
-EAPI=5
+EAPI=8
 
 inherit eutils unpacker
 
@@ -47,11 +47,6 @@ src_unpack() {
 	unpack_deb "${A}"
 	S="${WORKDIR}"
 }
-
-#src_prepare() {
-	#epatch "${FILESDIR}"'/fix-rc-.desktop-Icon-key.patch'
-	#rm -r "${WORKDIR}"/opt/Enpass/lib
-#}
 
 src_install() {
 	cp -R "${WORKDIR}/usr" "${D}" || die "Install failed!"
