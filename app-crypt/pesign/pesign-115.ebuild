@@ -1,14 +1,14 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2022 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=5
+EAPI=8
 
-inherit eutils multilib
+inherit desktop multilib
 
 DESCRIPTION="Tools for manipulating signed PE-COFF binaries"
-HOMEPAGE="https://github.com/vathpela/pesign"
-SRC_URI="https://github.com/vathpela/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
+HOMEPAGE="https://github.com/rhboot/pesign"
+SRC_URI="https://github.com/rhboot/${PN}/archive/${PV}.tar.gz -> ${P}.tar.gz"
 
 LICENSE="GPL-2"
 SLOT="0"
@@ -37,15 +37,3 @@ src_install() {
 	# create .so symlink
 	ln -s libdpe.so "${ED}/usr/$(get_libdir)/libdpe.so.0"
 }
-#
-#src_prepare() {
-#	local iarch
-#	case ${ARCH} in
-#		ia64)  iarch=ia64 ;;
-#		x86)   iarch=ia32 ;;
-#		amd64) iarch=x86_64 ;;
-#		*)     die "unsupported architecture: ${ARCH}" ;;
-#	esac
-#	sed -i "/^EFI_ARCH=/s:=.*:=${iarch}:" configure || die
-#	sed -i 's/-m64$/& -march=x86-64/' tests/Makefile.in || die
-#}
