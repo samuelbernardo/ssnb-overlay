@@ -1,8 +1,8 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=7
+EAPI=8
 #PYTHON_COMPAT=( python2_7 )
 
 if [[ $PV = *9999* ]]; then
@@ -24,7 +24,7 @@ else
 	KEYWORDS="~amd64 ~x86"
 fi
 
-inherit autotools eutils user ${scm_eclass}
+inherit autotools ${scm_eclass}
 
 DESCRIPTION="ZFS based replication and failover solution"
 HOMEPAGE="http://www.bolthole.com/solaris/zrep/"
