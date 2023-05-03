@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
-inherit findlib eutils
+inherit findlib
 
 DESCRIPTION="Camomile is a comprehensive Unicode library for ocaml"
 SRC_URI="https://github.com/yoriyuki/Camomile/releases/download/${PV}/${P}.tbz"

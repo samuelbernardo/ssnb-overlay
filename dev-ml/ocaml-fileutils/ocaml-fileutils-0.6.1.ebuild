@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
-inherit findlib eutils autotools
+inherit findlib autotools
 
 DESCRIPTION="Pure OCaml functions to manipulate real file (POSIX like) and filename"
 HOMEPAGE="http://forge.ocamlcore.org/projects/ocaml-fileutils"
