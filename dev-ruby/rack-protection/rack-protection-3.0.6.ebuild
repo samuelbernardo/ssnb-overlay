@@ -1,8 +1,8 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-USE_RUBY="ruby25 ruby26 ruby27"
+EAPI=8
+USE_RUBY="ruby30 ruby31 ruby32"
 
 # There are no specs in the gem and the source cannot be downloaded separately.
 RUBY_FAKEGEM_RECIPE_TEST="none"
