@@ -4,7 +4,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby24 ruby25 ruby26 ruby27"
+USE_RUBY="ruby30 ruby31 ruby32"
 
 SLOT="0"
 RUBY_FAKEGEM_NAME="${PN}"

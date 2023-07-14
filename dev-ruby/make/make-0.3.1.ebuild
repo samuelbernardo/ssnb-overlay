@@ -4,7 +4,7 @@
 
 EAPI=7
 
-USE_RUBY="ruby25 ruby26 ruby27"
+USE_RUBY="ruby30 ruby31 ruby32"
 
 RUBY_FAKEGEM_TASK_TEST="spec"
 RUBY_FAKEGEM_RECIPE_DOC="none"
