@@ -1,12 +1,12 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
 DESCRIPTION="Tools for authenticating with https://www.autenticacao.gov.pt/"
 HOMEPAGE="https://svn.gov.pt/projects/ccidadao"
 
-inherit subversion unpacker eutils
+inherit subversion unpacker
 
 ESVN_REPO_URI="https://svn.gov.pt/projects/ccidadao/repository/middleware-offline/tags/version${PV}/_src/eidmw"
 ESVN_PATCHES="${FILESDIR}/*.${PV}.patch"
