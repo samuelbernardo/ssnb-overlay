@@ -1,10 +1,8 @@
-# Copyright 1999-2022 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Header: $
 
-EAPI="7"
-
-inherit eutils
+EAPI="8"
 
 MY_PV=$(ver_rs 3 '.v')
 MY_PV=$(ver_cut 1-5 ${MY_PV})
