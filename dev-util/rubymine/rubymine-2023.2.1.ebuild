@@ -1,9 +1,9 @@
-# Copyright 1999-2020 Gentoo Foundation
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=7
-inherit eutils desktop
+EAPI=8
+inherit desktop
 
 SLOT="$(ver_cut 1)"
 RDEPEND=">=virtual/jdk-1.7"
@@ -17,7 +17,7 @@ DESCRIPTION="The most intelligent Ruby and Rails IDE"
 HOMEPAGE="http://jetbrains.com/ruby/"
 SRC_URI="http://download.jetbrains.com/ruby/${MY_PN}-${MY_PV}.tar.gz"
 LICENSE="all-rights-reserved"
-IUSE="jbr11"
+IUSE="+jbr17"
 KEYWORDS="~amd64 ~x86"
 S=${WORKDIR}/${MY_PN}-${MY_PV}
 
@@ -26,7 +26,7 @@ src_prepare() {
 	rm -vrf "${S}"/lib/libpty/macosx
 	rm -vrf "${S}"/lib/libpty/win
 
-	if use !jbr11; then
+	if use !jbr17; then
 		rm -vrf "${S}"/jbr
 	fi
 
