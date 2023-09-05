@@ -1,8 +1,8 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-inherit eutils desktop
+EAPI=8
+inherit desktop
 
 SLOT="0"
 PV_STRING="$(ver_cut 4-6)"
@@ -11,6 +11,8 @@ MY_PN="idea"
 # Using the most recent Jetbrains Runtime binaries available at the time of writing
 # As the exact bundled versions ( jre 11 build 159.30 and jre 8 build 1483.39 ) aren't
 # available separately
+JRE17_BASE="17.0.8"
+JRE17_VER="1000.22"
 JRE11_BASE="11_0_2"
 JRE11_VER="164"
 JRE_BASE="8u202"
@@ -25,10 +27,11 @@ then
 else
 	# upstream stable
 	KEYWORDS="~amd64 ~x86"
-	SRC_URI="https://download.jetbrains.com/idea/${MY_PN}IU-${MY_PV}-no-jbr.tar.gz -> ${MY_PN}IU-${PV_STRING}.tar.gz
+	SRC_URI="https://download.jetbrains.com/idea/${MY_PN}IU-${MY_PV}.tar.gz -> ${MY_PN}IU-${PV_STRING}.tar.gz
 		jbr8? ( x86? ( https://bintray.com/jetbrains/intellij-jdk/download_file?file_path=jbrx-${JRE_BASE}-linux-i586-b${JRE_VER}.tar.gz -> jbrx-${JRE_BASE}-linux-i586-b${JRE_VER}.tar.gz )
 		amd64? ( https://bintray.com/jetbrains/intellij-jdk/download_file?file_path=jbrx-${JRE_BASE}-linux-x64-b${JRE_VER}.tar.gz -> jbrx-${JRE_BASE}-linux-x64-b${JRE_VER}.tar.gz ) )
-		jbr11? ( amd64? ( https://bintray.com/jetbrains/intellij-jdk/download_file?file_path=jbr-${JRE11_BASE}-linux-x64-b${JRE11_VER}.tar.gz -> jbr-${JRE11_BASE}-linux-x64-b${JRE11_VER}.tar.gz ) )"
+		jbr11? ( amd64? ( https://bintray.com/jetbrains/intellij-jdk/download_file?file_path=jbr-${JRE11_BASE}-linux-x64-b${JRE11_VER}.tar.gz -> jbr-${JRE11_BASE}-linux-x64-b${JRE11_VER}.tar.gz ) )
+		jbr17? ( amd64? ( https://cache-redirector.jetbrains.com/intellij-jbr/jbr-${JRE17_BASE}-linux-x64-b${JRE17_VER}.tar.gz -> jbr-${JRE17_BASE}-linux-x64-b${JRE17_VER}.tar.gz ) )"
 fi
 
 DESCRIPTION="A complete toolset for web, mobile and enterprise development"
@@ -40,8 +43,10 @@ LICENSE="IDEA
 #Splitting custom-jdk into jbr8 and jbr11 as upstream now offers downloads with
 #either (or neither) bundled
 #Defaulting to jbr8 to match upstream
-IUSE="+jbr8 -jbr11"
-REQUIRED_USE="jbr8? ( !jbr11 )"
+IUSE="-jbr8 -jbr11 -jbr17"
+REQUIRED_USE="jbr8? ( !jbr11 !jbr17 )
+              jbr11? ( !jbr8 !jbr17 )
+	      jbr17? ( !jbr8 !jbr11 )"
 
 DEPEND="!dev-util/${PN}:14
 	!dev-util/${PN}:15"
@@ -56,15 +61,27 @@ S="${WORKDIR}/${MY_PN}-IU-$(ver_cut 4-6)"
 
 QA_PREBUILT="opt/${PN}-${MY_PV}/*"
 
+
+jbr_unpack() {
+	cd "${WORKDIR}"
+	unpack ${MY_PN}IU-${PV_STRING}.tar.gz
+	cd "${S}"
+	mkdir jre64 && cd jre64 || die "Unable to create jre64 directory"
+}
+
 # jbr11 binary doesn't unpack nicely into a single folder
 src_unpack() {
-	if use !jbr11 ; then
-		default_src_unpack
+	if use jbr8 ; then
+		jbr_unpack
+		unpack jbr-${JRE8_BASE}-linux-x64-b${JRE8_VER}.tar.gz
+	elif use jbr11; then
+		jbr_unpack
+		unpack jbr-${JRE11_BASE}-linux-x64-b${JRE11_VER}.tar.gz
+	elif use jbr17; then
+		jbr_unpack
+		unpack jbr-${JRE17_BASE}-linux-x64-b${JRE17_VER}.tar.gz
 	else
-		cd "${WORKDIR}"
-		unpack ${MY_PN}IU-${PV_STRING}.tar.gz
-		cd "${S}"
-		mkdir jre64 && cd jre64 && unpack jbr-${JRE11_BASE}-linux-x64-b${JRE11_VER}.tar.gz
+		default_src_unpack
 	fi
 }
 
@@ -75,11 +92,11 @@ src_prepare() {
 		JRE_DIR=jre
 	fi
 
-	if use jbr8; then
+	if use jbr8 || use jbr11 || use jbr17; then
+		PLUGIN_DIR="${S}/${JRE_DIR}/lib/"
+	else
 		mv "${WORKDIR}/jre" ./"${JRE_DIR}"
 		PLUGIN_DIR="${S}/${JRE_DIR}/lib/${ARCH}"
-	else
-		PLUGIN_DIR="${S}/${JRE_DIR}/lib/"
 	fi
 
 	rm -vf ${PLUGIN_DIR}/libavplugin*
@@ -120,7 +137,7 @@ src_install() {
 	else
 		JRE_DIR=jre
 	fi
-	if use jbr8 || use jbr11 ; then
+	if use jbr8 || use jbr11 || use jbr17 ; then
 	if use jbr8; then
 		JRE_BINARIES="java jjs keytool orbd pack200 policytool rmid rmiregistry servertool tnameserv unpack200"
 	else
