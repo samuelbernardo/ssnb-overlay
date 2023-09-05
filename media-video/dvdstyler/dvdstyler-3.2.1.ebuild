@@ -1,4 +1,4 @@
-# Copyright 1999-2020 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
 EAPI=7
@@ -6,7 +6,7 @@ EAPI=7
 MY_P=${P/dvds/DVDS}
 WX_GTK_VER=3.0
 
-inherit wxwidgets eutils
+inherit wxwidgets
 
 DESCRIPTION="A cross-platform free DVD authoring application"
 HOMEPAGE="http://www.dvdstyler.org/"
