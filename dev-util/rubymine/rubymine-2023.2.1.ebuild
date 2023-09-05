@@ -46,7 +46,7 @@ src_install() {
 	doins -r *
 	fperms 755 "${dir}/bin/"{${PN}.sh,rinspect.sh,fsnotifier,repair,format.sh,ltedit.sh,restart.py}
 	if use jbr17; then
-		fperms 755 "${dir}"/jbr/bin/*
+		fperms -R 755 "${dir}"/jbr/bin
 	fi
 
 	newicon "bin/${PN}.png" "${exe}.png"
