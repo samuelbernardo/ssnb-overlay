@@ -44,7 +44,7 @@ src_install() {
 
 	insinto "${dir}"
 	doins -r *
-	fperms 755 "${dir}/bin/${PN}.sh" "${dir}/bin/rinspect.sh" "${dir}/bin/fsnotifier" "${dir}/bin/fsnotifier64"
+	fperms 755 "${dir}/bin/${PN}.sh" "${dir}/bin/rinspect.sh" "${dir}/bin/fsnotifier" "${dir}/bin/repair" "${dir}/bin/format.sh" "${dir}/bin/ltedit.sh"
 	if use jbr11; then
 		fperms 755 "${dir}/jbr/bin/*"
 	fi
