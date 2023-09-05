@@ -45,7 +45,7 @@ src_install() {
 	insinto "${dir}"
 	doins -r *
 	fperms 755 "${dir}/bin/"{${PN}.sh,rinspect.sh,fsnotifier,repair,format.sh,ltedit.sh,restart.py}
-	if use jbr11; then
+	if use jbr17; then
 		fperms 755 "${dir}/jbr/bin/*"
 	fi
 
