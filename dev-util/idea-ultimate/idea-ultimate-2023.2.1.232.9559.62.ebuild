@@ -93,10 +93,10 @@ src_prepare() {
 	fi
 
 	if use jbr8 || use jbr11 || use jbr17; then
-		PLUGIN_DIR="${S}/${JRE_DIR}/lib/"
-	else
 		mv "${WORKDIR}/jre" ./"${JRE_DIR}"
 		PLUGIN_DIR="${S}/${JRE_DIR}/lib/${ARCH}"
+	else
+		PLUGIN_DIR="${S}/${JRE_DIR}/lib/"
 	fi
 
 	rm -vf ${PLUGIN_DIR}/libavplugin*
@@ -131,7 +131,7 @@ src_install() {
 
 	insinto "${dir}"
 	doins -r *
-	fperms 755 "${dir}"/bin/{format.sh,idea.sh,inspect.sh,printenv.py,restart.py,fsnotifier{,64}}
+	fperms 755 "${dir}"/bin/{format.sh,idea.sh,inspect.sh,restart.py,fsnotifier,ltedit.sh,remote-dev-server.sh,repair}
 	if use amd64; then
 		JRE_DIR=jre64
 	else
