@@ -1,12 +1,12 @@
-# Copyright 1999-2021 Gentoo Authors
+# Copyright 1999-2023 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 DESCRIPTION="Portuguese Citizen Card Middleware"
 HOMEPAGE="https://github.com/amagovpt/autenticacao.gov"
 
-inherit git-r3 unpacker eutils
+inherit git-r3 unpacker
 
 EGIT_CLONE_TYPE="single"
 EGIT_REPO_URI="https://github.com/amagovpt/autenticacao.gov.git"
