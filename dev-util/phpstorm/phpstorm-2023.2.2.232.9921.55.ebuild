@@ -1,8 +1,7 @@
-EAPI=6
-inherit eutils versionator
+EAPI=8
 
-PV_STRING="$(get_version_component_range 4-6)"
-MY_PV="$(get_version_component_range 1-3)"
+PV_STRING="$(ver_cut 4-6)"
+MY_PV="$(ver_cut 1-3)"
 MY_PN="PhpStorm"
 
 HOMEPAGE="http://www.jetbrains.com/phpstorm/"
@@ -36,7 +35,7 @@ src_install() {
 	insinto /opt/${PN}
 	doins -r *
 
-	fperms a+x /opt/${PN}/bin/phpstorm.sh || die "Chmod failed"
+	fperms a+x /opt/${PN}/bin/*.sh || die "Chmod failed"
 	fperms a+x /opt/${PN}/bin/fsnotifier || die "Chmod failed"
 	fperms a+x /opt/${PN}/bin/fsnotifier64 || die "Chmod failed"
 	dosym /opt/${PN}/bin/phpstorm.sh /usr/bin/${PN}
