@@ -1,5 +1,7 @@
 EAPI=8
 
+inherit desktop
+
 PV_STRING="$(ver_cut 4-6)"
 MY_PV="$(ver_cut 1-3)"
 MY_PN="PhpStorm"
@@ -32,6 +34,10 @@ src_install() {
 
 	cd PhpStorm*/
 	sed -i 's/IS_EAP="true"/IS_EAP="false"/' bin/phpstorm.sh
+	doicon "bin/${PN}.png"
+	make_desktop_entry ${PN} "${PROGNAME}" "${PN}"
+	rm "bin/${PN}.png" "bin/${PN}.svg"
+
 	insinto /opt/${PN}
 	doins -r *
 
@@ -39,9 +45,6 @@ src_install() {
 	fperms a+x /opt/${PN}/bin/fsnotifier || die "Chmod failed"
 	fperms a+x /opt/${PN}/bin/restart.py || die "Chmod failed"
 	dosym /opt/${PN}/bin/phpstorm.sh /usr/bin/${PN}
-
-	doicon "bin/${PN}.png"
-	make_desktop_entry ${PN} "${PROGNAME}" "${PN}"
 }
 
 pkg_postinst() {
