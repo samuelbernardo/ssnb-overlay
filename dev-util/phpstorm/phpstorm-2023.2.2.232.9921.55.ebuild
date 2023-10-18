@@ -37,10 +37,9 @@ src_install() {
 
 	fperms a+x /opt/${PN}/bin/*.sh || die "Chmod failed"
 	fperms a+x /opt/${PN}/bin/fsnotifier || die "Chmod failed"
-	fperms a+x /opt/${PN}/bin/*.py || die "Chmod failed"
+	fperms a+x /opt/${PN}/bin/restart.py || die "Chmod failed"
 	dosym /opt/${PN}/bin/phpstorm.sh /usr/bin/${PN}
 
-	mv "bin/webide.png" "bin/${PN}.png"
 	doicon "bin/${PN}.png"
 	make_desktop_entry ${PN} "${PROGNAME}" "${PN}"
 }
