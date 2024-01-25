@@ -115,7 +115,7 @@ src_install() {
 	local pngfile="$(find ${dst}/bin -maxdepth 1 -iname '*.png')"
 	newicon $pngfile "${PN}.png" || die "we died"
 
-	make_desktop_entry "${PN}" "IntelliJ Idea Community Edition" "${PN}" "Development;IDE;"
+	make_desktop_entry "${PN}" "IntelliJ Idea Ultimate Edition" "${PN}" "Development;IDE;"
 
 	# recommended by: https://confluence.jetbrains.com/display/IDEADEV/Inotify+Watches+Limit
 	mkdir -p "${D}/etc/sysctl.d/" || die
