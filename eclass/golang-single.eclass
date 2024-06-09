@@ -1,10 +1,10 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 # @ECLASS: golang-single.eclass
 # @MAINTAINER:
-# Mauro Toffanin <toffanin.mauro@gmail.com>
+# Samuel Bernardo <samuelbernardo.mail@gmail.com>
 # @AUTHOR:
 # Mauro Toffanin <toffanin.mauro@gmail.com>
 # @BLURB: An eclass for GoLang packages not installed inside GOPATH/GOBIN.
@@ -19,7 +19,7 @@
 # Typical ebuild using golang-single.eclass:
 #
 # @CODE
-# EAPI=5
+# EAPI=8
 #
 # GOLANG_PKG_IMPORTPATH="github.com/captObvious"
 # GOLANG_PKG_ARCHIVESUFFIX=".zip"

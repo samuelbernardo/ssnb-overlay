@@ -1,10 +1,10 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 # @ECLASS: golang-utils.eclass
 # @MAINTAINER:
-# Mauro Toffanin <toffanin.mauro@gmail.com>
+# Samuel Bernardo <samuelbernardo.mail@gmail.com>
 # @AUTHOR:
 # Mauro Toffanin <toffanin.mauro@gmail.com>
 # @BLURB: Base eclass for GoLang packages
@@ -15,14 +15,14 @@
 # This eclass should not be inherited directly from an ebuild.
 # Instead, you should inherit golang-single or golang-live for GoLang packages.
 
-inherit versionator eutils multiprocessing
+inherit estack multiprocessing
 
 if [[ -z ${_GOLANG_BASE_ECLASS} ]]; then
 _GOLANG_BASE_ECLASS=1
 
 # Silences repoman warnings.
 case "${EAPI:-0}" in
-		5|6)
+		8)
 				case "${GOLANG_PKG_DEPEND_ON_GO_SUBSLOT:-yes}" in
 					yes)
 						GO_DEPEND="dev-lang/go:0="
@@ -596,7 +596,7 @@ golang-common_src_configure() {
 	# Removes GoLang object files from package source directories (pkg/)
 	# and temporary directories (_obj/ _test*/).
 	local EGO_SUBPACKAGES="${GOLANG_PKG_IMPORTPATH_ALIAS}/${GOLANG_PKG_NAME}"
-	case $( get_version_component_range 1-2 ${GOLANG_VERSION} ) in
+	case $( ver_cut 1-2 ${GOLANG_VERSION} ) in
 		1.4*) ;;
 		*)
 			EGO_SUBPACKAGES+="/..."
@@ -909,7 +909,7 @@ golang_do_build() {
 	# Filters "=" chars from ldflags declaration.
 	# NOTE: from go1.5+ linker syntax is no more compatible with <go1.4;
 	#       this hack ensures that the old behaviour is honoured.
-	if [[ $( get_version_component_range 1-2 ${GOLANG_VERSION} ) == "1.4" ]]; then
+	if [[ $( ver_cut 1-2 ${GOLANG_VERSION} ) == "1.4" ]]; then
 		GOLANG_PKG_LDFLAGS="${GOLANG_PKG_LDFLAGS//=/ }"
 	fi
 

@@ -1,10 +1,10 @@
-# Copyright 1999-2017 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
 # @ECLASS: golang-live.eclass
 # @MAINTAINER:
-# Mauro Toffanin <toffanin.mauro@gmail.com>
+# Samuel Bernardo <samuelbernardo.mail@gmail.com>
 # @AUTHOR:
 # Mauro Toffanin <toffanin.mauro@gmail.com>
 # @BLURB: Eclass for fetching and unpacking HEAD shapshot of go repositories
