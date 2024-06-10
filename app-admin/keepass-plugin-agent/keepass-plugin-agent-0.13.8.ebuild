@@ -1,16 +1,15 @@
-# Copyright 1999-2018 Gentoo Authors
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=6
+EAPI=8
 
-#inherit eutils git-r3
-inherit eutils
+#inherit git-r3
 
 MAIN_PN="keepass"
 MY_PN="KeeAgent"
 DESCRIPTION="ssh agent plugin for KeePass 2.x"
 HOMEPAGE="https://github.com/dlech/KeeAgent"
-SRC_URI="https://lechnology.com/wp-content/uploads/2018/04/${MY_PN}_v${PV}.zip"
+SRC_URI="https://github.com/dlech/${MY_PN}/archive/refs/tags/v${PV}.zip"
 #EGIT_REPO_URI="https://github.com/dlech/KeeAgent.git"
 #EGIT_COMMIT="v${PV}"
 #EGIT_SUBMODULES=( '*' )
