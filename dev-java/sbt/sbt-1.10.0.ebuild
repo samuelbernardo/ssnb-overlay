@@ -1,10 +1,10 @@
-# Copyright 1999-2016 Gentoo Foundation
+# Copyright 1999-2024 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI="6"
+EAPI="8"
 
 # repoman gives LIVEVCS.unmasked even with EGIT_COMMIT, so create snapshot
-inherit eutils java-pkg-2 git-r3
+inherit java-pkg-2 git-r3
 
 L_PN="sbt-launch"
 L_P="${L_PN}-${PV}"
@@ -110,7 +110,7 @@ src_install() {
 
 		rm -v bin/sbt.bat || die
 		sed -i -e 's#bin/sbt-launch.jar#lib/sbt-launch.jar#g;' \
-			bin/sbt-launch-lib.bash || die
+			bin/sbt || die
 
 		insinto "${dest}/lib"
 		doins bin/* || die
