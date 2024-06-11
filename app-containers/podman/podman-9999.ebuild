@@ -51,7 +51,7 @@ BDEPEND="
 "
 
 PATCHES=(
-	"${FILESDIR}/seccomp-toggle-4.7.0.patch"
+	"${FILESDIR}/seccomp-toggle-5.1.1.patch"
 )
 
 CONFIG_CHECK="

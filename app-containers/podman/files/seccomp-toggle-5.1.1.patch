@@ -1,0 +1,18 @@
+diff -Naur a/Makefile b/Makefile
+--- a/Makefile	2024-06-11 23:40:49.548321758 +0100
++++ b/Makefile	2024-06-11 23:42:32.662691391 +0100
+@@ -55,8 +55,12 @@
+ 	$(shell hack/btrfs_tag.sh) \
+ 	$(shell hack/systemd_tag.sh) \
+ 	$(shell hack/libsubid_tag.sh) \
+-	exclude_graphdriver_devicemapper \
+-	seccomp
++	exclude_graphdriver_devicemapper
++
++BUILD_SECCOMP ?= yes
++ifeq ($(BUILD_SECCOMP),yes)
++BUILDTAGS += seccomp
++endif
+ # allow downstreams to easily add build tags while keeping our defaults
+ BUILDTAGS += ${EXTRA_BUILDTAGS}
+ # N/B: This value is managed by Renovate, manual changes are
