@@ -9,7 +9,8 @@ MAIN_PN="keepass"
 MY_PN="KeeAgent"
 DESCRIPTION="ssh agent plugin for KeePass 2.x"
 HOMEPAGE="https://github.com/dlech/KeeAgent"
-SRC_URI="https://github.com/dlech/${MY_PN}/archive/refs/tags/v${PV}.zip"
+#SRC_URI="https://github.com/dlech/${MY_PN}/archive/refs/tags/v${PV}.zip"
+SRC_URI="https://lechnology.com/wp-content/uploads/2024/05/${MY_PN}_v${PV}.zip"
 #EGIT_REPO_URI="https://github.com/dlech/KeeAgent.git"
 #EGIT_COMMIT="v${PV}"
 #EGIT_SUBMODULES=( '*' )
@@ -35,12 +36,12 @@ S="${WORKDIR}"
 
 src_prepare() {
 	default
-	#cd ${S}/${P} || die "Cloudn't access source directory: ${S}/${P}/${MY_PN}"
+	#cd ${S}/${MY_PN}-${PV} || die "Cloudn't access source directory: ${S}/${MY_PN}-${PV}"
 	#nuget restore KeeAgent.sln
 }
 
 src_compile() {
-	#cd ${S}/${P} || die "Cloudn't access source directory: ${S}/${P}"
+	#cd ${S}/${MY_PN}-${PV} || die "Cloudn't access source directory: ${S}/${MY_PN}-${PV}"
 	#xbuild /property:Configuration=ReleasePlgx KeeAgent.sln
 	true
 }
