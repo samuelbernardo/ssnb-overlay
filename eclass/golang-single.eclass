@@ -24,7 +24,7 @@
 # GOLANG_PKG_IMPORTPATH="github.com/captObvious"
 # GOLANG_PKG_ARCHIVESUFFIX=".zip"
 # GOLANG_PKG_HAVE_TEST
-# inherit golang-single qt4-r2
+# inherit golang-single
 #
 # DESCRIPTION="Foo bar application"
 # HOMEPAGE="http://example.org/foo/"
@@ -32,13 +32,9 @@
 # LICENSE="MIT"
 # KEYWORDS="~amd64 ~x86"
 # SLOT="0"
-# IUSE="doc qt4"
+# IUSE="doc"
 #
 # CDEPEND="
-#   qt4? (
-#       dev-qt/qtcore:4
-#       dev-qt/qtgui:4
-#   )"
 # RDEPEND="${CDEPEND}
 #   !media-gfx/bar"
 # DEPEND="${CDEPEND}
@@ -47,7 +43,6 @@
 # DOCS=(AUTHORS ChangeLog README "Read me.txt" TODO)
 #
 # PATCHES=(
-#   "${FILESDIR}/${P}-qt4.patch" # bug 123458
 #   "${FILESDIR}/${P}-as-needed.patch"
 # )
 #
