@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=8
 
 NPM_EXTRA_FILES="benchclean.js common.js oh-my-glob.gif sync.js prof.sh make-benchmark-fixture.sh benchmark.sh"
 

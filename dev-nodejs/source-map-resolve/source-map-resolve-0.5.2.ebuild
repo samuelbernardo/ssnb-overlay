@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=8
 
 NPM_EXTRA_FILES="generate-source-map-resolve.js bower.json source-map-resolve.js.template"
 

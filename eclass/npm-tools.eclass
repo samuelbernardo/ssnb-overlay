@@ -28,7 +28,7 @@ _NPM_TOOLS_ECLASS=1
 # Run npm install in the provided project directory.
 # If no directory is provided it will run on current path.
 case ${EAPI:-0} in
-5|6|7)
+5|6|7|8)
 	npm_install() {
 		local dir="$1"
 		if [[ -z "${dir}" ]] ; then

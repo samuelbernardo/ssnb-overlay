@@ -2,7 +2,7 @@
 # Distributed under the terms of the GNU General Public License v2
 # $Id$
 
-EAPI=6
+EAPI=8
 
 NPM_MODULE="object.pick"
 NPM_PN_URI="object.pick"
