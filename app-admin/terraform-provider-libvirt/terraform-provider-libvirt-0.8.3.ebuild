@@ -7,7 +7,7 @@ GOLANG_PKG_IMPORTPATH="github.com/dmacvicar"
 GOLANG_PKG_ARCHIVEPREFIX="v"
 GOLANG_PKG_VERSION="$(ver_cut 1-3)"
 
-inherit golang-single
+inherit go-module
 
 EGO_SRC="${GOLANG_PKG_IMPORTPATH}/${PN}"
 EGO_PN=${EGO_SRC}/...
