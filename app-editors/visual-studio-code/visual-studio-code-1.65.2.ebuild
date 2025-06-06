@@ -13,6 +13,8 @@ HOMEPAGE="https://code.visualstudio.com"
 BASE_URI="https://update.code.visualstudio.com/${PV}"
 SRC_URI="
 	amd64? ( ${BASE_URI}/linux-x64/stable -> ${P}-amd64.tar.gz )
+	arm? ( ${BASE_URI}/linux-x64/stable -> ${P}-arm.tar.gz )
+	arm64? ( ${BASE_URI}/linux-x64/stable -> ${P}-arm64.tar.gz )
 	"
 RESTRICT="mirror strip bindist"
 
