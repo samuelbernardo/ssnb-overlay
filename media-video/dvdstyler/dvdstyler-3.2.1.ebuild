@@ -1,16 +1,16 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
+EAPI=8
 
 MY_P=${P/dvds/DVDS}
-WX_GTK_VER=3.0
+WX_GTK_VER="3.2-gtk3"
 
 inherit wxwidgets
 
 DESCRIPTION="A cross-platform free DVD authoring application"
 HOMEPAGE="http://www.dvdstyler.org/"
-SRC_URI="mirror://sourceforge/${PN}/${PV}/${MY_P}.tar.bz2"
+SRC_URI="https://downloads.sourceforge.net/project/${PN}/${PN}/${PV}/${MY_P}.tar.bz2"
 
 LICENSE="GPL-2"
 SLOT="0"
