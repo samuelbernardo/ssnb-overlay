@@ -1,13 +1,14 @@
-# Copyright 1999-2023 Gentoo Authors
+# Copyright 1999-2025 Gentoo Authors
 # Distributed under the terms of the GNU General Public License v2
 
-EAPI=7
-WX_GTK_VER=3.0
+EAPI=8
+
+WX_GTK_VER="3.2-gtk3"
 inherit wxwidgets
 
 DESCRIPTION="C++ library to create, manipulate and render SVG files"
 HOMEPAGE="http://wxsvg.sourceforge.net/"
-SRC_URI="mirror://sourceforge/${PN}/${P}.tar.bz2"
+SRC_URI="https://downloads.sourceforge.net/project/${PN}/${PN}/${PV}/${P}.tar.bz2"
 
 LICENSE="wxWinLL-3"
 SLOT="0/3" # based on SONAME of libwxsvg.so
